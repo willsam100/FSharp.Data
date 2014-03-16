@@ -302,7 +302,7 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.JsonValue.Post(System.String)">
+<member name="M:FSharp.Data.JsonValue.Post(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}})">
 <summary>
  Posts the JSON to the specified uri
 </summary>
@@ -1310,6 +1310,9 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="M:FSharp.Data.Runtime.JsonRuntime.GetPropertyPackedOrNull(FSharp.Data.Runtime.IJsonDocument,System.String)">
 <summary>
  Get json property and wrap in json document, and return null if not found
@@ -1336,6 +1339,15 @@
 <summary>
  Returns a single array children that matches the specified tag
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -3181,12 +3193,12 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntimeWithDesignTimeRules(System.String,System.String,System.String)">
+<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntimeWithDesignTimeRules(System.String,System.String,System.String,System.String)">
 <summary>
  Returns a TextReader for the uri using the designtime resolution rules
 </summary>
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntime(System.Boolean,System.String,System.String,System.String)">
+<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntime(System.Boolean,System.String,System.String,System.String,System.String)">
 <summary>
  Returns a TextReader for the uri using the runtime resolution rules
 </summary>
@@ -3194,7 +3206,7 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncOpenStream(Microsoft.FSharp.Core.FSharpOption{System.Tuple{FSharp.Data.Runtime.IO.IDisposableTypeProvider,System.String}},FSharp.Data.Runtime.IO.UriResolver,System.Uri)">
+<member name="M:FSharp.Data.Runtime.IO.asyncOpenStream(Microsoft.FSharp.Core.FSharpOption{System.Tuple{FSharp.Data.Runtime.IO.IDisposableTypeProvider,System.String}},FSharp.Data.Runtime.IO.UriResolver,System.String,System.Uri)">
 <summary>
  Opens a stream to the uri using the uriResolver resolution rules
  It the uri is a file, uses shared read, so it works when the file locked by Excel or similar tools,
@@ -4620,6 +4632,12 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
 <member name="T:ProviderImplementation.JsonGenerationContext">
 <summary>
  Context that is used to generate the JSON types.
@@ -5070,19 +5088,22 @@
 <member name="T:ProviderImplementation.JsonInference">
 
 </member>
-<member name="M:ProviderImplementation.JsonTypeBuilder.generateJsonType(ProviderImplementation.JsonGenerationContext,System.Boolean,System.Boolean,FSharp.Data.Runtime.StructuralTypes.InferedType)">
+<member name="M:ProviderImplementation.JsonTypeBuilder.generateJsonType(ProviderImplementation.JsonGenerationContext,System.Boolean,System.Boolean,System.String,FSharp.Data.Runtime.StructuralTypes.InferedType)">
 <summary>
  Recursively walks over inferred type information and 
  generates types for read-only access to the document
 </summary>
 </member>
-<member name="M:ProviderImplementation.JsonTypeBuilder.generateMultipleChoiceType(ProviderImplementation.JsonGenerationContext,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{FSharp.Data.Runtime.StructuralTypes.InferedTypeTag,System.Tuple{FSharp.Data.Runtime.StructuralTypes.InferedMultiplicity,FSharp.Data.Runtime.StructuralTypes.InferedType}}},Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.Runtime.StructuralTypes.InferedMultiplicity,Microsoft.FSharp.Core.FSharpFunc{ProviderImplementation.JsonGenerationResult,Microsoft.FSharp.Core.FSharpFunc{System.String,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Collections.FSharpList{Microsoft.FSharp.Quotations.FSharpExpr},Microsoft.FSharp.Quotations.FSharpExpr}}}})">
+<member name="M:ProviderImplementation.JsonTypeBuilder.generateMultipleChoiceType(ProviderImplementation.JsonGenerationContext,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{FSharp.Data.Runtime.StructuralTypes.InferedTypeTag,System.Tuple{FSharp.Data.Runtime.StructuralTypes.InferedMultiplicity,FSharp.Data.Runtime.StructuralTypes.InferedType}}},System.Boolean,System.String,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.Runtime.StructuralTypes.InferedMultiplicity,Microsoft.FSharp.Core.FSharpFunc{ProviderImplementation.JsonGenerationResult,Microsoft.FSharp.Core.FSharpFunc{System.String,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Collections.FSharpList{Microsoft.FSharp.Quotations.FSharpExpr},Microsoft.FSharp.Quotations.FSharpExpr}}}})">
 <summary>
  Common code that is shared by code generators that generate 
  &quot;Choice&quot; type. This is parameterized by the types (choices) to generate,
  by functions that get the multiplicity and the type tag for each option
  and also by function that generates the actual code.
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 

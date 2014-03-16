@@ -302,7 +302,7 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.JsonValue.Post(System.String)">
+<member name="M:FSharp.Data.JsonValue.Post(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}})">
 <summary>
  Posts the JSON to the specified uri
 </summary>
@@ -1305,6 +1305,9 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="M:FSharp.Data.Runtime.JsonRuntime.GetPropertyPackedOrNull(FSharp.Data.Runtime.IJsonDocument,System.String)">
 <summary>
  Get json property and wrap in json document, and return null if not found
@@ -1331,6 +1334,15 @@
 <summary>
  Returns a single array children that matches the specified tag
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -3109,12 +3121,12 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntimeWithDesignTimeRules(System.String,System.String,System.String)">
+<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntimeWithDesignTimeRules(System.String,System.String,System.String,System.String)">
 <summary>
  Returns a TextReader for the uri using the designtime resolution rules
 </summary>
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntime(System.Boolean,System.String,System.String,System.String)">
+<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntime(System.Boolean,System.String,System.String,System.String,System.String)">
 <summary>
  Returns a TextReader for the uri using the runtime resolution rules
 </summary>
@@ -3122,7 +3134,7 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncOpenStream(Microsoft.FSharp.Core.FSharpOption{System.Tuple{FSharp.Data.Runtime.IO.IDisposableTypeProvider,System.String}},FSharp.Data.Runtime.IO.UriResolver,System.Uri)">
+<member name="M:FSharp.Data.Runtime.IO.asyncOpenStream(Microsoft.FSharp.Core.FSharpOption{System.Tuple{FSharp.Data.Runtime.IO.IDisposableTypeProvider,System.String}},FSharp.Data.Runtime.IO.UriResolver,System.String,System.Uri)">
 <summary>
  Opens a stream to the uri using the uriResolver resolution rules
  It the uri is a file, uses shared read, so it works when the file locked by Excel or similar tools,
