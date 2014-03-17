@@ -1059,6 +1059,23 @@
  This module also provides the dynamic operator.
 </summary>
 </member>
+<member name="P:FSharp.Data.JsonValueModule.Object">
+<summary>
+ Constructor to create a `JsonValue.Record of (string * JsonValue)[]` as a `JsonValue.Object of Map&lt;string, JsonValue&gt;` for
+ backwards compatibility reaons
+</summary>
+</member>
+<member name="M:FSharp.Data.JsonValueModule.|Object|_|(FSharp.Data.JsonValue)">
+<summary>
+ Active Pattern to view a `JsonValue.Record of (string * JsonValue)[]` as a `JsonValue.Object of Map&lt;string, JsonValue&gt;` for
+ backwards compatibility reaons
+</summary>
+</member>
+<member name="T:FSharp.Data.JsonValueModule">
+<summary>
+ [omit]
+</summary>
+</member>
 <member name="">
 
 </member>
