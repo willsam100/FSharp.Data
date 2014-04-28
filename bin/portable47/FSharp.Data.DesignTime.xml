@@ -1288,13 +1288,18 @@
 <member name="">
 
 </member>
-<member name="">
-
-</member>
 <member name="P:FSharp.Data.Runtime.JsonDocument.JsonValue">
 <summary>
  The underlying JsonValue
 </summary>
+</member>
+<member name="M:FSharp.Data.Runtime.JsonDocument.ToString">
+<summary>
+ [omit]
+</summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -1377,14 +1382,18 @@
  Returns a single array children that matches the specified tag
 </summary>
 </member>
-<member name="">
-
+<member name="M:FSharp.Data.Runtime.JsonRuntime.CreateValue(System.Object,System.String)">
+<summary>
+ Creates a scalar JsonValue and wraps it in a json document
+</summary>
 </member>
 <member name="">
 
 </member>
-<member name="">
-
+<member name="M:FSharp.Data.Runtime.JsonRuntime.CreateArray(System.Object[],System.String)">
+<summary>
+ Creates a scalar JsonValue.Array and wraps it in a json document
+</summary>
 </member>
 <member name="">
 
@@ -1511,9 +1520,6 @@
  Turn a .NET type Nullable&lt;&apos;T&gt; to an F# option type Option&lt;&apos;T&gt;
 </summary>
 </member>
-<member name="">
-
-</member>
 <member name="M:FSharp.Data.Runtime.TextRuntime.GetNonOptionalValue``1(System.String,Microsoft.FSharp.Core.FSharpOption{``0},Microsoft.FSharp.Core.FSharpOption{System.String})">
 <summary>
  Operation that extracts the value from an option and reports a meaningful error message when the value is not there
@@ -1596,6 +1602,11 @@
  [omit]
 </summary>
 </member>
+<member name="M:FSharp.Data.Runtime.XmlElement.ToString">
+<summary>
+ [omit]
+</summary>
+</member>
 <member name="M:FSharp.Data.Runtime.XmlElement.CreateList(System.IO.TextReader)">
 <summary>
  [omit]
@@ -1637,6 +1648,14 @@
 </member>
 <member name="">
 
+</member>
+<member name="">
+
+</member>
+<member name="M:FSharp.Data.Runtime.XmlRuntime.CreateValue(System.String,System.Object,System.String)">
+<summary>
+ Creates a XElement with a scalar value and wraps it in a XmlElement
+</summary>
 </member>
 <member name="">
 
@@ -3397,6 +3416,9 @@
  if one may be missing. It also returns subtype of their types.
 </summary>
 </member>
+<member name="">
+
+</member>
 <member name="M:FSharp.Data.Runtime.StructuralInference.unionCollectionTypes(System.Boolean,Microsoft.FSharp.Collections.FSharpMap{FSharp.Data.Runtime.StructuralTypes.InferedTypeTag,System.Tuple{FSharp.Data.Runtime.StructuralTypes.InferedMultiplicity,FSharp.Data.Runtime.StructuralTypes.InferedType}},Microsoft.FSharp.Collections.FSharpMap{FSharp.Data.Runtime.StructuralTypes.InferedTypeTag,System.Tuple{FSharp.Data.Runtime.StructuralTypes.InferedMultiplicity,FSharp.Data.Runtime.StructuralTypes.InferedType}})">
 <summary>
  A collection can contain multiple types - in that case, we do keep 
@@ -3484,7 +3506,7 @@
 <member name="T:FSharp.Data.Runtime.StructuralInference.Helpers">
 
 </member>
-<member name="M:FSharp.Data.Runtime.StructuralInference.Seq.pairBy``2(Microsoft.FSharp.Core.FSharpFunc{``0,``1},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+<member name="M:FSharp.Data.Runtime.StructuralInference.List.pairBy``2(Microsoft.FSharp.Core.FSharpFunc{``0,``1},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
 <summary>
  Merge two sequences by pairing elements for which
  the specified predicate returns the same key
@@ -3493,7 +3515,7 @@
  of the elements is preserved.)
 </summary>
 </member>
-<member name="T:FSharp.Data.Runtime.StructuralInference.Seq">
+<member name="T:FSharp.Data.Runtime.StructuralInference.List">
 <summary>
  [omit]
 </summary>
@@ -4872,6 +4894,12 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
 <member name="T:ProviderImplementation.XmlGenerationContext">
 <summary>
  Context that is used to generate the XML types.
@@ -5001,6 +5029,12 @@
 
 </member>
 <member name="T:ProviderImplementation.AssemblyReplacerModule">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
 
 </member>
 <member name="">
@@ -5392,6 +5426,11 @@
  Add definition location information to the provided type definition.
 </summary>
 </member>
+<member name="M:ProviderImplementation.ProvidedTypes.ProvidedTypeDefinition.AddCustomAttribute(System.Reflection.CustomAttributeData)">
+<summary>
+ Add a custom attribute to the provided type definition.
+</summary>
+</member>
 <member name="M:ProviderImplementation.ProvidedTypes.ProvidedTypeDefinition.AddAssemblyTypesAsNestedTypesDelayed(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Reflection.Assembly})">
 <summary>
  Add the types of the generated assembly as generative types, where types in namespaces get hierarchically positioned as nested types.
@@ -5701,6 +5740,11 @@
  Add definition location information to the provided type definition.
 </summary>
 </member>
+<member name="M:ProviderImplementation.ProvidedTypes.ProvidedProperty.AddCustomAttribute(System.Reflection.CustomAttributeData)">
+<summary>
+ Add a custom attribute to the provided property definition.
+</summary>
+</member>
 <member name="M:ProviderImplementation.ProvidedTypes.ProvidedProperty.#ctor(System.String,System.Type,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{ProviderImplementation.ProvidedTypes.ProvidedParameter}})">
 <summary>
  Create a new provided type. It is not initially associated with any specific provided type definition.
@@ -5765,6 +5809,11 @@
  Add definition location information to the provided type definition.
 </summary>
 </member>
+<member name="M:ProviderImplementation.ProvidedTypes.ProvidedMethod.AddCustomAttribute(System.Reflection.CustomAttributeData)">
+<summary>
+ Add a custom attribute to the provided method definition.
+</summary>
+</member>
 <member name="M:ProviderImplementation.ProvidedTypes.ProvidedMethod.#ctor(System.String,Microsoft.FSharp.Collections.FSharpList{ProviderImplementation.ProvidedTypes.ProvidedParameter},System.Type)">
 <summary>
  Create a new provided method. It is not initially associated with any specific provided type definition.
@@ -5795,6 +5844,13 @@
 </member>
 <member name="">
 
+</member>
+<member name="P:ProviderImplementation.ProvidedTypes.ProvidedConstructor.IsImplicitCtor">
+<summary>
+ Set a flag indicating that the constructor acts like an F# implicit constructor, so the
+ parameters of the constructor become fields and can be accessed using Expr.GlobalVar with the
+ same name.
+</summary>
 </member>
 <member name="M:ProviderImplementation.ProvidedTypes.ProvidedConstructor.GetInvokeCodeInternal(System.Boolean)">
 <summary>
@@ -5914,6 +5970,9 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="T:ProviderImplementation.ProviderHelpers">
 
 </member>
@@ -5986,7 +6045,7 @@
 <summary>
  Succeeds when type is a heterogeneous type containing recors
  If the type is heterogeneous, but contains other things, exception
- is thrown (this is unexpected, because XML nodes are always records)
+ is thrown (this is unexpected, because XML elements are always records)
 </summary>
 </member>
 <member name="M:ProviderImplementation.XmlTypeBuilder.|ContentType|_|(FSharp.Data.Runtime.StructuralTypes.InferedProperty)">
