@@ -154,6 +154,50 @@ module ProviderHelpers =
         else
             false
 
+    type private ParseTextResult<'T> =
+        { TypedSamples : 'T []
+          SampleIsUri : bool
+          SampleIsWebUri : bool
+          SampleIsResource : bool }
+
+    type private EmbeddedResourceReader() =
+        inherit MarshalByRefObject()
+
+        static do
+            AppDomain.CurrentDomain.add_AssemblyResolve(ResolveEventHandler(fun _ args -> 
+                if args.Name = typeof<EmbeddedResourceReader>.Assembly.FullName then 
+                    typeof<EmbeddedResourceReader>.Assembly 
+                else 
+                    null))
+
+        member private __.ReadResource(referencedAssemblies, asmName, resourceName) =
+            try
+                let asmLocation = 
+                    referencedAssemblies
+                    |> Array.tryFind (fun (x:string) -> x.EndsWith(asmName + ".dll", StringComparison.InvariantCultureIgnoreCase))
+                let asm = 
+                    match asmLocation with
+                    | Some asmLocation -> Assembly.LoadFrom(asmLocation)
+                    | None -> Assembly.Load(asmName)
+                use sr = new StreamReader(asm.GetManifestResourceStream(resourceName))
+                Some(sr.ReadToEnd())
+            with _ -> 
+                None
+
+        static member ReadResource(referencedAssemblies, resourceName:string) =
+            match resourceName.Split(',') with
+            | [| asmName; name |] ->
+                try 
+                    let domain = AppDomain.CreateDomain "Embedded Resource Reader"
+                    try
+                        let reader = domain.CreateInstanceFromAndUnwrap(Assembly.GetExecutingAssembly().Location,
+                                                                        typeof<EmbeddedResourceReader>.FullName) :?> EmbeddedResourceReader
+                        reader.ReadResource(referencedAssemblies, asmName.Trim(), name.Trim())
+                    finally
+                        AppDomain.Unload domain
+                with _ -> None
+            | _ -> None
+
     /// Reads a sample parameter for a type provider, detecting if it is a uri and fetching it if needed
     /// Samples from the web are cached for 30 minutes
     /// Samples from the filesystem are read using shared read, so it works when the file is locked by Excel or similar tools,
@@ -165,12 +209,19 @@ module ProviderHelpers =
     /// * formatName - the description of what is being parsed (for the error message)
     /// * tp - the type provider
     /// * cfg - the type provider config
+    /// * optResource - when specified, we first try to treat read the sample from an embedded resource
+    ///     (the value specified assembly and resource name e.g. "MyCompany.MyAssembly, some_resource.json")
     /// * resolutionFolder - if the type provider allows to override the resolutionFolder pass it here
     let private parseTextAtDesignTime sampleOrSampleUri parseFunc formatName (tp:IDisposableTypeProvider) 
-                                      (cfg:TypeProviderConfig) resolutionFolder fullTypeName =
+                                      (cfg:TypeProviderConfig) resolutionFolder optResource fullTypeName =
     
         using (logTime "Loading" sampleOrSampleUri) <| fun _ ->
     
+        let tryGetResource() = 
+            if String.IsNullOrWhiteSpace(optResource)
+            then None 
+            else EmbeddedResourceReader.ReadResource(cfg.ReferencedAssemblies, optResource)
+
         let tryGetUri str =
             match Uri.TryCreate(str, UriKind.RelativeOrAbsolute) with
             | false, _ -> None
@@ -178,11 +229,23 @@ module ProviderHelpers =
                 if str.Trim() = "" || not uri.IsAbsoluteUri && Seq.exists invalidChars.Contains str
                 then None else Some uri
     
+        match tryGetResource() with
+        | Some res -> { TypedSamples = parseFunc "" res
+                        SampleIsUri = false
+                        SampleIsWebUri = false
+                        SampleIsResource = true }
+        | _ -> 
+
         match tryGetUri sampleOrSampleUri with
         | None -> 
     
-            try lazy (parseFunc "" sampleOrSampleUri), false, false
-            with e -> failwithf "The provided sample is neither a file, nor a well-formed %s: %s" formatName e.Message
+            try
+                { TypedSamples = parseFunc "" sampleOrSampleUri
+                  SampleIsUri = false
+                  SampleIsWebUri = false
+                  SampleIsResource = false }
+            with e -> 
+                failwithf "The provided sample is neither a file, nor a well-formed %s: %s" formatName e.Message
     
         | Some uri ->
     
@@ -192,11 +255,8 @@ module ProviderHelpers =
                   ResolutionFolder = resolutionFolder }
             
             let readText() = 
-                Async.RunSynchronously <| async {
-                    use! stream = asyncOpenStream (Some (tp, fullTypeName)) resolver formatName uri
-                    use reader = new StreamReader(stream)
-                    return reader.ReadToEnd()
-                } 
+                asyncReadText (Some (tp, fullTypeName)) resolver formatName uri
+                |> Async.RunSynchronously
     
             try
               
@@ -210,19 +270,25 @@ module ProviderHelpers =
                             value, true
                     else readText(), false
                     
-                lazy (parseFunc (Path.GetExtension uri.OriginalString) sample), true, isWeb
+                { TypedSamples = parseFunc (Path.GetExtension uri.OriginalString) sample
+                  SampleIsUri = true
+                  SampleIsWebUri = isWeb
+                  SampleIsResource = false }
     
             with e ->
     
                 if not uri.IsAbsoluteUri then
                     // even if it's a valid uri, it could be sample text
                     try 
-                        lazy (parseFunc "" sampleOrSampleUri), false, false
+                        { TypedSamples = parseFunc "" sampleOrSampleUri
+                          SampleIsUri = false
+                          SampleIsWebUri = false
+                          SampleIsResource = false }
                     with _ -> 
                         // if not, return the first exception
-                        failwithf "Cannot read sample %s from %s: %s" formatName sampleOrSampleUri e.Message
+                        failwithf "Cannot read sample %s from '%s': %s" formatName sampleOrSampleUri e.Message
                 else
-                    failwithf "Cannot read sample %s from %s: %s" formatName sampleOrSampleUri e.Message
+                    failwithf "Cannot read sample %s from '%s': %s" formatName sampleOrSampleUri e.Message
     
     // carries part of the information needed by generateType
     type TypeProviderSpec = 
@@ -266,9 +332,12 @@ module ProviderHelpers =
     /// * cfg -> the type provider config
     /// * replacer -> the assemblyReplacer
     /// * resolutionFolder -> if the type provider allows to override the resolutionFolder pass it here
+    /// * optResource - when specified, we first try to treat read the sample from an embedded resource
+    ///     (the value specified assembly and resource name e.g. "MyCompany.MyAssembly, some_resource.json")
     /// * typeName -> the full name of the type provider, this will be used for caching
     let generateType formatName sampleOrSampleUri sampleIsList parseSingle parseList getSpecFromSamples runtimeVersion
-                     (tp:DisposableTypeProviderForNamespaces) (cfg:TypeProviderConfig) (replacer:AssemblyReplacer) resolutionFolder fullTypeName =
+                     (tp:DisposableTypeProviderForNamespaces) (cfg:TypeProviderConfig) (replacer:AssemblyReplacer) 
+                     resolutionFolder optResource fullTypeName =
     
         let isRunningInFSI = cfg.IsHostedExecution
         let defaultResolutionFolder = cfg.ResolutionFolder
@@ -277,14 +346,14 @@ module ProviderHelpers =
             if sampleIsList then
                 parseList extension value
             else
-                parseSingle extension value |> Seq.singleton
+                [| parseSingle extension value |]
         
         getOrCreateProvidedType tp fullTypeName runtimeVersion cacheDuration <| fun () ->
 
         // Infer the schema from a specified uri or inline text
-        let typedSamples, sampleIsUri, sampleIsWebUri = parseTextAtDesignTime sampleOrSampleUri parse formatName tp cfg resolutionFolder fullTypeName
+        let parseResult = parseTextAtDesignTime sampleOrSampleUri parse formatName tp cfg resolutionFolder optResource fullTypeName
         
-        let spec = getSpecFromSamples typedSamples.Value
+        let spec = getSpecFromSamples parseResult.TypedSamples
         
         let resultType = spec.RepresentationType
         let resultTypeAsync = typedefof<Async<_>>.MakeGenericType(resultType) |> replacer.ToRuntime
@@ -335,7 +404,9 @@ module ProviderHelpers =
           m.AddXmlDoc <| sprintf "Loads %s from the specified uri" formatName
           yield m :> _
           
-          if sampleOrSampleUri <> "" && (runtimeVersion.SupportsLocalFileSystem || not sampleIsUri || sampleIsWebUri && not (hasAuthorizationPart sampleOrSampleUri)) then
+          if sampleOrSampleUri <> "" && 
+             not (parseResult.SampleIsResource) && 
+             (runtimeVersion.SupportsLocalFileSystem || not parseResult.SampleIsUri || parseResult.SampleIsWebUri && not (hasAuthorizationPart sampleOrSampleUri)) then
         
               if sampleIsList then
               
@@ -348,13 +419,13 @@ module ProviderHelpers =
                       // Generate static GetSamples method
                       let m = ProvidedMethod("GetSamples", [], resultTypeArray, IsStaticMethod = true)
                       m.InvokeCode <- fun _ -> 
-                          if sampleIsUri 
+                          if parseResult.SampleIsUri 
                           then <@ Async.RunSynchronously(asyncReadTextAtRuntimeWithDesignTimeRules defaultResolutionFolder resolutionFolder formatName sampleOrSampleUri) @>
                           else <@ new StringReader(sampleOrSampleUri) :> TextReader @>
                           |> spec.CreateFromTextReaderForSampleList
                       yield m :> _
                               
-                      if sampleIsUri then
+                      if parseResult.SampleIsUri  then
                           // Generate static AsyncGetSamples method
                           let m = ProvidedMethod("AsyncGetSamples", [], resultTypeArrayAsync, IsStaticMethod = true)
                           m.InvokeCode <- fun _ -> 
@@ -367,7 +438,7 @@ module ProviderHelpers =
                 let name = if resultType.IsArray then "GetSamples" else "GetSample"
               
                 let getSampleCode = fun _ -> 
-                    if sampleIsUri 
+                    if parseResult.SampleIsUri  
                     then <@ Async.RunSynchronously(asyncReadTextAtRuntimeWithDesignTimeRules defaultResolutionFolder resolutionFolder formatName sampleOrSampleUri) @>
                     else <@ new StringReader(sampleOrSampleUri) :> TextReader @>
                     |> spec.CreateFromTextReader
@@ -379,7 +450,7 @@ module ProviderHelpers =
                     // Generate default constructor
                     yield ProvidedConstructor([], InvokeCode = getSampleCode) :> _
               
-                if sampleIsUri then
+                if parseResult.SampleIsUri then
                     // Generate static AsyncGetSample method
                     let m = ProvidedMethod("Async" + name, [], resultTypeAsync, IsStaticMethod = true)
                     m.InvokeCode <- fun _ -> 
