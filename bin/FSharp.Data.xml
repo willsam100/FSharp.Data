@@ -457,6 +457,9 @@
  Loads JSON from the specified stream
 </summary>
 </member>
+<member name="">
+
+</member>
 <member name="M:FSharp.Data.JsonValue.AsyncLoad(System.String,Microsoft.FSharp.Core.FSharpOption{System.Globalization.CultureInfo})">
 <summary>
  Loads JSON from the specified uri asynchronously
@@ -630,6 +633,9 @@
 <summary>
  Constants for common HTTP content types
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -3204,12 +3210,6 @@
 <member name="">
 
 </member>
-<member name="T:FSharp.Data.Runtime.HttpUtils">
-
-</member>
-<member name="">
-
-</member>
 <member name="">
 
 </member>
@@ -3291,12 +3291,12 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntimeWithDesignTimeRules(System.String,System.String,System.String,System.String)">
+<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntimeWithDesignTimeRules(System.String,System.String,System.String,System.String,System.String)">
 <summary>
  Returns a TextReader for the uri using the designtime resolution rules
 </summary>
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntime(System.Boolean,System.String,System.String,System.String,System.String)">
+<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntime(System.Boolean,System.String,System.String,System.String,System.String,System.String)">
 <summary>
  Returns a TextReader for the uri using the runtime resolution rules
 </summary>
@@ -3304,7 +3304,7 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncReadText(Microsoft.FSharp.Core.FSharpOption{System.Tuple{FSharp.Data.Runtime.IO.IDisposableTypeProvider,System.String}},FSharp.Data.Runtime.IO.UriResolver,System.String,System.Uri)">
+<member name="M:FSharp.Data.Runtime.IO.asyncReadText(Microsoft.FSharp.Core.FSharpOption{System.Tuple{FSharp.Data.Runtime.IO.IDisposableTypeProvider,System.String}},FSharp.Data.Runtime.IO.UriResolver,System.String,System.String,System.Uri)">
 <summary>
  Opens a stream to the uri using the uriResolver resolution rules
  It the uri is a file, uses shared read, so it works when the file locked by Excel or similar tools,

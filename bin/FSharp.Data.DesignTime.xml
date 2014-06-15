@@ -457,6 +457,9 @@
  Loads JSON from the specified stream
 </summary>
 </member>
+<member name="">
+
+</member>
 <member name="M:FSharp.Data.JsonValue.AsyncLoad(System.String,Microsoft.FSharp.Core.FSharpOption{System.Globalization.CultureInfo})">
 <summary>
  Loads JSON from the specified uri asynchronously
@@ -630,6 +633,9 @@
 <summary>
  Constants for common HTTP content types
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -3204,12 +3210,6 @@
 <member name="">
 
 </member>
-<member name="T:FSharp.Data.Runtime.HttpUtils">
-
-</member>
-<member name="">
-
-</member>
 <member name="">
 
 </member>
@@ -3291,12 +3291,12 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntimeWithDesignTimeRules(System.String,System.String,System.String,System.String)">
+<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntimeWithDesignTimeRules(System.String,System.String,System.String,System.String,System.String)">
 <summary>
  Returns a TextReader for the uri using the designtime resolution rules
 </summary>
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntime(System.Boolean,System.String,System.String,System.String,System.String)">
+<member name="M:FSharp.Data.Runtime.IO.asyncReadTextAtRuntime(System.Boolean,System.String,System.String,System.String,System.String,System.String)">
 <summary>
  Returns a TextReader for the uri using the runtime resolution rules
 </summary>
@@ -3304,7 +3304,7 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Runtime.IO.asyncReadText(Microsoft.FSharp.Core.FSharpOption{System.Tuple{FSharp.Data.Runtime.IO.IDisposableTypeProvider,System.String}},FSharp.Data.Runtime.IO.UriResolver,System.String,System.Uri)">
+<member name="M:FSharp.Data.Runtime.IO.asyncReadText(Microsoft.FSharp.Core.FSharpOption{System.Tuple{FSharp.Data.Runtime.IO.IDisposableTypeProvider,System.String}},FSharp.Data.Runtime.IO.UriResolver,System.String,System.String,System.Uri)">
 <summary>
  Opens a stream to the uri using the uriResolver resolution rules
  It the uri is a file, uses shared read, so it works when the file locked by Excel or similar tools,
@@ -4694,6 +4694,9 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="T:ProviderImplementation.FreebaseRuntimeInfo">
 <summary>
  Find the handles in the Freebase type provider runtime DLL. 
@@ -4945,10 +4948,16 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="T:ProviderImplementation.XmlGenerationContext">
 <summary>
  Context that is used to generate the XML types.
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -5999,7 +6008,7 @@
 <member name="">
 
 </member>
-<member name="M:ProviderImplementation.ProviderHelpers.generateType``1(System.String,System.String,System.Boolean,Microsoft.FSharp.Core.FSharpFunc{System.String,Microsoft.FSharp.Core.FSharpFunc{System.String,``0}},Microsoft.FSharp.Core.FSharpFunc{System.String,Microsoft.FSharp.Core.FSharpFunc{System.String,``0[]}},Microsoft.FSharp.Core.FSharpFunc{``0[],ProviderImplementation.ProviderHelpers.TypeProviderSpec},ProviderImplementation.AssemblyResolver.FSharpDataRuntimeVersion,ProviderImplementation.DisposableTypeProviderForNamespaces,Microsoft.FSharp.Core.CompilerServices.TypeProviderConfig,ProviderImplementation.AssemblyReplacer,System.String,System.String,System.String)">
+<member name="M:ProviderImplementation.ProviderHelpers.generateType``1(System.String,System.String,System.Boolean,Microsoft.FSharp.Core.FSharpFunc{System.String,Microsoft.FSharp.Core.FSharpFunc{System.String,``0}},Microsoft.FSharp.Core.FSharpFunc{System.String,Microsoft.FSharp.Core.FSharpFunc{System.String,``0[]}},Microsoft.FSharp.Core.FSharpFunc{``0[],ProviderImplementation.ProviderHelpers.TypeProviderSpec},ProviderImplementation.AssemblyResolver.FSharpDataRuntimeVersion,ProviderImplementation.DisposableTypeProviderForNamespaces,Microsoft.FSharp.Core.CompilerServices.TypeProviderConfig,ProviderImplementation.AssemblyReplacer,System.String,System.String,System.String,System.String)">
 <summary>
  Creates all the constructors for a type provider: (Async)Parse, (Async)Load, (Async)GetSample(s), and default constructor
  * sampleOrSampleUri - the text which can be a sample or an uri for a sample
@@ -6022,7 +6031,7 @@
 <member name="">
 
 </member>
-<member name="M:ProviderImplementation.ProviderHelpers.parseTextAtDesignTime``1(System.String,Microsoft.FSharp.Core.FSharpFunc{System.String,Microsoft.FSharp.Core.FSharpFunc{System.String,``0[]}},System.String,FSharp.Data.Runtime.IO.IDisposableTypeProvider,Microsoft.FSharp.Core.CompilerServices.TypeProviderConfig,System.String,System.String,System.String)">
+<member name="M:ProviderImplementation.ProviderHelpers.parseTextAtDesignTime``1(System.String,Microsoft.FSharp.Core.FSharpFunc{System.String,Microsoft.FSharp.Core.FSharpFunc{System.String,``0[]}},System.String,FSharp.Data.Runtime.IO.IDisposableTypeProvider,Microsoft.FSharp.Core.CompilerServices.TypeProviderConfig,System.String,System.String,System.String,System.String)">
 <summary>
  Reads a sample parameter for a type provider, detecting if it is a uri and fetching it if needed
  Samples from the web are cached for 30 minutes
