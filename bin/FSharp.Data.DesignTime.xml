@@ -408,6 +408,11 @@
 <member name="">
 
 </member>
+<member name="M:FSharp.Data.JsonValue.WriteTo(System.IO.TextWriter,FSharp.Data.JsonSaveOptions)">
+<summary>
+ Serializes the JsonValue to the specified System.IO.TextWriter.
+</summary>
+</member>
 <member name="">
 
 </member>
@@ -627,6 +632,11 @@
 <member name="P:FSharp.Data.HttpContentTypes.Text">
 <summary>
  plain/text
+</summary>
+</member>
+<member name="P:FSharp.Data.HttpContentTypes.Any">
+<summary>
+ */*
 </summary>
 </member>
 <member name="T:FSharp.Data.HttpContentTypes">
@@ -1288,12 +1298,12 @@
  Conversions from JsonValue to string/int/int64/decimal/float/boolean/datetime/guid options
 </summary>
 </member>
-<member name="F:FSharp.Data.Runtime.FSharp.Data.Runtime.JsonDocument.Path">
+<member name="P:FSharp.Data.Runtime.JsonDocument.Path">
 <summary>
  [omit]
 </summary>
 </member>
-<member name="F:FSharp.Data.Runtime.FSharp.Data.Runtime.JsonDocument.Json">
+<member name="P:FSharp.Data.Runtime.JsonDocument.Json">
 <summary>
  [omit]
 </summary>
@@ -2786,7 +2796,7 @@
 <member name="">
 
 </member>
-<member name="F:FSharp.Data.Runtime.Freebase.FreebaseSchema.FreebaseProperty.UnitOfMeasureId">
+<member name="P:FSharp.Data.Runtime.Freebase.FreebaseSchema.FreebaseProperty.UnitOfMeasureId">
 <summary>
  The unit of measure for the property, if any. e.g. /en/kilometer
 </summary>
@@ -2794,7 +2804,7 @@
 <member name="">
 
 </member>
-<member name="F:FSharp.Data.Runtime.Freebase.FreebaseSchema.FreebaseProperty.EnumerationId">
+<member name="P:FSharp.Data.Runtime.Freebase.FreebaseSchema.FreebaseProperty.EnumerationId">
 <summary>
  Name of the enumeration type. Like /authority/gnis
 </summary>
@@ -4694,9 +4704,6 @@
 <member name="">
 
 </member>
-<member name="">
-
-</member>
 <member name="T:ProviderImplementation.FreebaseRuntimeInfo">
 <summary>
  Find the handles in the Freebase type provider runtime DLL. 
@@ -4705,7 +4712,7 @@
 <member name="">
 
 </member>
-<member name="F:ProviderImplementation.ProviderImplementation.FreebaseTypeProvider.rootNamespace">
+<member name="F:ProviderImplementation.FreebaseTypeProvider.rootNamespace">
 <summary>
  Root namespace of Freebase types
 </summary>
@@ -4951,10 +4958,16 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
 <member name="T:ProviderImplementation.XmlGenerationContext">
 <summary>
  Context that is used to generate the XML types.
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -5223,7 +5236,7 @@
 <member name="T:ProviderImplementation.JsonConversionsGenerator">
 
 </member>
-<member name="M:ProviderImplementation.JsonInference.inferType(System.Globalization.CultureInfo,System.String,FSharp.Data.JsonValue)">
+<member name="M:ProviderImplementation.JsonInference.inferType(System.Boolean,System.Globalization.CultureInfo,System.String,FSharp.Data.JsonValue)">
 <summary>
  Infer type of a JSON value - this is simple function because most of the
  functionality is handled in `StructureInference` (most notably, by
@@ -5281,11 +5294,20 @@
 <member name="T:ProviderImplementation.PrimitiveInferedPropertyExtensions">
 
 </member>
+<member name="">
+
+</member>
 <member name="P:ProviderImplementation.ProvidedTypes.TypeProviderForNamespaces.Namespaces">
 <summary>
  FSharp.Data addition: this method is used by Debug.fs
  Get all namespace with their provided types.
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -6092,20 +6114,20 @@
 <member name="T:ProviderImplementation.ReflectionHelpers">
 
 </member>
-<member name="M:ProviderImplementation.XmlInference.inferType(System.Globalization.CultureInfo,System.Boolean,System.Boolean,System.Xml.Linq.XElement)">
+<member name="M:ProviderImplementation.XmlInference.inferType(System.Boolean,System.Globalization.CultureInfo,System.Boolean,System.Boolean,System.Xml.Linq.XElement)">
 <summary>
  A type is infered either using `inferLocalType` which only looks
  at immediate children or using `inferGlobalType` which unifies nodes
  of the same name in the entire document
 </summary>
 </member>
-<member name="M:ProviderImplementation.XmlInference.inferLocalType(System.Globalization.CultureInfo,System.Boolean,System.Xml.Linq.XElement)">
+<member name="M:ProviderImplementation.XmlInference.inferLocalType(System.Boolean,System.Globalization.CultureInfo,System.Boolean,System.Xml.Linq.XElement)">
 <summary>
  Get information about type locally (the type of children is infered
  recursively, so same elements in different positions have different types)
 </summary>
 </member>
-<member name="M:ProviderImplementation.XmlInference.inferGlobalType(System.Globalization.CultureInfo,System.Boolean,System.Xml.Linq.XElement)">
+<member name="M:ProviderImplementation.XmlInference.inferGlobalType(System.Boolean,System.Globalization.CultureInfo,System.Boolean,System.Xml.Linq.XElement)">
 <summary>
  Infers type for the element, unifying nodes of the same name
  accross the entire document (we first get information based
@@ -6115,7 +6137,7 @@
 <member name="">
 
 </member>
-<member name="M:ProviderImplementation.XmlInference.getAttributes(System.Globalization.CultureInfo,System.Xml.Linq.XElement)">
+<member name="M:ProviderImplementation.XmlInference.getAttributes(System.Boolean,System.Globalization.CultureInfo,System.Xml.Linq.XElement)">
 <summary>
  Generates record fields for all attributes
 </summary>

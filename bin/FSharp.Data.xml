@@ -408,6 +408,11 @@
 <member name="">
 
 </member>
+<member name="M:FSharp.Data.JsonValue.WriteTo(System.IO.TextWriter,FSharp.Data.JsonSaveOptions)">
+<summary>
+ Serializes the JsonValue to the specified System.IO.TextWriter.
+</summary>
+</member>
 <member name="">
 
 </member>
@@ -627,6 +632,11 @@
 <member name="P:FSharp.Data.HttpContentTypes.Text">
 <summary>
  plain/text
+</summary>
+</member>
+<member name="P:FSharp.Data.HttpContentTypes.Any">
+<summary>
+ */*
 </summary>
 </member>
 <member name="T:FSharp.Data.HttpContentTypes">
@@ -1288,12 +1298,12 @@
  Conversions from JsonValue to string/int/int64/decimal/float/boolean/datetime/guid options
 </summary>
 </member>
-<member name="F:FSharp.Data.Runtime.FSharp.Data.Runtime.JsonDocument.Path">
+<member name="P:FSharp.Data.Runtime.JsonDocument.Path">
 <summary>
  [omit]
 </summary>
 </member>
-<member name="F:FSharp.Data.Runtime.FSharp.Data.Runtime.JsonDocument.Json">
+<member name="P:FSharp.Data.Runtime.JsonDocument.Json">
 <summary>
  [omit]
 </summary>
@@ -2786,7 +2796,7 @@
 <member name="">
 
 </member>
-<member name="F:FSharp.Data.Runtime.Freebase.FreebaseSchema.FreebaseProperty.UnitOfMeasureId">
+<member name="P:FSharp.Data.Runtime.Freebase.FreebaseSchema.FreebaseProperty.UnitOfMeasureId">
 <summary>
  The unit of measure for the property, if any. e.g. /en/kilometer
 </summary>
@@ -2794,7 +2804,7 @@
 <member name="">
 
 </member>
-<member name="F:FSharp.Data.Runtime.Freebase.FreebaseSchema.FreebaseProperty.EnumerationId">
+<member name="P:FSharp.Data.Runtime.Freebase.FreebaseSchema.FreebaseProperty.EnumerationId">
 <summary>
  Name of the enumeration type. Like /authority/gnis
 </summary>
