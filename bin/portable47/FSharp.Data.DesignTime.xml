@@ -203,8 +203,10 @@
 <member name="">
 
 </member>
-<member name="">
-
+<member name="P:FSharp.Data.HttpResponse.Headers">
+<summary>
+ If the same header is present multiple times, the values will be concatenated with comma as the separator
+</summary>
 </member>
 <member name="">
 
@@ -234,8 +236,10 @@
 <member name="">
 
 </member>
-<member name="">
-
+<member name="P:FSharp.Data.HttpResponseWithStream.Headers">
+<summary>
+ If the same header is present multiple times, the values will be concatenated with comma as the separator
+</summary>
 </member>
 <member name="">
 
@@ -516,6 +520,9 @@
 <summary>
  Extension members for operations permitted in queries of the Freebase service
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 

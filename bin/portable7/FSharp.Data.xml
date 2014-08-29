@@ -115,12 +115,6 @@
 <member name="">
 
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:FSharp.Data.Http.RequestString(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
 <summary>
  Download an HTTP web resource from the specified URL synchronously
@@ -186,9 +180,6 @@
 <member name="">
 
 </member>
-<member name="">
-
-</member>
 <member name="T:FSharp.Data.Http">
 <summary>
  Utilities for working with network via HTTP. Includes methods for downloading 
@@ -212,8 +203,10 @@
 <member name="">
 
 </member>
-<member name="">
-
+<member name="P:FSharp.Data.HttpResponse.Headers">
+<summary>
+ If the same header is present multiple times, the values will be concatenated with comma as the separator
+</summary>
 </member>
 <member name="">
 
@@ -243,8 +236,10 @@
 <member name="">
 
 </member>
-<member name="">
-
+<member name="P:FSharp.Data.HttpResponseWithStream.Headers">
+<summary>
+ If the same header is present multiple times, the values will be concatenated with comma as the separator
+</summary>
 </member>
 <member name="">
 
@@ -525,6 +520,12 @@
 <summary>
  Extension members for operations permitted in queries of the Freebase service
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="">
 
