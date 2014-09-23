@@ -5395,6 +5395,11 @@
  Get or set a flag indicating if the ProvidedTypeDefinition has type-relocation suppressed
 </summary>
 </member>
+<member name="P:ProviderImplementation.ProvidedTypes.ProvidedTypeDefinition.NonNullable(System.Boolean)">
+<summary>
+ Disallows the use of the null literal. 
+</summary>
+</member>
 <member name="P:ProviderImplementation.ProvidedTypes.ProvidedTypeDefinition.IsErased(System.Boolean)">
 <summary>
  Get or set a flag indicating if the ProvidedTypeDefinition is erased
