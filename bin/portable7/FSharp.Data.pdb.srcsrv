@@ -2,7 +2,7 @@ SRCSRV: ini ------------------------------------------------
 VERSION=2
 SRCSRV: variables ------------------------------------------
 SRCSRVVERCTRL=https
-SRCSRVTRG=https://raw.github.com/fsharp/FSharp.Data/a9f27c73599cbf6c0b7e1a22a00c5e7488fdb365/%var2%
+SRCSRVTRG=https://raw.github.com/fsharp/FSharp.Data/016952b6457caaed12ffdc4051466648fe673d16/%var2%
 SRCSRV: source files ---------------------------------------
 C:\Git\FSharp.Data SourceLink\src\Net\UriUtils.fs*src/Net/UriUtils.fs
 C:\Git\FSharp.Data SourceLink\src\Net\Http.fs*src/Net/Http.fs
@@ -28,5 +28,10 @@ C:\Git\FSharp.Data SourceLink\src\Freebase\FreebaseRequests.fs*src/Freebase/Free
 C:\Git\FSharp.Data SourceLink\src\Freebase\FreebaseSchema.fs*src/Freebase/FreebaseSchema.fs
 C:\Git\FSharp.Data SourceLink\src\Freebase\FreebaseRuntime.fs*src/Freebase/FreebaseRuntime.fs
 C:\Git\FSharp.Data SourceLink\src\Freebase\FreebaseOperators.fs*src/Freebase/FreebaseOperators.fs
+C:\Git\FSharp.Data SourceLink\src\Html\HtmlCharRefs.fs*src/Html/HtmlCharRefs.fs
+C:\Git\FSharp.Data SourceLink\src\Html\HtmlParser.fs*src/Html/HtmlParser.fs
+C:\Git\FSharp.Data SourceLink\src\Html\HtmlOperations.fs*src/Html/HtmlOperations.fs
+C:\Git\FSharp.Data SourceLink\src\Html\HtmlInference.fs*src/Html/HtmlInference.fs
+C:\Git\FSharp.Data SourceLink\src\Html\HtmlRuntime.fs*src/Html/HtmlRuntime.fs
 C:\Git\FSharp.Data SourceLink\src\Runtime.fs*src/Runtime.fs
 SRCSRV: end ------------------------------------------------
