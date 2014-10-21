@@ -2,7 +2,7 @@ SRCSRV: ini ------------------------------------------------
 VERSION=2
 SRCSRV: variables ------------------------------------------
 SRCSRVVERCTRL=https
-SRCSRVTRG=https://raw.github.com/fsharp/FSharp.Data/016952b6457caaed12ffdc4051466648fe673d16/%var2%
+SRCSRVTRG=https://raw.github.com/fsharp/FSharp.Data/8e364a4a0bdfbe541cc64265f0df7d0c7c04860e/%var2%
 SRCSRV: source files ---------------------------------------
 C:\Git\FSharp.Data SourceLink\src\Net\UriUtils.fs*src/Net/UriUtils.fs
 C:\Git\FSharp.Data SourceLink\src\Net\Http.fs*src/Net/Http.fs

@@ -8,30 +8,6 @@
 <member name="">
 
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="M:FSharp.Data.CsvFile.Parse(System.String,Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Char},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
 <summary>
  Parses the specified CSV content
@@ -118,6 +94,26 @@
 <member name="">
 
 </member>
+<member name="M:FSharp.Data.HtmlAttribute.New(System.String,System.String)">
+ <summary>
+ Creates an html attribute
+ </summary>
+ <param name="name">The name of the attribute</param>
+ <param name="value">The value of the attribute</param>
+</member>
+<member name="">
+
+</member>
+<member name="M:FSharp.Data.HtmlAttributeExtensions.Value(FSharp.Data.HtmlAttribute)">
+<summary>
+ Gets the value of the current attribute
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlAttributeExtensions.Name(FSharp.Data.HtmlAttribute)">
+<summary>
+ Gets the name of the current attribute
+</summary>
+</member>
 <member name="">
 
 </member>
@@ -131,6 +127,173 @@
 </member>
 <member name="">
 
+</member>
+<member name="M:FSharp.Data.HtmlDocument.Parse(System.String)">
+<summary>
+ Parses the specified HTML string
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlDocument.New(System.Collections.Generic.IEnumerable{FSharp.Data.HtmlNode})">
+ <summary>
+ Creates an html document
+ </summary>
+ <param name="children">The child elements of this document</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocument.New(System.String,System.Collections.Generic.IEnumerable{FSharp.Data.HtmlNode})">
+ <summary>
+ Creates an html document
+ </summary>
+ <param name="docType">The document type specifier string</param>
+ <param name="children">The child elements of this document</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocument.Load(System.String)">
+<summary>
+ Loads HTML from the specified uri
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlDocument.Load(System.IO.TextReader)">
+<summary>
+ Loads HTML from the specified reader
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlDocument.Load(System.IO.Stream)">
+<summary>
+ Loads HTML from the specified stream
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlDocument.AsyncLoad(System.String)">
+<summary>
+ Loads HTML from the specified uri asynchronously
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.TryGetBody(FSharp.Data.HtmlDocument)">
+<summary>
+ Tries to find the body element of the given document.
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Elements(FSharp.Data.HtmlDocument,System.String)">
+ <summary>
+ Returns all of the root elements in the current document that match the name
+ </summary>
+ <param name="name">The name to match</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Elements(FSharp.Data.HtmlDocument,System.Collections.Generic.IEnumerable{System.String})">
+ <summary>
+ Returns all of the root elements in the current document that match the set of names
+ </summary>
+ <param name="names">The set of names to match</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Elements(FSharp.Data.HtmlDocument)">
+ <summary>
+ Returns all of the root elements of the current document
+ that match the given predicate
+ </summary>
+ <param name="predicate">The predicate used to match elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.DescendantsWithPath(FSharp.Data.HtmlDocument,System.String)">
+ <summary>
+ Finds all of the descendant nodes of this document that match the given name
+ Recurses on match
+ </summary>
+ <param name="name">The name to match</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.DescendantsWithPath(FSharp.Data.HtmlDocument,System.String,System.Boolean)">
+ <summary>
+ Finds all of the descendant nodes of this document that match the given name
+ </summary>
+ <param name="name">The name to match</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.DescendantsWithPath(FSharp.Data.HtmlDocument,System.Collections.Generic.IEnumerable{System.String})">
+ <summary>
+ Finds all of the descendant nodes of this document that match the given set of names
+ Recurses on match
+ </summary>
+ <param name="names">The set of names to match</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.DescendantsWithPath(FSharp.Data.HtmlDocument,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+ <summary>
+ Finds all of the descendant nodes of this document that match the given set of names
+ </summary>
+ <param name="names">The set of names to match</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.DescendantsWithPath(FSharp.Data.HtmlDocument)">
+<summary>
+ Gets all of the descendants of this document
+ Recurses on match
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.DescendantsWithPath(FSharp.Data.HtmlDocument,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean})">
+ <summary>
+ Gets all of the descendants of this document that statisfy the given predicate
+ Recurses on match
+ </summary>
+ <param name="predicate">The predicate by which to match the nodes to return</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.DescendantsWithPath(FSharp.Data.HtmlDocument,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},System.Boolean)">
+ <summary>
+ Gets all of the descendants of this document that statisfy the given predicate
+ </summary>
+ <param name="predicate">The predicate by which to match the nodes to return</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Descendants(FSharp.Data.HtmlDocument,System.String)">
+ <summary>
+ Finds all of the descendant nodes of this document that match the given name
+ Recurses on match
+ </summary>
+ <param name="names">The name to match</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Descendants(FSharp.Data.HtmlDocument,System.String,System.Boolean)">
+ <summary>
+ Finds all of the descendant nodes of this document that match the given name
+ </summary>
+ <param name="name">The name to match</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Descendants(FSharp.Data.HtmlDocument,System.Collections.Generic.IEnumerable{System.String})">
+ <summary>
+ Finds all of the descendant nodes of this document that match the given set of names
+ Recurses on match
+ </summary>
+ <param name="names">The set of names to match</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Descendants(FSharp.Data.HtmlDocument,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+ <summary>
+ Finds all of the descendant nodes of this document that match the given set of names
+ </summary>
+ <param name="names">The set of names to match</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Descendants(FSharp.Data.HtmlDocument)">
+<summary>
+ Gets all of the descendants of this document
+ Recurses on match
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Descendants(FSharp.Data.HtmlDocument,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean})">
+ <summary>
+ Gets all of the descendants of this document that statisfy the given predicate
+ Recurses on match
+ </summary>
+ <param name="predicate">The predicate by which to match the nodes to return</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Descendants(FSharp.Data.HtmlDocument,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},System.Boolean)">
+ <summary>
+ Gets all of the descendants of this document that statisfy the given predicate
+ </summary>
+ <param name="predicate">The predicate by which to match the nodes to return</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentExtensions.Body(FSharp.Data.HtmlDocument)">
+<summary>
+ Finds the body element of the given document,
+ this throws an exception if no body element exists.
+</summary>
 </member>
 <member name="">
 
@@ -152,10 +315,289 @@
 <member name="">
 
 </member>
+<member name="M:FSharp.Data.HtmlNode.ParseRooted(System.String,System.String)">
+<summary>
+ Parses the specified HTML string to a list of HTML nodes
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNode.Parse(System.String)">
+<summary>
+ Parses the specified HTML string to a list of HTML nodes
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNode.NewText(System.String)">
+ <summary>
+ Creates a text content element
+ </summary>
+ <param name="content">The actual content</param>
+</member>
+<member name="M:FSharp.Data.HtmlNode.NewElement(System.String,System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}},System.Collections.Generic.IEnumerable{FSharp.Data.HtmlNode})">
+ <summary>
+ Creates an html element
+ </summary>
+ <param name="name">The name of the element</param>
+ <param name="attrs">The HtmlAttribute(s) of the element</param>
+ <param name="children">The children elements of this element</param>
+</member>
+<member name="M:FSharp.Data.HtmlNode.NewElement(System.String,System.Collections.Generic.IEnumerable{FSharp.Data.HtmlNode})">
+ <summary>
+ Creates an html element
+ </summary>
+ <param name="name">The name of the element</param>
+ <param name="children">The children elements of this element</param>
+</member>
+<member name="M:FSharp.Data.HtmlNode.NewElement(System.String,System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}})">
+ <summary>
+ Creates an html element
+ </summary>
+ <param name="name">The name of the element</param>
+ <param name="attrs">The HtmlAttribute(s) of the element</param>
+</member>
+<member name="M:FSharp.Data.HtmlNode.NewElement(System.String)">
+ <summary>
+ Creates an html element
+ </summary>
+ <param name="name">The name of the element</param>
+</member>
+<member name="M:FSharp.Data.HtmlNode.NewComment(System.String)">
+ <summary>
+ Creates a comment element
+ </summary>
+ <param name="content">The actual content</param>
+</member>
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Http.RequestString(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
+<member name="M:FSharp.Data.HtmlNodeExtensions.TryGetAttribute(FSharp.Data.HtmlNode,System.String)">
+ <summary>
+ Tries to select an attribute with the given name from the current node.
+ </summary>
+ <param name="name">The name of the attribute to select</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Name(FSharp.Data.HtmlNode)">
+<summary>
+ Gets the given nodes name
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.InnerText(FSharp.Data.HtmlNode)">
+<summary>
+ Returns the inner text of the current node
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.HasId(FSharp.Data.HtmlNode,System.String)">
+<summary>
+ Returns true if the current node has the specified id
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.HasClass(FSharp.Data.HtmlNode,System.String)">
+<summary>
+ Returns true if the current node has the specified class
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.HasAttribute(FSharp.Data.HtmlNode,System.String,System.String)">
+ <summary>
+ Returns true if the current node has an attribute that
+ matches both the name and the value
+ </summary>
+ <param name="name">The name of the attribute</param>
+ <param name="value">The value of the attribute</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Elements(FSharp.Data.HtmlNode,System.String)">
+ <summary>
+ Gets all of the elements of the current node, which match the given name
+ </summary>
+ <param name="names">The name by which to map the elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Elements(FSharp.Data.HtmlNode,System.Collections.Generic.IEnumerable{System.String})">
+ <summary>
+ Gets all of the elements of the current node, which match the given set of names
+ </summary>
+ <param name="names">The set of names by which to map the elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Elements(FSharp.Data.HtmlNode)">
+<summary>
+ Gets all of the nodes immediately under this node
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode,System.String)">
+ <summary>
+ Gets all of the descendants of the current node, which match the given name
+ Recurses on match
+ Doesn't include self
+ </summary>
+ <param name="name">The names by which to map the descendants</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode,System.String,System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node, which match the given name
+ Recurses on match
+ </summary>
+ <param name="name">The names by which to map the descendants</param>
+ <param name="includeSelf">Include the current node</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode,System.String,System.Boolean,System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node, which match the given name
+ </summary>
+ <param name="name">The name by which to map the descendants</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+ <param name="includeSelf">Include the current node</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode,System.Collections.Generic.IEnumerable{System.String})">
+ <summary>
+ Gets all of the descendants of the current node, which match the given set of names
+ Recurses on match
+ Doesn't include self
+ </summary>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node, which match the given set of names
+ Recurses on match
+ </summary>
+ <param name="names">The set of names by which to map the descendants</param>
+ <param name="includeSelf">Include the current node</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node, which match the given set of names
+ </summary>
+ <param name="names">The set of names by which to map the descendants</param>
+ <param name="includeSelf">Include the current node</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode)">
+<summary>
+ Gets all of the descendants of the current node
+ Recurses on match
+ Doesn&apos;t include self
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean})">
+ <summary>
+ Gets all of the descendants of the current node that satisfy the predicate
+ Recurses on match
+ Doesn't include self
+ </summary>
+ <param name="predicate">The predicate for which descendants to return</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node that satisfy the predicate
+ Recurses on match
+ </summary>
+ <param name="predicate">The predicate for which descendants to return</param>
+ <param name="includeSelf">Include the current node</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},System.Boolean,System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node that satisfy the predicate
+ </summary>
+ <param name="predicate">The predicate for which descendants to return</param>
+ <param name="includeSelf">Include the current node</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Descendants(FSharp.Data.HtmlNode,System.String)">
+ <summary>
+ Gets all of the descendants of the current node, which match the given name
+ Recurses on match
+ Doesn't include self
+ </summary>
+ <param name="name">The name by which to map the descendants</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Descendants(FSharp.Data.HtmlNode,System.String,System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node, which match the given name
+ Recurses on match
+ </summary>
+ <param name="name">The name by which to map the descendants</param>
+ <param name="includeSelf">Include the current node</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Descendants(FSharp.Data.HtmlNode,System.String,System.Boolean,System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node, which match the given name
+ </summary>
+ <param name="name">The name by which to map the descendants</param>
+ <param name="includeSelf">Include the current node</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Descendants(FSharp.Data.HtmlNode,System.Collections.Generic.IEnumerable{System.String})">
+ <summary>
+ Gets all of the descendants of the current node, which match the given set of names
+ Recurses on match
+ Doesn't include self
+ </summary>
+ <param name="names">The set of names by which to map the descendants</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Descendants(FSharp.Data.HtmlNode,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node, which match the given set of names
+ Recurses on match
+ </summary>
+ <param name="names">The set of names by which to map the descendants</param>
+ <param name="includeSelf">Include the current node</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Descendants(FSharp.Data.HtmlNode,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node, which match the given set of names
+ </summary>
+ <param name="names">The set of names by which to map the descendants</param>
+ <param name="includeSelf">Include the current node</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Descendants(FSharp.Data.HtmlNode)">
+<summary>
+ Gets all of the descendants of the current node
+ Recurses on match
+ Doesn&apos;t include self
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Descendants(FSharp.Data.HtmlNode,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean})">
+ <summary>
+ Gets all of the descendants of the current node that satisfy the predicate
+ Recurses on match
+ Doesn't include self
+ </summary>
+ <param name="predicate">The predicate for which descendants to return</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Descendants(FSharp.Data.HtmlNode,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node that satisfy the predicate
+ Recurses on match
+ </summary>
+ <param name="predicate">The predicate for which descendants to return</param>
+ <param name="includeSelf">Include the current node</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Descendants(FSharp.Data.HtmlNode,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},System.Boolean,System.Boolean)">
+ <summary>
+ Gets all of the descendants of the current node that satisfy the predicate
+ </summary>
+ <param name="predicate">The predicate for which descendants to return</param>
+ <param name="includeSelf">Include the current node</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Attributes(FSharp.Data.HtmlNode)">
+<summary>
+ Gets all of the attributes of this node
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.AttributeValue(FSharp.Data.HtmlNode,System.String)">
+ <summary>
+ Return the value of the named attribute, or an empty string if not found.
+ </summary>
+ <param name="name">The name of the attribute to get the value from</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.Attribute(FSharp.Data.HtmlNode,System.String)">
+ <summary>
+ Returns the attribute with the given name. If the
+ attribute does not exist then this will throw an exception
+ </summary>
+ <param name="name">The name of the attribute to select</param>
+</member>
+<member name="">
+
+</member>
+<member name="M:FSharp.Data.Http.RequestString(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
 <summary>
  Download an HTTP web resource from the specified URL synchronously
  (allows specifying query string parameters and HTTP headers including
@@ -164,7 +606,7 @@
  that will be encoded, and the method will automatically be set if not specified
 </summary>
 </member>
-<member name="M:FSharp.Data.Http.RequestStream(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
+<member name="M:FSharp.Data.Http.RequestStream(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
 <summary>
  Download an HTTP web resource from the specified URL synchronously
  (allows specifying query string parameters and HTTP headers including
@@ -173,7 +615,7 @@
  that will be encoded, and the method will automatically be set if not specified
 </summary>
 </member>
-<member name="M:FSharp.Data.Http.Request(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
+<member name="M:FSharp.Data.Http.Request(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
 <summary>
  Download an HTTP web resource from the specified URL synchronously
  (allows specifying query string parameters and HTTP headers including
@@ -185,7 +627,7 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Http.AsyncRequestString(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
+<member name="M:FSharp.Data.Http.AsyncRequestString(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
 <summary>
  Download an HTTP web resource from the specified URL asynchronously
  (allows specifying query string parameters and HTTP headers including
@@ -194,7 +636,7 @@
  that will be encoded, and the method will automatically be set if not specified
 </summary>
 </member>
-<member name="M:FSharp.Data.Http.AsyncRequestStream(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
+<member name="M:FSharp.Data.Http.AsyncRequestStream(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
 <summary>
  Download an HTTP web resource from the specified URL synchronously
  (allows specifying query string parameters and HTTP headers including
@@ -203,7 +645,7 @@
  that will be encoded, and the method will automatically be set if not specified
 </summary>
 </member>
-<member name="M:FSharp.Data.Http.AsyncRequest(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
+<member name="M:FSharp.Data.Http.AsyncRequest(System.String,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{FSharp.Data.HttpRequestBody},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}},Microsoft.FSharp.Core.FSharpOption{System.Net.CookieContainer},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.HttpWebRequest,System.Net.HttpWebRequest}})">
 <summary>
  Download an HTTP web resource from the specified URL asynchronously
  (allows specifying query string parameters and HTTP headers including
@@ -468,12 +910,12 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.JsonValue.RequestAsync(System.String,Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}})">
+<member name="M:FSharp.Data.JsonValue.RequestAsync(System.String,Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}})">
 <summary>
  Sends the JSON to the specified uri. Defaults to a POST request.
 </summary>
 </member>
-<member name="M:FSharp.Data.JsonValue.Request(System.String,Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}})">
+<member name="M:FSharp.Data.JsonValue.Request(System.String,Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}})">
 <summary>
  Sends the JSON to the specified uri. Defaults to a POST request.
 </summary>
@@ -525,6 +967,30 @@
  Decimal type are represented using the Float case, while
  smaller numbers are represented as decimals to avoid precision loss.
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="M:FSharp.Data.CsvExtensionsModule.op_Dynamic(FSharp.Data.CsvRow,System.String)">
 <summary>
@@ -617,45 +1083,6 @@
 <member name="T:FSharp.Data.Helpers">
 
 </member>
-<member name="M:FSharp.Data.HtmlAttributeExtensions.HtmlAttribute.Value``1(FSharp.Data.HtmlAttribute,``0,Microsoft.FSharp.Core.FSharpFunc{System.String,System.Tuple{System.Boolean,``0}})">
- <summary>
- Attempts to parse the attribute value using the given function
- if the parse function returns false then the defaultValue is used
- </summary>
- <param name="defaultValue">Value to return if the parse function fails</param>
- <param name="parseF">Function to parse the attribute value</param>
-</member>
-<member name="M:FSharp.Data.HtmlAttributeExtensions.HtmlAttribute.Value``1(FSharp.Data.HtmlAttribute,Microsoft.FSharp.Core.FSharpFunc{System.String,``0})">
- <summary>
- Gets the value of the current attribute and parses the value
- using the function supplied by parseF
- </summary>
- <param name="parseF">The function to parse the attribute value</param>
-</member>
-<member name="M:FSharp.Data.HtmlAttributeExtensions.HtmlAttribute.Value(FSharp.Data.HtmlAttribute)">
-<summary>
- Gets the value of the current attribute
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlAttributeExtensions.HtmlAttribute.get_Name(FSharp.Data.HtmlAttribute)">
-<summary>
- Gets the name of the current attribute
-</summary>
-</member>
-<member name="T:FSharp.Data.HtmlAttributeExtensions">
-
-</member>
-<member name="M:FSharp.Data.HtmlAttributeModule.tryParseValue``1(``0,Microsoft.FSharp.Core.FSharpFunc{System.String,System.Tuple{System.Boolean,``0}},FSharp.Data.HtmlAttribute)">
-<summary>
- Attempts to parse the value of the attribute using the given function
- if the parse functions fails the defaultValue is returned
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlAttributeModule.parseValue``1(Microsoft.FSharp.Core.FSharpFunc{System.String,``0},FSharp.Data.HtmlAttribute)">
-<summary>
- Parses the value of the attribute using the given function
-</summary>
-</member>
 <member name="M:FSharp.Data.HtmlAttributeModule.value(FSharp.Data.HtmlAttribute)">
 <summary>
  Gets the value of the given attribute
@@ -681,75 +1108,9 @@
 <member name="T:FSharp.Data.HtmlCharRefs">
 
 </member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.Load.Static(System.String)">
-<summary>
- Loads HTML from the specified uri
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.AsyncLoad.Static(System.String)">
-<summary>
- Loads HTML from the specified uri asynchronously
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.Load.Static(System.IO.TextReader)">
-<summary>
- Loads HTML from the specified reader
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.Load.Static(System.IO.Stream)">
-<summary>
- Loads HTML from the specified stream
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.Parse.Static(System.String)">
-<summary>
- Parses the specified HTML string
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.Elements(FSharp.Data.HtmlDocument,System.Collections.Generic.IEnumerable{System.String})">
+<member name="M:FSharp.Data.HtmlDocumentModule.tryGetBody(FSharp.Data.HtmlDocument)">
  <summary>
- Returns all of the elements in the current document that match the set of names
- </summary>
- <param name="names">The set of names to match</param>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.Elements(FSharp.Data.HtmlDocument,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean}})">
- <summary>
- Returns all of the elements of the current document
- that match the given predicate
- </summary>
- <param name="f">The predicate used to match elements</param>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.Descendants(FSharp.Data.HtmlDocument,System.Collections.Generic.IEnumerable{System.String},Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
- <summary>
- Finds all of the descendant nodes of this document that match the given set of names
- </summary>
- <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
- <param name="names">The set of names to match</param>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.Descendants(FSharp.Data.HtmlDocument,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean}},Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
- <summary>
- Gets all of the descendants of this document that statisfy the given predicate
- </summary>
- <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
- <param name="f">The predicate by which to match the nodes to return</param>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.TryBody(FSharp.Data.HtmlDocument)">
-<summary>
- Trys to find the body element of the given document.
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentExtensions.HtmlDocument.get_Body(FSharp.Data.HtmlDocument)">
-<summary>
- Finds the body element of the given document,
- this throws an exception if no body element exists.
-</summary>
-</member>
-<member name="T:FSharp.Data.HtmlDocumentExtensions">
-
-</member>
-<member name="M:FSharp.Data.HtmlDocumentModule.tryBody(FSharp.Data.HtmlDocument)">
- <summary>
- Trys to find the body element of the given document.
+ Tries to find the body element of the given document.
  </summary>
  <param name="x">The given document</param>
 </member>
@@ -760,13 +1121,21 @@
  </summary>
  <param name="x">The given document</param>
 </member>
-<member name="M:FSharp.Data.HtmlDocumentModule.hasDescendants(System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlDocument)">
+<member name="M:FSharp.Data.HtmlDocumentModule.descendantsNamedWithPath(System.Boolean,System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlDocument)">
  <summary>
- Returns true if any of the descendants of the current document exist in the 
- given set of names
+ Finds all of the descendant nodes of this document that match the given set of names
  </summary>
- <param name="names">The set of names to match against</param>
- <param name="x">The given document</param>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+ <param name="names">The set of names to match</param>
+ <param name="doc">The given document</param>
+</member>
+<member name="M:FSharp.Data.HtmlDocumentModule.descendantsWithPath(System.Boolean,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},FSharp.Data.HtmlDocument)">
+ <summary>
+ Gets all of the descendants of this document that statisfy the given predicate
+ </summary>
+ <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
+ <param name="predicate">The predicate by which to match the nodes to return</param>
+ <param name="doc">The given document</param>
 </member>
 <member name="M:FSharp.Data.HtmlDocumentModule.descendantsNamed(System.Boolean,System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlDocument)">
  <summary>
@@ -774,212 +1143,74 @@
  </summary>
  <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
  <param name="names">The set of names to match</param>
- <param name="x">The given document</param>
+ <param name="doc">The given document</param>
 </member>
 <member name="M:FSharp.Data.HtmlDocumentModule.descendants(System.Boolean,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},FSharp.Data.HtmlDocument)">
  <summary>
  Gets all of the descendants of this document that statisfy the given predicate
  </summary>
  <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
- <param name="f">The predicate by which to match the nodes to return</param>
- <param name="x">The given node</param>
-</member>
-<member name="M:FSharp.Data.HtmlDocumentModule.hasElements(System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlDocument)">
- <summary>
- Returns true if any of the elements of the current document exist in the 
- given set of names
- </summary>
- <param name="names">The set of names to match against</param>
- <param name="x">The given document</param>
+ <param name="predicate">The predicate by which to match the nodes to return</param>
+ <param name="doc">The given document</param>
 </member>
 <member name="M:FSharp.Data.HtmlDocumentModule.elementsNamed(System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlDocument)">
  <summary>
- Returns all of the elements in the current document that match the set of names
+ Returns all of the root elements of the document that match the set of names
  </summary>
  <param name="names">The set of names to match</param>
- <param name="x">The current node</param>
+ <param name="doc">The given document</param>
 </member>
-<member name="M:FSharp.Data.HtmlDocumentModule.elements(Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},FSharp.Data.HtmlDocument)">
- <summary>
- Returns all of the elements of the current document
- that match the given predicate
- </summary>
- <param name="f">The predicate used to match elements</param>
+<member name="">
+
 </member>
 <member name="M:FSharp.Data.HtmlDocumentModule.docType(FSharp.Data.HtmlDocument)">
 <summary>
  Returns the doctype of the document
 </summary>
 </member>
-<member name="M:FSharp.Data.HtmlDocumentModule.createDoc(System.String,Microsoft.FSharp.Collections.FSharpList{FSharp.Data.HtmlNode})">
- <summary>
- Creates a HtmlDocument
- </summary>
- <param name="docType">The document type specifier string</param>
- <param name="children">The child elements of this document</param>
-</member>
 <member name="T:FSharp.Data.HtmlDocumentModule">
 
 </member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.ParseRooted.Static(System.String,System.String)">
-<summary>
- Parses the specified HTML string to a list of HTML nodes
-</summary>
+<member name="">
+
 </member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.Parse.Static(System.String)">
-<summary>
- Parses the specified HTML string to a list of HTML nodes
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.get_InnerText(FSharp.Data.HtmlNode)">
-<summary>
- Returns the inner text of the current node
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.HasElement(FSharp.Data.HtmlNode,System.Collections.Generic.IEnumerable{System.String})">
- <summary>
- Returns true if the current node contains an element that matches any of the
- names in the given set
- </summary>
- <param name="names">The set of names to match</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.Elements(FSharp.Data.HtmlNode,System.Collections.Generic.IEnumerable{System.String},Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
- <summary>
- Gets all of the elements of the current node, which match the given set of names
- </summary>
- <param name="names">The set of names by which to map the elements</param>
- <param name="includeSelf">include the current node</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.Elements(FSharp.Data.HtmlNode,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean}},Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
- <summary>
- Gets all of the element of the current node, which match the given predicate
- </summary>
- <param name="f">The predicate by which to match nodes</param>
- <param name="includeSelf">include the current node</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.HasAttribute(FSharp.Data.HtmlNode,System.String,System.String)">
- <summary>
- Returns true id the current node has an attribute that
- matches both the name and the value
- </summary>
- <param name="name">The name of the attribute</param>
- <param name="value">The value of the attribute</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.Attribute(FSharp.Data.HtmlNode,System.String)">
- <summary>
- Returns the attribute with the given name. If the
- attribute does not exist then this will throw an exception
- </summary>
- <param name="name">The name of the attribute to select</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.GetAttributeValue``1(FSharp.Data.HtmlNode,``0,Microsoft.FSharp.Core.FSharpFunc{System.String,System.Tuple{System.Boolean,``0}},System.String)">
- <summary>
- Trys to return a parsed value of the named attribute.
- </summary>
- <param name="defaultValue">The default value to return if the attribute does not exist or the parsing fails</param>
- <param name="parseF">The function to parse the value</param>
- <param name="name">The name of the attribute to get the value from</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.TryGetAttribute(FSharp.Data.HtmlNode,System.String)">
- <summary>
- Trys to select an attribute with the given name from the current node.
- </summary>
- <param name="name">The name of the attribute to select</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.Descendants(FSharp.Data.HtmlNode,System.Collections.Generic.IEnumerable{System.String},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
- <summary>
- Gets all of the descendants of the current node, which match the given set of names
- </summary>
- <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
- <param name="names">The set of names by which to map the descendants</param>
- <param name="includeSelf">include the current node</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.Descendants(FSharp.Data.HtmlNode,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean}},Microsoft.FSharp.Core.FSharpOption{System.Boolean},Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
- <summary>
- Gets all of the descendants of the current node
- </summary>
- <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
- <param name="f">The predicate for which descendants to return</param>
- <param name="includeSelf">include the current node</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.get_Children(FSharp.Data.HtmlNode)">
-<summary>
- Gets all of the nodes immediately under this node
-</summary>
-</member>
-<member name="M:FSharp.Data.HtmlNodeExtensions.HtmlNode.get_Name(FSharp.Data.HtmlNode)">
-<summary>
- Gets the given nodes name
-</summary>
-</member>
-<member name="T:FSharp.Data.HtmlNodeExtensions">
+<member name="T:FSharp.Data.HtmlExtensionsModule">
 
 </member>
 <member name="M:FSharp.Data.HtmlNodeModule.innerText(FSharp.Data.HtmlNode)">
  <summary>
  Returns the inner text of the current node
  </summary>
- <param name="x">The current node</param>
+ <param name="n">The given node</param>
 </member>
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.HtmlNodeModule.hasElements(System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlNode)">
- <summary>
- Returns true if any of the elements of the current node exist in the 
- given set of names
- </summary>
- <param name="names">The set of names to match against</param>
- <param name="x">The given node</param>
+<member name="M:FSharp.Data.HtmlNodeModule.hasClass(System.String,FSharp.Data.HtmlNode)">
+<summary>
+ Returns true if the current node has the specified class
+</summary>
 </member>
-<member name="M:FSharp.Data.HtmlNodeModule.elementsNamed(System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlNode)">
- <summary>
- Finds all of the elements nodes of this nodes that match the given set of names
- </summary>
- <param name="names">The set of names to match</param>
- <param name="x">The given node</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeModule.hasElementsAndSelf(System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlNode)">
- <summary>
- Returns true if any of the elements of the current node exist in the 
- given set of names, this also includes the current node
- </summary>
- <param name="names">The set of names to match against</param>
- <param name="x">The given node</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeModule.elementsAndSelfNamed(System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlNode)">
- <summary>
- Returns the current element and any other elements that match the given
- set of names
- </summary>
- <param name="names">The set of names to match against</param>
- <param name="x">The given node</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeModule.elementsAndSelf(Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},FSharp.Data.HtmlNode)">
- <summary>
- Returns the elements under the current node that macht the
- given predicate, this also returns the node aswell if it
- matches the predicate
- </summary>
- <param name="f">The predicate to match the element</param>
- <param name="x">The given html node</param>    
-</member>
-<member name="M:FSharp.Data.HtmlNodeModule.elements(Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},FSharp.Data.HtmlNode)">
- <summary>
- Returns the elements under the current node that mach the
- given predicate
- </summary>
- <param name="f">The predicate to match the element</param>
- <param name="x">The given html node</param>    
+<member name="M:FSharp.Data.HtmlNodeModule.hasId(System.String,FSharp.Data.HtmlNode)">
+<summary>
+ Returns true if the current node has the specified id
+</summary>
 </member>
 <member name="M:FSharp.Data.HtmlNodeModule.hasAttribute(System.String,System.String,FSharp.Data.HtmlNode)">
  <summary>
- Returns true id the current node has an attribute that
+ Returns true if the current node has an attribute that
  matches both the name and the value
  </summary>
  <param name="name">The name of the attribute</param>
  <param name="value">The value of the attribute</param>
  <param name="x">The given html node</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeModule.attributeValue(System.String,FSharp.Data.HtmlNode)">
+ <summary>
+ Return the value of the named attribute, or an empty string if not found.
+ </summary>
+ <param name="name">The name of the attribute to get the value from</param>
+ <param name="n">The given node</param>
 </member>
 <member name="M:FSharp.Data.HtmlNodeModule.attribute(System.String,FSharp.Data.HtmlNode)">
  <summary>
@@ -987,66 +1218,63 @@
  attribute does not exist then this will throw an exception
  </summary>
  <param name="name">The name of the attribute to select</param>
- <param name="x">The current node</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeModule.getAttributeValue``1(``0,Microsoft.FSharp.Core.FSharpFunc{System.String,System.Tuple{System.Boolean,``0}},System.String,FSharp.Data.HtmlNode)">
- <summary>
- Trys to return a parsed value of the named attribute.
- </summary>
- <param name="defaultValue">The default value to return if the attribute does not exist or the parsing fails</param>
- <param name="parseF">The function to parse the value</param>
- <param name="name">The name of the attribute to get the value from</param>
- <param name="x">The given node</param>
+ <param name="n">The given node</param>
 </member>
 <member name="M:FSharp.Data.HtmlNodeModule.tryGetAttribute(System.String,FSharp.Data.HtmlNode)">
  <summary>
- Trys to return an attribute that exists on the current node
+ Tries to return an attribute that exists on the current node
  </summary>
  <param name="name">The name of the attribute to return.</param>
 </member>
-<member name="M:FSharp.Data.HtmlNodeModule.hasDescendants(System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlNode)">
- <summary>
- Returns true if any of the descendants of the current node exist in the 
- given set of names
- </summary>
- <param name="names">The set of names to match against</param>
- <param name="x">The given node</param>
+<member name="M:FSharp.Data.HtmlNodeModule.attributes(FSharp.Data.HtmlNode)">
+<summary>
+ Gets all of the attributes of this node
+</summary>
 </member>
-<member name="M:FSharp.Data.HtmlNodeModule.descendantsNamed(System.Boolean,System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlNode)">
+<member name="M:FSharp.Data.HtmlNodeModule.descendantsNamedWithPath(System.Boolean,System.Boolean,System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlNode)">
  <summary>
  Finds all of the descendant nodes of this nodes that match the given set of names
  </summary>
+ <param name="includeSelf">Include the current node</param>
  <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
  <param name="names">The set of names to match</param>
- <param name="x">The given node</param>
+ <param name="n">The given node</param>
 </member>
-<member name="M:FSharp.Data.HtmlNodeModule.descendants(System.Boolean,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},FSharp.Data.HtmlNode)">
+<member name="M:FSharp.Data.HtmlNodeModule.descendantsWithPath(System.Boolean,System.Boolean,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},FSharp.Data.HtmlNode)">
  <summary>
  Gets all of the descendants of this node that statisfy the given predicate
  </summary>
+ <param name="includeSelf">Include the current node</param>
  <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
- <param name="f">The predicate by which to match the nodes to return</param>
- <param name="x">The given node</param>
+ <param name="predicate">The predicate by which to match the nodes to return</param>
+ <param name="n">The given node</param>
 </member>
-<member name="M:FSharp.Data.HtmlNodeModule.descendantsAndSelfNamed(System.Boolean,System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlNode)">
+<member name="M:FSharp.Data.HtmlNodeModule.descendantsNamed(System.Boolean,System.Boolean,System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlNode)">
  <summary>
  Finds all of the descendant nodes of this nodes that match the given set of names
- the current node is also considered for comparison
  </summary>
+ <param name="includeSelf">Include the current node</param>
  <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
  <param name="names">The set of names to match</param>
- <param name="x">The given node</param>
+ <param name="n">The given node</param>
 </member>
-<member name="M:FSharp.Data.HtmlNodeModule.descendantsAndSelf(System.Boolean,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},FSharp.Data.HtmlNode)">
+<member name="M:FSharp.Data.HtmlNodeModule.descendants(System.Boolean,System.Boolean,Microsoft.FSharp.Core.FSharpFunc{FSharp.Data.HtmlNode,System.Boolean},FSharp.Data.HtmlNode)">
  <summary>
  Gets all of the descendants of this node that statisfy the given predicate
- the current node is also considered in the comparison
  </summary>
+ <param name="includeSelf">Include the current node</param>
  <param name="recurseOnMatch">If a match is found continues down the tree matching child elements</param>
- <param name="f">The predicate by which to match the nodes to return</param>
- <param name="x">The given node</param>
+ <param name="predicate">The predicate by which to match the nodes to return</param>
+ <param name="n">The given node</param>
 </member>
-<member name="M:FSharp.Data.HtmlNodeModule.children(FSharp.Data.HtmlNode)">
+<member name="M:FSharp.Data.HtmlNodeModule.elementsNamed(System.Collections.Generic.IEnumerable{System.String},FSharp.Data.HtmlNode)">
+ <summary>
+ Finds all of the elements nodes of this node that match the given set of names
+ </summary>
+ <param name="names">The set of names to match</param>
+ <param name="n">The given node</param>
+</member>
+<member name="M:FSharp.Data.HtmlNodeModule.elements(FSharp.Data.HtmlNode)">
 <summary>
  Gets all of the nodes immediately under this node
 </summary>
@@ -1055,27 +1283,6 @@
 <summary>
  Gets the given nodes name
 </summary>
-</member>
-<member name="M:FSharp.Data.HtmlNodeModule.createComment(System.String)">
- <summary>
- Creates a comment element
- </summary>
- <param name="content">The actual content</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeModule.createText(System.String)">
- <summary>
- Creates a text content element
- </summary>
- <param name="content">The actual content</param>
-</member>
-<member name="M:FSharp.Data.HtmlNodeModule.createElement(System.String,System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}},Microsoft.FSharp.Collections.FSharpList{FSharp.Data.HtmlNode})">
- <summary>
- Creates a HtmlElement
- All attribute names and tag names will be normalized to lowercase
- </summary>
- <param name="name">The name of the element</param>
- <param name="attrs">The HtmlAttribute(s) of the element</param>
- <param name="children">The children elements of this element</param>
 </member>
 <member name="T:FSharp.Data.HtmlNodeModule">
 
@@ -1248,6 +1455,9 @@
  All the consecutive whitespace (except for `&amp;nbsp;`) will be collapsed to a single space
  All br tags will be replaced by newlines
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -2024,7 +2234,79 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Runtime.HtmlTable`1.Create(System.Func{System.String[],`0},FSharp.Data.Runtime.TypedHtmlDocument,System.String)">
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="M:FSharp.Data.Runtime.HtmlTable`1.Create(System.Func{System.String[],`0},FSharp.Data.Runtime.TypedHtmlDocument,System.String,System.Boolean)">
 <summary>
  [omit]
 </summary>
@@ -2382,12 +2664,12 @@
 <member name="">
 
 </member>
-<member name="M:FSharp.Data.Runtime.TypedHtmlDocument.GetTable(System.String)">
+<member name="M:FSharp.Data.Runtime.TypedHtmlDocument.GetObject(System.String)">
 <summary>
  [omit]
 </summary>
 </member>
-<member name="M:FSharp.Data.Runtime.TypedHtmlDocument.Create(System.Boolean,System.String,System.String,System.IO.TextReader)">
+<member name="M:FSharp.Data.Runtime.TypedHtmlDocument.Create(System.Boolean,System.IO.TextReader)">
 <summary>
  [omit]
 </summary>
@@ -3992,10 +4274,43 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
 <member name="T:FSharp.Data.Runtime.HtmlInference">
 <summary>
  Structural inference for HTML tables
 </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -4115,6 +4430,9 @@
  Multiple tags are replaced with just a single space. (This is a recursive 
  implementation that is somewhat faster than regular expression.)
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="M:FSharp.Data.Runtime.NameUtils.uniqueGenerator``1(Microsoft.FSharp.Core.FSharpFunc{``0,System.String})">
 <summary>
@@ -5182,12 +5500,21 @@
 <member name="T:FSharp.Data.TextParser">
 
 </member>
-<member name="M:FSharp.Data.XElementExtensions.XElement.RequestAsync(System.Xml.Linq.XElement,System.String,Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}})">
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:FSharp.Data.Utils">
+
+</member>
+<member name="M:FSharp.Data.XElementExtensions.XElement.RequestAsync(System.Xml.Linq.XElement,System.String,Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}})">
 <summary>
  Sends the XML to the specified uri. Defaults to a POST request.
 </summary>
 </member>
-<member name="M:FSharp.Data.XElementExtensions.XElement.Request(System.Xml.Linq.XElement,System.String,Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.String,System.String}}})">
+<member name="M:FSharp.Data.XElementExtensions.XElement.Request(System.Xml.Linq.XElement,System.String,Microsoft.FSharp.Core.FSharpOption{System.String},Microsoft.FSharp.Core.FSharpOption{System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}}})">
 <summary>
  Sends the XML to the specified uri. Defaults to a POST request.
 </summary>
