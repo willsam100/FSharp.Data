@@ -1634,6 +1634,11 @@
  Used to specify directives that MUST be obeyed by all caching mechanisms along the request/response chain 
 </summary>
 </member>
+<member name="M:FSharp.Data.HttpRequestHeaders.BasicAuth(System.String,System.String)">
+<summary>
+ Authentication header using Basic Auth encoding
+</summary>
+</member>
 <member name="M:FSharp.Data.HttpRequestHeaders.Authorization(System.String)">
 <summary>
  Authentication credentials for HTTP authentication
