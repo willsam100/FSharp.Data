@@ -34,6 +34,12 @@ type XmlProviderArgs =
       EmbeddedResource : string 
       InferTypesFromValues : bool }
 
+type XsdProviderArgs = 
+    { Schema : string
+      ResolutionFolder : string
+      Encoding : string
+      EmbeddedResource : string  }
+
 type JsonProviderArgs = 
     { Sample : string
       SampleIsList : bool
@@ -111,6 +117,8 @@ module private RuntimeAssemblies =
 type TypeProviderInstantiation = 
     | Csv of CsvProviderArgs
     | Xml of XmlProviderArgs
+    | Xsd of XsdProviderArgs
+    | Comment
     | Json of JsonProviderArgs
     | Html of HtmlProviderArgs
     | WorldBank of WorldBankProviderArgs
@@ -118,6 +126,7 @@ type TypeProviderInstantiation =
     member x.GenerateType resolutionFolder runtimeAssembly runtimeAssemblyRefs =
         let f, args =
             match x with
+            | Comment -> failwith "Can't instantiate a comment"
             | Csv x -> 
                 (fun cfg -> new CsvProvider(cfg) :> TypeProviderForNamespaces),
                 [| box x.Sample
@@ -146,6 +155,12 @@ type TypeProviderInstantiation =
                    box x.ResolutionFolder 
                    box x.EmbeddedResource
                    box x.InferTypesFromValues |] 
+            | Xsd x ->
+                (fun cfg -> new XsdProvider(cfg) :> TypeProviderForNamespaces),
+                [| box x.Schema
+                   box x.ResolutionFolder 
+                   box x.Encoding
+                   box x.EmbeddedResource |] 
             | Json x -> 
                 (fun cfg -> new JsonProvider(cfg) :> TypeProviderForNamespaces),
                 [| box x.Sample
@@ -174,6 +189,7 @@ type TypeProviderInstantiation =
 
     override x.ToString() =
         match x with
+        | Comment -> [""]
         | Csv x -> 
             ["Csv"
              x.Sample
@@ -192,6 +208,10 @@ type TypeProviderInstantiation =
              x.Global.ToString()
              x.Culture
              x.InferTypesFromValues.ToString() ]
+        | Xsd x -> 
+            ["Xml"
+             x.Schema
+             x.Encoding ]
         | Json x -> 
             ["Json"
              x.Sample
@@ -230,6 +250,7 @@ type TypeProviderInstantiation =
         let args = line.Split [|','|]
         args.[0],
         match args.[0] with
+        | s when s.StartsWith("//") -> Comment
         | "Csv" ->
             Csv { Sample = args.[1]
                   Separators = args.[2]
@@ -256,6 +277,11 @@ type TypeProviderInstantiation =
                   ResolutionFolder = ""
                   EmbeddedResource = "" 
                   InferTypesFromValues = args.[5] |> bool.Parse }
+        | "Xsd" ->
+            Xsd { Schema = args.[1]
+                  ResolutionFolder = ""
+                  Encoding = ""
+                  EmbeddedResource = "" }
         | "Json" ->
             Json { Sample = args.[1]
                    SampleIsList = args.[2] |> bool.Parse
