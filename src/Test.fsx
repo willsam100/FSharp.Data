@@ -104,6 +104,7 @@ let testCases =
     __SOURCE_DIRECTORY__ ++ ".." ++ "tests" ++ "FSharp.Data.DesignTime.Tests" ++ "SignatureTestCases.config"
     |> File.ReadAllLines
     |> Array.map (TypeProviderInstantiation.Parse >> snd)
+    |> Array.filter (function Comment -> false | _ -> true)
 
 for testCase in testCases do
     dump false false Net40 true testCase

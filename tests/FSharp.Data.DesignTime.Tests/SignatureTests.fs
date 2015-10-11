@@ -24,6 +24,7 @@ let testCasesTuple =
 
 let testCases = 
     testCasesTuple
+    |> Array.filter (snd >> function | Comment -> false | _ -> true)
 #if BUILD_SERVER
     |> Array.filter (snd >> function | WorldBank _ -> false | _ -> true)
 #endif
