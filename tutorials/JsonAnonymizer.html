@@ -39,19 +39,15 @@
         <div class="span9" id="main">
           
 <h1>F# Data: Anonymizing JSON</h1>
-
 <p>This tutorial shows how to implement an anonymizer for a JSON document (represented using
-the <code>JsonValue</code> type discussed in <a href="../library/JsonValue.html">JSON parser article</a>)
+the <code>JsonValue</code> type discussed in <a href="JsonValue.html">JSON parser article</a>)
 This functionality is not directly available in the F# Data library, but it can
 be very easily implemented by recursively walking over the JSON document.</p>
-
-<p>If you want to use the JSON anonymizer in your code, you can copy the 
+<p>If you want to use the JSON anonymizer in your code, you can copy the
 <a href="https://github.com/fsharp/FSharp.Data/blob/master/docs/content/tutorials/JsonAnonymizer.fsx">source from GitHub</a> and just include it in your project. If you use these
 functions often and would like to see them in the F# Data library, please submit
 a <a href="https://github.com/fsharp/FSharp.Data/issues">feature request</a>.</p>
-
 <p><em>DISCLAIMER</em>: Don't use this for sensitive data as it's just a sample</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -194,14 +190,16 @@ a <a href="https://github.com/fsharp/FSharp.Data/issues">feature request</a>.</p
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Related articles</h2>
-
 <ul>
-<li><a href="../library/JsonValue.html">F# Data: JSON Parser</a> - a tutorial that introduces
-<code>JsonValue</code> for working with JSON values dynamically.</li>
-<li><a href="../library/JsonProvider.html">F# Data: JSON Type Provider</a> - discusses F# type provider
-that provides type-safe access to JSON data.</li>
+<li>
+<a href="../library/JsonValue.html">F# Data: JSON Parser</a> - a tutorial that introduces
+<code>JsonValue</code> for working with JSON values dynamically.
+</li>
+<li>
+<a href="../library/JsonProvider.html">F# Data: JSON Type Provider</a> - discusses F# type provider
+that provides type-safe access to JSON data.
+</li>
 </ul>
 
 <div class="tip" id="fs1">namespace System</div>

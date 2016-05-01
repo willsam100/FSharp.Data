@@ -47,7 +47,6 @@
 <div class="xmldoc">
 <p>Implements type inference for unstructured documents like XML or JSON</p>
 
-
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -111,7 +110,6 @@
           <p>Infers the type of a simple string value</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -133,7 +131,6 @@
 (group the types by tag, count their multiplicity)</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -153,7 +150,6 @@
             </a>
           <p>Infers the type of a simple string value
 Returns one of null|typeof<Bit0>|typeof<Bit1>|typeof<bool>|typeof<int>|typeof<int64>|typeof<decimal>|typeof<float>|typeof<Guid>|typeof<DateTime>|typeof<string></p>
-
 
 
         </td>
@@ -192,21 +188,22 @@ Returns one of null|typeof<Bit0>|typeof<Bit1>|typeof<bool>|typeof<int>|typeof<in
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Find common subtype of two infered types:</p>
-
 <ul>
 <li>If the types are both primitive, then we find common subtype of the primitive types</li>
 <li>If the types are both records, then we union their fields (and mark some as optional)</li>
-<li>If the types are both collections, then we take subtype of their elements
-(note we do not generate heterogeneous types in this case!)</li>
+<li>
+If the types are both collections, then we take subtype of their elements
+(note we do not generate heterogeneous types in this case!)
+</li>
 <li>If one type is the Top type, then we return the other without checking</li>
-<li>If one of the types is the Null type and the other is not a value type
+<li>
+If one of the types is the Null type and the other is not a value type
 (numbers or booleans, but not string) then we return the other type.
-Otherwise, we return bottom.</li>
+Otherwise, we return bottom.
+</li>
 </ul>
-
 <p>The contract that should hold about the function is that given two types with the
 same <a href="fsharp-data-runtime-structuraltypes-inferedtypetag.html" title="InferedTypeTag"><code>InferedTypeTag</code></a>, the result also has the same <a href="fsharp-data-runtime-structuraltypes-inferedtypetag.html" title="InferedTypeTag"><code>InferedTypeTag</code></a>.</p>
-
 
 
         </td>
@@ -229,7 +226,6 @@ same <a href="fsharp-data-runtime-structuraltypes-inferedtypetag.html" title="In
           <p>Checks whether a type supports unit of measure</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -247,9 +243,8 @@ same <a href="fsharp-data-runtime-structuraltypes-inferedtypetag.html" title="In
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Returns a tag of a type - a tag represents a 'kind' of type 
+          <p>Returns a tag of a type - a tag represents a 'kind' of type
 (essentially it describes the different bottom types we have)</p>
-
 
 
         </td>
@@ -290,7 +285,6 @@ same <a href="fsharp-data-runtime-structuraltypes-inferedtypetag.html" title="In
           <p>Get the union of record types (merge their properties)
 This matches the corresponding members and marks them as <code>Optional</code>
 if one may be missing. It also returns subtype of their types.</p>
-
 
 
         </td>

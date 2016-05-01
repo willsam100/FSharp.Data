@@ -39,22 +39,17 @@
         <div class="span9" id="main">
           
 <h1>F# Data: JSON Type Provider</h1>
-
 <p>This article demonstrates how to use the JSON Type Provider to access JSON files
-in a statically typed way. We first look at how the structure is inferred and then 
+in a statically typed way. We first look at how the structure is inferred and then
 demonstrate the provider by parsing data from WorldBank and Twitter.</p>
-
 <p>The JSON Type Provider provides statically typed access to JSON documents.
 It takes a sample document as an input (or a document containing a JSON array of samples).
-The generated type can then be used to read files with the same structure. If the 
-loaded file does not match the structure of the sample, a runtime error may occur 
+The generated type can then be used to read files with the same structure. If the
+loaded file does not match the structure of the sample, a runtime error may occur
 (but only when accessing e.g. non-existing element).</p>
-
 <h2>Introducing the provider</h2>
-
-<p>The type provider is located in the <code>FSharp.Data.dll</code> assembly. Assuming the assembly 
+<p>The type provider is located in the <code>FSharp.Data.dll</code> assembly. Assuming the assembly
 is located in the <code>../../../bin</code> directory, we can load it in F# Interactive as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -63,15 +58,11 @@ is located in the <code>../../../bin</code> directory, we can load it in F# Inte
 </code></pre></td>
 </tr>
 </table>
-
 <h3>Inferring types from the sample</h3>
-
-<p>The <code>JsonProvider&lt;...&gt;</code> takes one static parameter of type <code>string</code>. The parameter can 
-be <em>either</em> a sample string <em>or</em> a sample file (relative to the current folder or online 
+<p>The <code>JsonProvider&lt;...&gt;</code> takes one static parameter of type <code>string</code>. The parameter can
+be <em>either</em> a sample string <em>or</em> a sample file (relative to the current folder or online
 accessible via <code>http</code> or <code>https</code>). It is not likely that this could lead to ambiguities.</p>
-
 <p>The following sample passes a small JSON string to the provider:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -84,17 +75,13 @@ accessible via <code>http</code> or <code>https</code>). It is not likely that t
 </code></pre></td>
 </tr>
 </table>
-
 <p>You can see that the generated type has two properties - <code>Age</code> of type <code>int</code> and <code>Name</code> of
 type <code>string</code>. The provider successfully infers the types from the sample and exposes the
 fields as properties (with PascalCase name to follow standard naming conventions).</p>
-
 <h3>Inferring numeric types</h3>
-
 <p>In the previous case, the sample document simply contained an integer and so the provider
-inferred the type <code>int</code>. Sometimes, the types in the sample document (or a list of samples) 
+inferred the type <code>int</code>. Sometimes, the types in the sample document (or a list of samples)
 may not match exactly. For example, a list may mix integers and floats:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -105,16 +92,13 @@ may not match exactly. For example, a list may mix integers and floats:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>When the sample is a collection, the type provider generates a type that can be used to store
 all values in the sample. In this case, the resulting type is <code>decimal</code>, because one
-of the values is not an integer. In general, the provider supports (and prefers them 
+of the values is not an integer. In general, the provider supports (and prefers them
 in this order): <code>int</code>, <code>int64</code>, <code>decimal</code> and <code>float</code>.</p>
-
 <p>Other primitive types cannot be combined into a single type. For example, if the list contains
 numbers <em>and</em> strings. In this case, the provider generates two methods that can be used
 to get values that match one of the types:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -129,21 +113,16 @@ to get values that match one of the types:</p>
 </code></pre></td>
 </tr>
 </table>
-
-<p>As you can see, the <code>Mixed</code> type has properties <code>Numbers</code> and <code>Strings</code> that 
-return only <code>int</code> and <code>string</code> values from the collection. This means that we get 
+<p>As you can see, the <code>Mixed</code> type has properties <code>Numbers</code> and <code>Strings</code> that
+return only <code>int</code> and <code>string</code> values from the collection. This means that we get
 type-safe access to the values, but not in the original order (if order matters, then
-you can use the <code>mixed.JsonValue</code> property to get the underlying <code>JsonValue</code> and 
+you can use the <code>mixed.JsonValue</code> property to get the underlying <code>JsonValue</code> and
 process it dynamically as described in <a href="JsonValue.html">the documentation for <code>JsonValue</code></a>.</p>
-
 <h3>Inferring record types</h3>
-
 <p>Now let's look at a sample JSON document that contains a list of records. The
 following example uses two records - one with <code>name</code> and <code>age</code> and the second with just
 <code>name</code>. If a property is missing, then the provider infers it as optional.</p>
-
 <p>If we want to just use the same text used for the schema at runtime, we can use the <code>GetSamples</code> method:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -160,17 +139,14 @@ following example uses two records - one with <code>name</code> and <code>age</c
 </code></pre></td>
 </tr>
 </table>
-
 <p>The inferred type for <code>items</code> is a collection of (anonymous) JSON entities - each entity
 has properties <code>Name</code> and <code>Age</code>. As <code>Age</code> is not available for all records in the sample
 data set, it is inferred as <code>option&lt;int&gt;</code>. The above sample uses <code>Option.iter</code> to print
 the value only when it is available.</p>
-
-<p>In the previous case, the values of individual properties had common types - <code>string</code> 
+<p>In the previous case, the values of individual properties had common types - <code>string</code>
 for the <code>Name</code> property and numeric type for <code>Age</code>. However, what if the property of
 a record can have multiple different types? In that case, the type provider behaves
 as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -189,20 +165,15 @@ as follows:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>Here, the <code>Value</code> property is either a number or a string, The type provider generates
-a type that has an optional property for each possible option, so we can use 
+a type that has an optional property for each possible option, so we can use
 simple pattern matching on <code>option&lt;int&gt;</code> and <code>option&lt;string&gt;</code> values to distinguish
 between the two options. This is similar to the handling of heterogeneous arrays.</p>
-
 <p>Note that we have a <code>GetSamples</code> method because the sample is a JSON list. If it was a JSON
 object, we would have a <code>GetSample</code> method instead.</p>
-
 <h2>Loading WorldBank data</h2>
-
-<p>Now let's use the type provider to process some real data. We use a data set returned by 
+<p>Now let's use the type provider to process some real data. We use a data set returned by
 <a href="http://data.worldbank.org">the WorldBank</a>, which has (roughly) the following structure:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -211,7 +182,7 @@ object, we would have a <code>GetSample</code> method instead.</p>
 <span class="l">6: </span>
 <span class="l">7: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="js">[ { <span class="s">"page"</span>: 1, <span class="s">"pages"</span>: 1, <span class="s">"total"</span>: 53 },
+<td class="snippet"><pre class="fssnip highlighted"><code lang="js">[ { <span class="s">"page"</span>: <span class="n">1</span>, <span class="s">"pages"</span>: <span class="n">1</span>, <span class="s">"total"</span>: <span class="n">53</span> },
   [ { <span class="s">"indicator"</span>: {<span class="s">"value"</span>: <span class="s">"Central government debt, total (% of GDP)"</span>},
       <span class="s">"country"</span>: {<span class="s">"id"</span>:<span class="s">"CZ"</span>,<span class="s">"value"</span>:<span class="s">"Czech Republic"</span>},
       <span class="s">"value"</span>:<span class="k">null</span>,<span class="s">"decimal"</span>:<span class="s">"1"</span>,<span class="s">"date"</span>:<span class="s">"2000"</span>},
@@ -219,17 +190,14 @@ object, we would have a <code>GetSample</code> method instead.</p>
       <span class="s">"country"</span>: {<span class="s">"id"</span>:<span class="s">"CZ"</span>,<span class="s">"value"</span>:<span class="s">"Czech Republic"</span>},
       <span class="s">"value"</span>:<span class="s">"16.6567773464055"</span>,<span class="s">"decimal"</span>:<span class="s">"1"</span>,<span class="s">"date"</span>:<span class="s">"2010"</span>} ] ]
 </code></pre></td></tr></table>
-
 <p>The response to a request contains an array with two items. The first item is a record
 with general information about the response (page, total pages, etc.) and the second item
 is another array which contains the actual data points. For every data point, we get
-some information and the actual <code>value</code>. Note that the <code>value</code> is passed as a string 
+some information and the actual <code>value</code>. Note that the <code>value</code> is passed as a string
 (for some unknown reason). It is wrapped in quotes, so the provider infers its type as
 <code>string</code> (and we need to convert it manually).</p>
-
-<p>The following sample generates type based on the <a href="../data/WorldBank.json"><code>data/WorldBank.json</code></a> 
+<p>The following sample generates type based on the <a href="../data/WorldBank.json"><code>data/WorldBank.json</code></a>
 file and loads it:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -238,21 +206,17 @@ file and loads it:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>Note that we can also load the data directly from the web both in the <code>Load</code> method and in
 the type provider sample parameter, and there's an asynchronous <code>AsyncLoad</code> method available too:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 73)" onmouseover="showTip(event, 'fs39', 73)" class="i">docAsync</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 74)" onmouseover="showTip(event, 'fs36', 74)" class="t">WorldBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 75)" onmouseover="showTip(event, 'fs40', 75)" class="f">AsyncLoad</span>(<span class="s">&quot;http://api.worldbank.org/country/cz/indicator/GC.DOD.TOTL.GD.ZS?format=json&quot;</span>)
 </code></pre></td>
 </tr>
 </table>
-
 <p>The <code>doc</code> is an array of heterogeneous types, so the provider generates a type
-that can be used to get the record and the array, respectively. Note that the 
+that can be used to get the record and the array, respectively. Note that the
 provider infers that there is only one record and one array. We can print the data set as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -275,21 +239,17 @@ provider infers that there is only one record and one array. We can print the da
 </code></pre></td>
 </tr>
 </table>
-
 <p>When printing the data points, some of the values might be missing (in the input, the value
-is <code>null</code> instead of a valid number). This is another example of a heterogeneous type - 
+is <code>null</code> instead of a valid number). This is another example of a heterogeneous type -
 the type is either <code>Number</code> or some other type (representing <code>null</code> value). This means
 that <code>record.Value</code> has a <code>Number</code> property (when the value is a number) and we can use
 it to print the result only when the data point is available.</p>
-
 <h2>Parsing Twitter stream</h2>
-
 <p>We now look on how to parse tweets returned by the <a href="http://dev.twitter.com/">Twitter API</a>.
-Tweets are quite heterogeneous, so we infer the structure from a <em>list</em> of inputs rather than from 
-just a single input. To do that, we use the file <a href="../data/TwitterStream.json"><code>data/TwitterStream.json</code></a> 
-(containing a list of tweets) and pass an optional parameter <code>SampleIsList=true</code> which tells the 
+Tweets are quite heterogeneous, so we infer the structure from a <em>list</em> of inputs rather than from
+just a single input. To do that, we use the file <a href="../data/TwitterStream.json"><code>data/TwitterStream.json</code></a>
+(containing a list of tweets) and pass an optional parameter <code>SampleIsList=true</code> which tells the
 provider that the sample is actually a <em>list of samples</em>:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -306,17 +266,13 @@ provider that the sample is actually a <em>list of samples</em>:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>After creating the <code>Tweet</code> type, we parse a single sample tweet and print some details about the
-tweet. As you can see, the <code>tweet.User</code> property has been inferred as optional (meaning that a 
+tweet. As you can see, the <code>tweet.User</code> property has been inferred as optional (meaning that a
 tweet might not have an author?) so we unsafely get the value using the <code>Value</code> property.
 The <code>RetweetCount</code> and <code>Text</code> properties may be also missing, so we also access them unsafely.</p>
-
 <h2>Getting and creating GitHub issues</h2>
-
 <p>In this example we will now also create JSON in addition to consuming it.
 Let's start by listing the 5 most recently updated open issues in the FSharp.Data repo.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -343,10 +299,8 @@ Let's start by listing the 5 most recently updated open issues in the FSharp.Dat
 </code></pre></td>
 </tr>
 </table>
-
 <p>And now let's create a new issue. We look into the documentation at <a href="http://developer.github.com/v3/issues/#create-an-issue">http://developer.github.com/v3/issues/#create-an-issue</a> and we see that
 we need to post a JSON value similar to this:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -377,10 +331,8 @@ we need to post a JSON value similar to this:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>This JSON is different from what we got for each issue in the previous API call, so we'll define a new type based on this sample,
 create an instance, and send a POST request:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -401,39 +353,33 @@ create an instance, and send a POST request:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <a name="jsonlib"></a>
-
 <h2>Using JSON provider in a library</h2>
-
 <p>You can use the types created by JSON type provider in a public API of a library that you are building,
 but there is one important thing to keep in mind - when the user references your library, the type
 provider will be loaded and the types will be generated at that time (the JSON provider is not
 currently a <em>generative</em> type provider). This means that the type provider will need to be able to
 access the sample JSON. This works fine when the sample is specified inline, but it won't work when
 the sample is specified as a local file (unless you distribute the samples with your library).</p>
-
-<p>For this reason, the JSON provider lets you specify samples as embedded resources using the 
+<p>For this reason, the JSON provider lets you specify samples as embedded resources using the
 static parameter <code>EmbeddedResource</code>. If you are building a library <code>MyLib.dll</code>, you can write:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs82', 155)" onmouseover="showTip(event, 'fs82', 155)" class="t">WB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 156)" onmouseover="showTip(event, 'fs4', 156)" class="t">JsonProvider</span><span class="o">&lt;</span><span class="s">&quot;../data/WorldBank.json&quot;</span>, <span class="i">EmbeddedResource</span><span class="o">=</span><span class="s">&quot;MyLib, worldbank.json&quot;</span><span class="o">&gt;</span>
 </code></pre></td>
 </tr>
 </table>
-
-<p>You still need to specify the local path, but this is only used when compiling <code>MyLib.dll</code>. 
+<p>You still need to specify the local path, but this is only used when compiling <code>MyLib.dll</code>.
 When a user of your library references <code>MyLib.dll</code> later, the JSON Type Provider will be able
 to load <code>MyLib.dll</code> and locate the sample <code>worldbank.json</code> as a resource of the library. When
 this succeeds, it does not attempt to find the local file and so your library can be used
 without providing a local copy of the sample JSON files.</p>
-
 <h2>Related articles</h2>
-
 <ul>
-<li><a href="JsonValue.html">F# Data: JSON Parser</a> - provides more information about 
-working with JSON values dynamically.</li>
+<li>
+<a href="JsonValue.html">F# Data: JSON Parser</a> - provides more information about 
+working with JSON values dynamically.
+</li>
 <li><a href="../reference/fsharp-data-jsonprovider.html">API Reference: JsonProvider type provider</a></li>
 <li><a href="../reference/fsharp-data-jsonvalue.html">API Reference: JsonValue discriminated union</a></li>
 </ul>

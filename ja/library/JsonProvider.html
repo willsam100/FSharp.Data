@@ -39,13 +39,11 @@
         <div class="span9" id="main">
           
 <h1>F# Data: JSON 型プロバイダー</h1>
-
 <p>このドキュメントではJSON 型プロバイダーを使って
 静的に型付けされた方法でJSONファイルを扱う方法について説明します。
 まず型が推測される方法について説明した後、
 このプロバイダーを使って世界銀行やTwitterから受け取ったデータをパースするデモを
 紹介します。</p>
-
 <p>JSON 型プロバイダーにはJSONドキュメントを静的に型付けされた方法で
 アクセスするための機能があります。
 このプロバイダーはサンプルとなるドキュメント
@@ -54,13 +52,10 @@
 生成された型を使うと、同じ構造のファイルを読み取ることができます。
 読み取ったファイルがサンプルとは異なる構造になっている場合には
 実行時エラーが発生します(ただし存在しない要素などにアクセスした場合に限ります)。</p>
-
 <h2>プロバイダーの基本</h2>
-
 <p>型プロバイダーは <code>FSharp.Data.dll</code> アセンブリ内にあります。
 このアセンブリが <code>../../../../bin</code> ディレクトリにあるとすると、
 以下のようにするとF# Interactive上でアセンブリをロードできます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -69,17 +64,13 @@
 </code></pre></td>
 </tr>
 </table>
-
 <h3>サンプルからの型の推測</h3>
-
 <p><code>JsonProvider&lt;...&gt;</code> は <code>string</code> 型のstatic引数を1つとります。
 この引数にはサンプルとなる文字列あるいはファイル
 (カレントディレクトリからの相対パスか、 <code>http</code> <code>https</code> で
 アクセスできるオンライン上のファイル)の <strong>どちらか一方</strong> を指定します。
 この引数の値があいまいになることはほとんどありえないでしょう。</p>
-
 <p>以下のコードでは小さなJSON文字列をプロバイダーに渡しています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -92,21 +83,17 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p>生成された型には <code>Age</code> という <code>int</code> 型のプロパティと、
 <code>Name</code> という <code>string</code> 型のプロパティがあることがわかります。
 つまり型プロバイダーがサンプルから適切な型を推測して、
 それらを(標準の命名規則に従ってパスカル記法の名前の)プロパティとして
 公開しているというわけです。</p>
-
 <h3>数値型に対する推測</h3>
-
 <p>先ほどの例では、サンプルファイルには単なる整数が含まれていたので、
 プロバイダーも <code>int</code> 型と推測しました。
 しかし場合によってはサンプルのドキュメント(あるいはサンプルのリスト)にある型とは
 厳密に一致しないことがあります。
 たとえば以下のように integer と float が混ざったリストがあるとします：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -117,19 +104,16 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p>サンプルがコレクションの場合、型プロバイダーはサンプル内のすべての値を
 格納できるような型を生成します。
 今回の場合は一部の値が integer ではないため、最終的に <code>decimal</code> 型になります。
 型プロバイダーで一般的にサポートされている型は
 <code>int</code> <code>int64</code> <code>decimal</code> <code>float</code> です
 (また、この順序で推測されます)。</p>
-
 <p>その他のプリミティブ型の組み合わせになっている場合には型を1つに限定できません。
 たとえばリストに数値と文字列があるような場合です。
 この場合、プロバイダーはいずれか一方の型に一致するような値を取得できるように
 2種類のメソッドを生成します：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -144,7 +128,6 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p>このように、 <code>Mixed</code> 型には <code>Numbers</code> と <code>Strings</code> という、
 それぞれコレクション内の <code>int</code> か <code>string</code> の値しか返さないメソッドが
 定義されていることがわかります。
@@ -153,17 +136,13 @@
 (値の順序が重要であれば、 <code>mixed.JsonValue</code> プロパティで <code>JsonValue</code> を取得した後、
 <a href="JsonValue.html"><code>JsonValue</code> のドキュメント</a> で説明している方法で
 処理するとよいでしょう)。</p>
-
 <h3>レコード型の推測</h3>
-
 <p>次はレコード型を含むJSONドキュメントをサンプルにしてみましょう。
 以下では2つのレコードを使っています。
 1つには <code>name</code> と <code>age</code> 、もう1つには <code>name</code> だけがあります。
 もしもプロパティが値無しになる場合、型プロバイダーはオプション型として推測します。</p>
-
 <p>また、スキーマと同じテキストを実行時にも使いたい場合には
 <code>GetSamples</code> メソッドを使います：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -180,19 +159,16 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>items</code> 用に推測された型は(無名の)JSONエンティティのコレクションで、
 それぞれには <code>Name</code> と <code>Age</code> というプロパティがあります。
 <code>Age</code> はサンプルデータ内のすべてのレコードで使われているわけでは無いため、
 <code>option&lt;int&gt;</code> 型と推測されています。
 また、上のコードでは値が利用できる場合に限って表示できるように
 <code>Option.iter</code> を使っています。</p>
-
 <p>前回の例では各プロパティの値の型は共通していました。
 <code>Name</code> プロパティは <code>string</code> で、 <code>Age</code> プロパティは数値でした。
 しかしレコードのプロパティに複数の異なる型が使われていた場合にはどうなるでしょう？
 この場合、型プロバイダーは以下のように動作します：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -211,24 +187,19 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p>このように、 <code>Value</code> プロパティは数値か文字列になります。
 型プロバイダーは取り得る型それぞれをオプション型のプロパティとして定義します。
 そのため、 <code>option&lt;int&gt;</code> と <code>option&lt;string&gt;</code> の値に対する
 単純なパターンマッチを使ってそれぞれの値を取得できます。
 この方法は多種多様なデータを含む配列を処理する方法に似ています。</p>
-
 <p>ここではサンプルがJSONのリストになっているために <code>GetSamples</code> を使っている
 という点に注意してください。
 もしもサンプルがJSONオブジェクトの場合には <code>GetSample</code> を使います。</p>
-
 <h2>世界銀行のデータの読み取り</h2>
-
 <p>では型プロバイダーを使って実際のデータを処理してみましょう。
 <a href="http://data.worldbank.org">世界銀行</a> (World Bank)から
 受信したデータセットを使います。
 このデータは以下のような構造になっています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -237,7 +208,7 @@
 <span class="l">6: </span>
 <span class="l">7: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="js">[ { <span class="s">"page"</span>: 1, <span class="s">"pages"</span>: 1, <span class="s">"total"</span>: 53 },
+<td class="snippet"><pre class="fssnip highlighted"><code lang="js">[ { <span class="s">"page"</span>: <span class="n">1</span>, <span class="s">"pages"</span>: <span class="n">1</span>, <span class="s">"total"</span>: <span class="n">53</span> },
   [ { <span class="s">"indicator"</span>: {<span class="s">"value"</span>: <span class="s">"Central government debt, total (% of GDP)"</span>},
       <span class="s">"country"</span>: {<span class="s">"id"</span>:<span class="s">"CZ"</span>,<span class="s">"value"</span>:<span class="s">"Czech Republic"</span>},
       <span class="s">"value"</span>:<span class="k">null</span>,<span class="s">"decimal"</span>:<span class="s">"1"</span>,<span class="s">"date"</span>:<span class="s">"2000"</span>},
@@ -245,7 +216,6 @@
       <span class="s">"country"</span>: {<span class="s">"id"</span>:<span class="s">"CZ"</span>,<span class="s">"value"</span>:<span class="s">"Czech Republic"</span>},
       <span class="s">"value"</span>:<span class="s">"16.6567773464055"</span>,<span class="s">"decimal"</span>:<span class="s">"1"</span>,<span class="s">"date"</span>:<span class="s">"2010"</span>} ] ]
 </code></pre></td></tr></table>
-
 <p>2つの要素を含んだ1つの配列がレスポンスとして返されます。
 1つめの要素にはレスポンスに関する一般的な情報(ページ数、総ページ数など)があり、
 2つめの要素には実際のデータ点を表すような別の配列があります。
@@ -253,10 +223,8 @@
 なお <code>value</code> は(何らかの理由により)文字列として返されていることに注意してください。
 引用符で囲われているため、型プロバイダーはこの型を <code>string</code> と推測します
 (そして手動で変換する必要があります)。</p>
-
 <p>以下では <a href="../../data/WorldBank.json"><code>data/WorldBank.json</code></a> をサンプルファイルにして
 型を生成した後、同じファイルを読み込んでいます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -265,18 +233,15 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p>型プロバイダーのサンプル用の引数と、 <code>Load</code> メソッドの引数にはいずれも
 Web上のURLを指定して直接データを読み取ることができることに注意してください。
 また、非同期バージョンの <code>AsyncLoad</code> メソッドもあります：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 73)" onmouseover="showTip(event, 'fs39', 73)" class="i">docAsync</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 74)" onmouseover="showTip(event, 'fs36', 74)" class="t">WorldBank</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs40', 75)" onmouseover="showTip(event, 'fs40', 75)" class="f">AsyncLoad</span>(<span class="s">&quot;http://api.worldbank.org/country/cz/indicator/GC.DOD.TOTL.GD.ZS?format=json&quot;</span>)
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>doc</code> は多種多様な型を含んだ配列なので、
 それぞれレコードや配列を取得できるようなプロパティを持った型が生成されます。
 なお型プロバイダーは1つのレコードと1つの配列だけが含まれているものとして
@@ -285,7 +250,6 @@ Web上のURLを指定して直接データを読み取ることができるこ�
 この場合はメソッドは生成されず、
 単に <code>Record</code> や <code>Array</code> というプロパティが生成されます。
 したがって以下のようにすればデータセットを表示できます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -308,16 +272,13 @@ Web上のURLを指定して直接データを読み取ることができるこ�
 </code></pre></td>
 </tr>
 </table>
-
 <p>データ点を表示する場合、一部で値無しになっていることがあります
 (入力データでは適切な値の代わりに <code>null</code> という値になっています)。
 ここでもまた多種多様な型になっています。
 つまり型は <code>Number</code> か、あるいは( <code>null</code> を表すような)別の型のどちらかです。
 したがって <code>record.Value</code> には(値が数値であれば) <code>Number</code> プロパティがあり、
 このプロパティを使えばデータ点が有効である場合に限り結果を表示できます。</p>
-
 <h2>Twitterのストリームをパースする</h2>
-
 <p>次の例として、 <a href="http://dev.twitter.com/">Twitter API</a> から返される
 ツイートをパースする例を紹介しましょう。
 ツイートには非常に多種多様なデータが含まれているため、
@@ -327,7 +288,6 @@ Web上のURLを指定して直接データを読み取ることができるこ�
 になっていることを明示するオプションを指定した状態で
 <a href="../../data/TwitterStream.json"><code>data/TwitterStream.json</code></a>
 ファイルを使います：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -344,7 +304,6 @@ Web上のURLを指定して直接データを読み取ることができるこ�
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>Tweet</code> 型を作成した後に、サンプルのツイートを1つパースした後、
 ツイートに関する詳細を表示しています。
 実際に試してみるとわかりますが、 <code>tweet.User</code> プロパティは
@@ -353,13 +312,10 @@ Web上のURLを指定して直接データを読み取ることができるこ�
 常に <code>Value</code> プロパティから値が取得できるとは限りません。
 同じように <code>RetweetCount</code> と <code>Text</code> プロパティも値無しになることがあるため、
 上のコードは安全ではないことに注意してください。</p>
-
 <h2>GitHubのIssuesを取得および作成する</h2>
-
 <p>この例ではJSONを作成するだけでなく、それを実際に使用する方法を紹介します。
 まず FSharp.Data リポジトリのオープンされているIssuesのうちで
 直近の5つを取得してみましょう。</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -386,12 +342,10 @@ Web上のURLを指定して直接データを読み取ることができるこ�
 </code></pre></td>
 </tr>
 </table>
-
 <p>次に新しいIssueを作成してみます。
 GitHubのドキュメント <a href="http://developer.github.com/v3/issues/#create-an-issue
 を見てみると、以下のようなJSON値をポストすればいいことがわかります：">http://developer.github.com/v3/issues/#create-an-issue
 を見てみると、以下のようなJSON値をポストすればいいことがわかります：</a></p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -422,12 +376,10 @@ GitHubのドキュメント <a href="http://developer.github.com/v3/issues/#crea
 </code></pre></td>
 </tr>
 </table>
-
 <p>このJSONデータは先ほどAPIを呼び出して取得した
 Issueそれぞれに対応するものとは異なります。
 そのため、このサンプルデータを元にして新しい型を定義し、
 そのインスタンスを作成してリクエストをPOSTします：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -448,12 +400,12 @@ Issueそれぞれに対応するものとは異なります。
 </code></pre></td>
 </tr>
 </table>
-
 <h2>関連する記事</h2>
-
 <ul>
-<li><a href="JsonValue.html">F# Data: JSON パーサーおよびリーダー</a> -
-JSONの値を動的に処理する方法についての説明があります。</li>
+<li>
+<a href="JsonValue.html">F# Data: JSON パーサーおよびリーダー</a> -
+JSONの値を動的に処理する方法についての説明があります。
+</li>
 <li><a href="../../reference/fsharp-data-jsonprovider.html">API リファレンス: JsonProvider 型プロバイダー</a></li>
 <li><a href="../../reference/fsharp-data-jsonvalue.html">API リファレンス: JsonValue 判別共用体</a></li>
 </ul>

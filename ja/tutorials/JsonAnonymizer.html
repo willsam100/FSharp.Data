@@ -39,22 +39,18 @@
         <div class="span9" id="main">
           
 <h1>F# Data: JSONの匿名化</h1>
-
 <p>このチュートリアルではJSONドキュメント
 ( <a href="../library/JsonValue.html">JSONパーサーの記事</a> で説明した
 <code>JsonValue</code> 型で表現されるドキュメント)
 の匿名化機能を実装する方法を紹介します。
 この機能はF# Dataライブラリに備わっている機能ではありませんが、
 JSONドキュメントを再帰的に処理するだけで非常に簡単に実装できます。</p>
-
 <p>JSON匿名化機能をコード内で利用したい場合には、
 <a href="https://github.com/fsharp/FSharp.Data/blob/master/docs/content/tutorials/JsonAnonymizer.fsx">GitHubにあるソースコード</a> をコピーして
 プロジェクトに加えるだけです。
 この機能を頻繁に利用するようになり、F# Dataライブラリに取り込んでもらいたい
 ということであれば <a href="https://github.com/fsharp/FSharp.Data/issues">機能のリクエスト</a> を送信してください。</p>
-
 <p><strong>警告</strong>: この機能は単なるサンプルであるため、重要なデータを処理させないでください。</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -197,15 +193,17 @@ JSONドキュメントを再帰的に処理するだけで非常に簡単に実�
 </code></pre></td>
 </tr>
 </table>
-
 <h2>関連する記事</h2>
-
 <ul>
-<li><a href="../library/JsonValue.html">F# Data: JSON パーサーおよびリーダー</a> -
-JSONの値を動的に処理する方法についての説明があります。</li>
-<li><a href="../library/JsonProvider.html">F# Data: JSON 型プロバイダー</a> -
+<li>
+<a href="../library/JsonValue.html">F# Data: JSON パーサーおよびリーダー</a> -
+JSONの値を動的に処理する方法についての説明があります。
+</li>
+<li>
+<a href="../library/JsonProvider.html">F# Data: JSON 型プロバイダー</a> -
 型安全な方法でJSONデータにアクセスする機能を持った
-F# 型プロバイダーについて説明しています。</li>
+F# 型プロバイダーについて説明しています。
+</li>
 </ul>
 
 <div class="tip" id="fs1">namespace System</div>

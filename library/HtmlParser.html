@@ -39,14 +39,11 @@
         <div class="span9" id="main">
           
 <h1>F# Data: HTML Parser</h1>
-
 <p>This article demonstrates how to use the HTML Parser to parse HTML files.</p>
-
-<p>The HTML parser takes any fragment of HTML, uri or a stream and trys to parse it into a DOM. 
+<p>The HTML parser takes any fragment of HTML, uri or a stream and trys to parse it into a DOM.
 The parser is based on the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/index.html#contents">HTML Living Standard</a>
 Once a document/fragment has been parsed, a set of extension methods over the HTML DOM elements allow you to extract information from a web page
 independently of the actual HTML Type provider.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -55,28 +52,23 @@ independently of the actual HTML Type provider.</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The following example uses Google to search for <code>FSharp.Data</code> then parses the first set of
 search results from the page, extracting the URL and Title of the link.</p>
-
 <p>To achieve this we must first parse the webpage into our DOM. We can do this using
 the <code>HtmlDocument.Load</code> method. This method will take a URL and make a synchronous web call
 to extract the data from the page. Note: an asynchronous variant <code>HtmlDocument.AsyncLoad</code> is also available</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">results</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">HtmlDocument</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="f">Load</span>(<span class="s">&quot;http://www.google.co.uk/search?q=FSharp.Data&quot;</span>)
 </code></pre></td>
 </tr>
 </table>
-
-<p>Now that we have a loaded HTML document we can begin to extract data from it. 
+<p>Now that we have a loaded HTML document we can begin to extract data from it.
 Firstly we want to extract all of the anchor tags <code>a</code> out of the document, then
 inspect the links to see if it has a <code>href</code> attribute. If it does, extract the value,
-which in this case is the url that the search result is pointing to, and additionally the 
+which in this case is the url that the search result is pointing to, and additionally the
 <code>InnerText</code> of the anchor tag to provide the name of the web page for the search result
 we are looking at.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -93,13 +85,11 @@ we are looking at.</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>Now that we have extracted our search results you will notice that there are lots of
-other links to various Google services and cached/similar results. Ideally we would 
+other links to various Google services and cached/similar results. Ideally we would
 like to filter these results as we are probably not interested in them.
 At this point we simply have a sequence of Tuples, so F# makes this trivial using <code>Seq.filter</code>
 and <code>Seq.map</code>.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -116,31 +106,29 @@ and <code>Seq.map</code>.</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>Putting this all together yields the following:</p>
-
 <table class="pre"><tr><td><pre><code>[|("F# Data: Library for Data Access", "http://fsharp.github.io/FSharp.Data/");
   ("JSON Type Provider",
    "http://fsharp.github.io/FSharp.Data/library/JsonProvider.html");
   ("F# Data: CSV Parser",
    "http://fsharp.github.io/FSharp.Data/library/CsvFile.html");
   ("CSV Type Provider",
-   "https://fsharp.github.io/FSharp.Data/library/CsvProvider.html");
+   "http://fsharp.github.io/FSharp.Data/library/CsvProvider.html");
   ("XML Type Provider",
    "http://fsharp.github.io/FSharp.Data/library/XmlProvider.html");
-  ("fsharp/FSharp.Data · GitHub", "https://github.com/fsharp/FSharp.Data");
-  ("NuGet Gallery | F# Data 2.2.5",
-   "https://www.nuget.org/packages/FSharp.Data/");
+  ("F# Data Toolbox - FsProjects",
+   "http://fsprojects.github.io/FSharp.Data.Toolbox/");
+  ("GitHub - fsharp/FSharp.Data: F# Data: Library for Data Access",
+   "https://github.com/fsharp/FSharp.Data");
+  ("NuGet Gallery | F# Data 2.2.5", "https://www.nuget.org/packages/FSharp.Data");
   ("Microsoft.FSharp.Data.TypeProviders Namespace (F#) - MSDN",
-   "https://msdn.microsoft.com/en-GB/library/hh362324.aspx");
-  ("Guide - Data Access | The F# Software Foundation - Fsharp.org",
-   "http://fsharp.org/guides/data-access/");
+   "https://msdn.microsoft.com/en-us/library/hh362324.aspx");
   ("F# Data: New type provider library - Tomas Petricek",
    "http://tomasp.net/blog/fsharp-data.aspx/");
-  ("f# - scripts don't recognize FSharp.Data - Stack Overflow",
-   "http://stackoverflow.com/questions/16343876/scripts-dont-recognize-fsharp-data");
-  ("fsharp-data-science - Google Groups",
-   "https://groups.google.com/forum/%23!forum/fsharp-data-science")|]</code></pre></td></tr></table>
+  ("Guide - Data Access | The F# Software Foundation - Fsharp.org",
+   "http://fsharp.org/guides/data-access/");
+  ("Newest 'f#-data' Questions - Stack Overflow",
+   "http://stackoverflow.com/questions/tagged/f%2523-data")|]</code></pre></td></tr></table>
 
 <div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
 <div class="tip" id="fs2">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>

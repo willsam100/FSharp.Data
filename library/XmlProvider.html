@@ -39,24 +39,19 @@
         <div class="span9" id="main">
           
 <h1>F# Data: XML Type Provider</h1>
-
 <p>This article demonstrates how to use the XML Type Provider to access XML documents
-in a statically typed way. We first look at how the structure is inferred and then 
+in a statically typed way. We first look at how the structure is inferred and then
 demonstrate the provider by parsing a RSS feed.</p>
-
 <p>The XML Type Provider provides statically typed access to XML documents.
 It takes a sample document as an input (or document containing a root XML node with
-multiple child nodes that are used as samples). The generated type can then be used 
-to read files with the same structure. If the loaded file does not match the structure 
+multiple child nodes that are used as samples). The generated type can then be used
+to read files with the same structure. If the loaded file does not match the structure
 of the sample, a runtime error may occur (but only when accessing e.g. non-existing element).</p>
-
 <h2>Introducing the provider</h2>
-
-<p>The type provider is located in the <code>FSharp.Data.dll</code> assembly. Assuming the assembly 
+<p>The type provider is located in the <code>FSharp.Data.dll</code> assembly. Assuming the assembly
 is located in the <code>../../bin</code> directory, we can load it in F# Interactive as follows:
 (note we also need a reference to <code>System.Xml.Linq</code>, because the provider uses the
 <code>XDocument</code> type internally):</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -67,16 +62,12 @@ is located in the <code>../../bin</code> directory, we can load it in F# Interac
 </code></pre></td>
 </tr>
 </table>
-
 <h3>Inferring type from sample</h3>
-
-<p>The <code>XmlProvider&lt;...&gt;</code> takes one static parameter of type <code>string</code>. The parameter can 
-be <em>either</em> a sample XML string <em>or</em> a sample file (relative to the current folder or online 
+<p>The <code>XmlProvider&lt;...&gt;</code> takes one static parameter of type <code>string</code>. The parameter can
+be <em>either</em> a sample XML string <em>or</em> a sample file (relative to the current folder or online
 accessible via <code>http</code> or <code>https</code>). It is not likely that this could lead to ambiguities.</p>
-
 <p>The following sample generates a type that can read simple XML documents with a root node
 containing two attributes:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -89,16 +80,13 @@ containing two attributes:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The type provider generates a type <code>Author</code> that has properties corresponding to the
-attributes of the root element of the XML document. The types of the properties are 
+attributes of the root element of the XML document. The types of the properties are
 inferred based on the values in the sample document. In this case, the <code>Name</code> property
 has a type <code>string</code> and <code>Born</code> is <code>int</code>.</p>
-
 <p>XML is a quite flexible format, so we could represent the same document differently.
 Instead of using attributes, we could use nested nodes (<code>&lt;name&gt;</code> and <code>&lt;born&gt;</code> nested
 under <code>&lt;author&gt;</code>) that directly contain the values:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -113,19 +101,14 @@ under <code>&lt;author&gt;</code>) that directly contain the values:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The generated type provides exactly the same API for reading documents following this
 convention (Note that you cannot use <code>AuthorAlt</code> to parse samples that use the
 first style - the implementation of the types differs, they just provide the same public API.)</p>
-
 <p>The provider turns a node into a simply typed property only when the node contains just
 a primitive value and has no children or attributes.</p>
-
 <h3>Types for more complex structure</h3>
-
-<p>Now let's look at a number of examples that have more interesting structure. First of 
+<p>Now let's look at a number of examples that have more interesting structure. First of
 all, what if a node contains some value, but also has some attributes?</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -138,19 +121,15 @@ all, what if a node contains some value, but also has some attributes?</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>If the node cannot be represented as a simple type (like <code>string</code>) then the provider
-builds a new type with multiple properties. Here, it generates a property <code>Full</code> 
+builds a new type with multiple properties. Here, it generates a property <code>Full</code>
 (based on the name of the attribute) and infers its type to be boolean. Then it
 adds a property with a (special) name <code>Value</code> that returns the content of the element.</p>
-
 <h3>Types for multiple simple elements</h3>
-
-<p>Another interesting case is when there are multiple nodes that contain just a 
+<p>Another interesting case is when there are multiple nodes that contain just a
 primitive value. The following example shows what happens when the root node
-contains multiple <code>&lt;value&gt;</code> nodes (note that if we leave out the parameter to the 
+contains multiple <code>&lt;value&gt;</code> nodes (note that if we leave out the parameter to the
 <code>Parse</code> method, the same text used for the schema will be used as the runtime value).</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -163,17 +142,13 @@ contains multiple <code>&lt;value&gt;</code> nodes (note that if we leave out th
 </code></pre></td>
 </tr>
 </table>
-
 <p>The type provider generates a property <code>Values</code> that returns an array with the
 values - as the <code>&lt;value&gt;</code> nodes do not contain any attributes or children, they
 are turned into <code>int</code> values and so the <code>Values</code> property returns just <code>int[]</code>!</p>
-
 <h2>Processing philosophers</h2>
-
-<p>In this section we look at an example that demonstrates how the type provider works 
-on a simple document that lists authors that write about a specific topic. The 
+<p>In this section we look at an example that demonstrates how the type provider works
+on a simple document that lists authors that write about a specific topic. The
 sample document <a href="../data/Writers.xml"><code>data/Writers.xml</code></a> looks as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -184,11 +159,9 @@ sample document <a href="../data/Writers.xml"><code>data/Writers.xml</code></a> 
   <span class="k">&lt;</span><span class="i">author</span> <span class="o">name</span><span class="k">="Thomas Kuhn"</span> <span class="k">/&gt;</span>
 <span class="k">&lt;/</span><span class="i">authors</span><span class="k">&gt;</span> 
 </code></pre></td></tr></table>
-
 <p>At runtime, we use the generated type provider to parse the following string
-(which has the same structure as the sample document with the exception that 
+(which has the same structure as the sample document with the exception that
 one of the <code>author</code> nodes also contains a <code>died</code> attribute):</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -205,11 +178,9 @@ one of the <code>author</code> nodes also contains a <code>died</code> attribute
 </code></pre></td>
 </tr>
 </table>
-
 <p>When initializing the <code>XmlProvider</code>, we can pass it a file name or a web URL.
 The <code>Load</code> and <code>AsyncLoad</code> methods allows reading the data from a file or from a web resource. The
 <code>Parse</code> method takes the data as a string, so we can now print the information as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -230,24 +201,19 @@ The <code>Load</code> and <code>AsyncLoad</code> methods allows reading the data
 </code></pre></td>
 </tr>
 </table>
-
 <p>The value <code>topic</code> has a property <code>Topic</code> (of type <code>string</code>) which returns the value
 of the attribute with the same name. It also has a property <code>Authors</code> that returns
 an array with all the authors. The <code>Born</code> property is missing for some authors,
 so it becomes <code>option&lt;int&gt;</code> and we need to print it using <code>Option.iter</code>.</p>
-
 <p>The <code>died</code> attribute was not present in the sample used for the inference, so we
 cannot obtain it in a statically typed way (although it can still be obtained
 dynamically using <code>author.XElement.Attribute(XName.Get("died"))</code>).</p>
-
 <h2>Global inference mode</h2>
-
 <p>In the examples shown earlier, an element was never (recursively) contained in an
 element of the same name (for example <code>&lt;author&gt;</code> never contained another <code>&lt;author&gt;</code>).
 However, when we work with documents such as XHTML files, this can often be the case.
-Consider for example, the following sample (a simplified version of 
+Consider for example, the following sample (a simplified version of
 <a href="../data/HtmlBody.xml"><code>data/HtmlBody.xml</code></a>):</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -262,12 +228,10 @@ Consider for example, the following sample (a simplified version of
   <span class="k">&lt;/</span><span class="i">div</span><span class="k">&gt;</span>
 <span class="k">&lt;/</span><span class="i">div</span><span class="k">&gt;</span>
 </code></pre></td></tr></table>
-
 <p>Here, a <code>&lt;div&gt;</code> element can contain other <code>&lt;div&gt;</code> elements and it is quite clear that
 they should all have the same type - we want to be able to write a recursive function
 that processes <code>&lt;div&gt;</code> elements. To make this possible, you need to set an optional
 parameter <code>Global</code> to <code>true</code>:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -276,14 +240,11 @@ parameter <code>Global</code> to <code>true</code>:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>When the <code>Global</code> parameter is <code>true</code>, the type provider <em>unifies</em> all elements of the
 same name. This means that all <code>&lt;div&gt;</code> elements have the same type (with a union
 of all attributes and all possible children nodes that appear in the sample document).</p>
-
 <p>The type is located under a type <code>Html</code>, so we can write a <code>printDiv</code> function
 that takes <code>Html.Div</code> and acts as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -306,41 +267,33 @@ that takes <code>Html.Div</code> and acts as follows:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The function first prints all text included as <code>&lt;span&gt;</code> (the element never has any
 attributes in our sample, so it is inferred as <code>string</code>), then it recursively prints
 the content of all <code>&lt;div&gt;</code> elements. If the element does not contain nested elements,
 then we print the <code>Value</code> (inner text).</p>
-
 <h2>Reading RSS feeds</h2>
-
 <p>To conclude this introduction with a more interesting example, let's look how to parse a
 RSS feed. As discussed earlier, we can use relative paths or web addresses when calling
 the type provider:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs43', 98)" onmouseover="showTip(event, 'fs43', 98)" class="t">Rss</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 99)" onmouseover="showTip(event, 'fs4', 99)" class="t">XmlProvider</span><span class="o">&lt;</span><span class="s">&quot;http://tomasp.net/blog/rss.aspx&quot;</span><span class="o">&gt;</span>
 </code></pre></td>
 </tr>
 </table>
-
 <p>This code builds a type <code>Rss</code> that represents RSS feeds (with the features that are used
 on <code>http://tomasp.net</code>). The type <code>Rss</code> provides static methods <code>Parse</code>, <code>Load</code> and <code>AsyncLoad</code>
 to construct it - here, we just want to reuse the same URI of the schema, so we
 use the <code>GetSample</code> static method:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 100)" onmouseover="showTip(event, 'fs44', 100)" class="i">blog</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs43', 101)" onmouseover="showTip(event, 'fs43', 101)" class="t">Rss</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 102)" onmouseover="showTip(event, 'fs45', 102)" class="f">GetSample</span>()
 </code></pre></td>
 </tr>
 </table>
-
 <p>Printing the title of the RSS feed together with a list of recent posts is now quite
 easy - you can simply type <code>blog</code> followed by <code>.</code> and see what the autocompletion
 offers. The code looks like this:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -357,12 +310,9 @@ offers. The code looks like this:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Transforming XML</h2>
-
 <p>In this example we will now also create XML in addition to consuming it.
 Consider the problem of flattening a data set. Let's say you have xml data that looks like this:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -403,9 +353,7 @@ Consider the problem of flattening a data set. Let's say you have xml data that 
 </code></pre></td>
 </tr>
 </table>
-
 <p>and you want to transform it into something like this:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -426,9 +374,7 @@ Consider the problem of flattening a data set. Let's say you have xml data that 
 </code></pre></td>
 </tr>
 </table>
-
 <p>We'll create types from both the input and output samples and use the constructors on the types generated by the XmlProvider:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -457,9 +403,7 @@ Consider the problem of flattening a data set. Let's say you have xml data that 
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Related articles</h2>
-
 <ul>
 <li><a href="JsonProvider.html#jsonlib">Using JSON provider in a library</a> also applies to XML type provider</li>
 <li><a href="../reference/fsharp-data-xmlprovider.html">API Reference: XmlProvider type provider</a></li>

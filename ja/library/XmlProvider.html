@@ -39,12 +39,10 @@
         <div class="span9" id="main">
           
 <h1>F# Data: XML 型プロバイダー</h1>
-
 <p>このドキュメントではXML型プロバイダーを使用して、静的に型付けされた
 方法でXMLドキュメントにアクセスする方法について説明します。
 まず、XMLドキュメントの構造が推測される方法について説明した後に、
 XML型プロバイダーを使用してRSSフィードを解析するデモを紹介します。</p>
-
 <p>ML型プロバイダーを使用すると、静的に型付けされた方法でXMLドキュメントに
 アクセスできます。
 このプロバイダーはサンプルとなるドキュメントを入力として受け取ります
@@ -54,15 +52,12 @@ XML型プロバイダーを使用してRSSフィードを解析するデモを�
 読み取ることができるようになります。
 ファイルの構造がサンプルと異なる場合には実行時エラーが発生します
 (ただし存在しない要素にアクセスしようとした場合に限られます)。</p>
-
 <h2>プロバイダーの基本</h2>
-
 <p>型プロバイダーは <code>FSharp.Data.dll</code> アセンブリ内にあります。
 このアセンブリが <code>../../../../bin</code> ディレクトリにあると仮定すると、
 F# Interactive内で読み込むためには以下のようにします
 (なおこの型プロバイダーは内部で <code>XDocument</code> を使用しているため、
 <code>System.Xml.Linq</code> への参照も必要になる点に注意してください)：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -73,19 +68,15 @@ F# Interactive内で読み込むためには以下のようにします
 </code></pre></td>
 </tr>
 </table>
-
 <h3>サンプルからの型の推論</h3>
-
 <p><code>XmlProvider&lt;...&gt;</code> には <code>string</code> 型の静的パラメータを1つ指定します。
 このパラメータには <strong>サンプルとなるXML文字列</strong> または
 <strong>サンプルファイル</strong> のいずれかを指定します
 (カレントディレクトリからの相対パスか、 <strong>http</strong> または <strong>https</strong> 経由で
 アクセス可能なファイル名を指定します)。
 パラメータの値があいまいで認識できないようなケースはほとんど無いでしょう。</p>
-
 <p>以下のサンプルではルートノードに2つの属性を持ったXMLドキュメントを
 読み取ることができるような型を生成しています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -98,17 +89,14 @@ F# Interactive内で読み込むためには以下のようにします
 </code></pre></td>
 </tr>
 </table>
-
 <p>型プロバイダーによって生成された型 <code>Author</code> には、XMLドキュメントの
 ルート要素にある2つの属性と同じ名前のプロパティがあります。
 プロパティの型はサンプルとして指定したドキュメントの値から推測されます。
 今回の場合、 <code>Name</code> プロパティは <code>string</code> 型で
 <code>Born</code> プロパティは <code>int</code> 型です。</p>
-
 <p>XMLは非常に柔軟な形式なので、同じドキュメントを異なる形式で表現できます。
 具体的には属性を使用する代わりに、値を直接含むようなネストされたノードとして
 表現できます( <code>&lt;author&gt;</code> 以下に <code>&lt;name&gt;</code> および <code>&lt;born&gt;</code> をネストさせます)</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -123,20 +111,15 @@ F# Interactive内で読み込むためには以下のようにします
 </code></pre></td>
 </tr>
 </table>
-
 <p>生成された型を使用すると、同じ形式のドキュメントを読み取る場合には完全に同じAPIで
 アクセスできるようになります（ただし1番目の形式を使用するサンプルを <code>AuthorAlt</code>
 で解析することはできません。両者は単にpublic APIの形式が同じだけであって、
 型の実装としてはそれぞれ別のものだからです）。</p>
-
 <p>この型プロバイダーはノードにプリミティブな値だけが含まれていて、子ノードも属性も
 持たないような場合に限って、ノードを単純に型付けされたプロパティへと変換します。</p>
-
 <h3>さらに複雑な構造を持つドキュメントに対する型</h3>
-
 <p>もう少し興味深い構造を持った例をいくつか見ていくことにしましょう。
 まず、ノードが同じ値を持つものの、属性の値が異なる場合にはどうなるでしょうか？</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -149,21 +132,17 @@ F# Interactive内で読み込むためには以下のようにします
 </code></pre></td>
 </tr>
 </table>
-
 <p>ノードが( <code>string</code> のような)単純型として表現できない場合、
 この型プロバイダーは複数のプロパティを持つような型を新しく作成します。
 今回の場合、(属性の名前を元にして) <code>Full</code> というbool型のプロパティが生成されます。
 次に要素のコンテンツを返すような、<code>Value</code> という(特別な)名前のプロパティが
 追加されます。</p>
-
 <h3>単純な要素を複数持つドキュメントに対する型</h3>
-
 <p>もう1つ興味深い例として、プリミティブ値しか持たないような複数のノードが存在する
 場合を考えてみましょう。
 以下の例ではルートノード以下に複数の <code>&lt;value&gt;</code> ノードがあるドキュメントを
 サンプルとして指定しています( <code>Parse</code> メソッドにパラメータを指定しなかった場合、
 スキーマ用に指定したものと同じテキストが実行時の値に反映されます)。</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -176,18 +155,14 @@ F# Interactive内で読み込むためには以下のようにします
 </code></pre></td>
 </tr>
 </table>
-
 <p>型パラメータは複数の値を配列として返すような <code>Values</code> メソッドを生成します。
 <code>&lt;value&gt;</code> ノードは任意個の属性や子ノードを持つわけではないため、
 それぞれ <code>int</code> 値となり、 <code>Values</code> メソッドも単に <code>int[]</code> を返すようになります！</p>
-
 <h2>哲学者たちをもてなす</h2>
-
 <p>このセクションでは特定の話題に関する著者のリストを含んだ、単純なドキュメントを
 型プロバイダーで処理する方法についてのデモを紹介します。
 サンプルとなるドキュメント <a href="../../data/Writers.xml"><code>data/Writers.xml</code></a> は
 以下のようになっています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -198,11 +173,9 @@ F# Interactive内で読み込むためには以下のようにします
   <span class="k">&lt;</span><span class="i">author</span> <span class="o">name</span><span class="k">="Thomas Kuhn"</span> <span class="k">/&gt;</span>
 <span class="k">&lt;/</span><span class="i">authors</span><span class="k">&gt;</span> 
 </code></pre></td></tr></table>
-
 <p>実行時には型プロバイダーから生成された型を使用して、以下のような文字列を
 解析します(構造としてはサンプルのドキュメントと同じですが、
 <code>author</code> ノードに <code>died</code> 属性が含まれているという違いがあります)：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -219,13 +192,11 @@ F# Interactive内で読み込むためには以下のようにします
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>XmlProvider</code> の初期化時にはファイル名またはWebのURLを指定できます。
 <code>Load</code> や <code>AsyncLoad</code> メソッドを使用すると、
 ファイルあるいはWeb上のリソースを読み取ることができます。
 <code>Parse</code> メソッドの場合はデータとして文字列を指定できるため、以下のようにすると
 データ内の情報を表示することができます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -246,28 +217,23 @@ F# Interactive内で読み込むためには以下のようにします
 </code></pre></td>
 </tr>
 </table>
-
 <p>値 <code>topic</code> には( <code>string</code> 型の) <code>Topic</code> プロパティがあります。
 このプロパティは同名の属性の値を返します。
 また、すべての著者名をコレクションとして返すような <code>Authors</code> メソッドもあります。
 <code>Born</code> プロパティはいくつかの著者では指定されていないため、
 <code>option&lt;int&gt;</code> 型として定義されています。
 そのため、 <code>Option.iter</code> を使用して表示する必要があります。</p>
-
 <p><code>died</code> 属性はサンプルからの推論時には存在しないため、
 静的に型付けられた方法でこの値を取得することはできません
 (ただし <code>author.XElement.Attribute(XName.Get("died"))</code> というコードを使用して
 動的に取得することは可能です)。</p>
-
 <h2>グローバル推測モード</h2>
-
 <p>これまでの例では、同じ名前の要素を（再帰的に）含むような要素は
 出てきませんでした(つまりたとえば <code>&lt;author&gt;</code> 以下に <code>&lt;author&gt;</code> ノードは
 決して現れないということです)。
 しかしXHTMLファイルのようなドキュメントを扱う場合、こういった状況はよくあることです。
 例として以下のようなサンプルドキュメントがあるとしましょう
 (単純化したバージョンが <a href="../../data/HtmlBody.xml"><code>data/HtmlBody.xml</code></a> にあります)：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -282,12 +248,10 @@ F# Interactive内で読み込むためには以下のようにします
   <span class="k">&lt;/</span><span class="i">div</span><span class="k">&gt;</span>
 <span class="k">&lt;/</span><span class="i">div</span><span class="k">&gt;</span>
 </code></pre></td></tr></table>
-
 <p>この例では <code>&lt;div&gt;</code> 要素内に <code>&lt;div&gt;</code> 要素がありますが、いずれも同じ型として
 扱われるべきであることは明らかです。
 <code>&lt;div&gt;</code> 要素を処理する再帰関数を作成できるようになっていてもらいたいはずです。
 このような場合には引数 <code>Global</code> に <code>true</code> を指定します：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -296,16 +260,13 @@ F# Interactive内で読み込むためには以下のようにします
 </code></pre></td>
 </tr>
 </table>
-
 <p>引数 <code>Global</code> を <code>true</code> にすると、型プロバイダーは同名の要素すべてを <strong>一元化</strong> します。
 つまりすべての <code>&lt;div&gt;</code> 要素が同じ型として扱われることになります
 ( <code>&lt;div&gt;</code> に指定されたすべての属性をプロパティとして持ち、
 サンプルドキュメント内で見つけられるすべての子要素の組み合わせが考慮されます)。</p>
-
 <p>型は <code>Html</code> 以下に定義されます。
 したがって、<code>Html.Div</code> を引数にとり、
 各 <code>&lt;div&gt;</code> 要素を処理するような <code>printDiv</code> 関数を以下のようにして作成できます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -328,43 +289,35 @@ F# Interactive内で読み込むためには以下のようにします
 </code></pre></td>
 </tr>
 </table>
-
 <p>この関数はまず <code>&lt;span&gt;</code> 内のすべてのテキストを表示します
 (今回の例の場合、属性が全く指定されていないため、
 <code>string</code> 型として推論されます)。
 次に、すべての <code>&lt;div&gt;</code> 要素を再帰的に表示します。
 ネストされた要素が見つからない場合は <code>Value</code> (インナーテキスト)を表示します。</p>
-
 <h2>RSSフィードの読み取り</h2>
-
 <p>今回の総まとめとして、もう少し実用的な例としてRSSフィードを解析してみましょう。
 既に説明した通り、型プロバイダーには相対パスあるいはWebページのアドレスを指定できます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs43', 98)" onmouseover="showTip(event, 'fs43', 98)" class="t">Rss</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 99)" onmouseover="showTip(event, 'fs4', 99)" class="t">XmlProvider</span><span class="o">&lt;</span><span class="s">&quot;http://tomasp.net/blog/rss.aspx&quot;</span><span class="o">&gt;</span>
 </code></pre></td>
 </tr>
 </table>
-
 <p>このコードではRSSフィード（および <code>http://tomasp.net</code> で使用されている機能）
 を表す <code>Rss</code> 型を生成しています。
 <code>Rss</code> 型にはこの型のインスタンスを生成するための機能として、staticメソッド
 <code>Parse</code> 、 <code>Load</code> 、 <code>AsyncLoad</code> が定義されています。
 今回の場合、スキーマとして指定したものと同じURIを再利用したいので、
 staticメソッド <code>GetSample</code> を使用します：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 100)" onmouseover="showTip(event, 'fs44', 100)" class="i">blog</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs43', 101)" onmouseover="showTip(event, 'fs43', 101)" class="t">Rss</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 102)" onmouseover="showTip(event, 'fs45', 102)" class="f">GetSample</span>()
 </code></pre></td>
 </tr>
 </table>
-
 <p>ここまで来ればRSSフィードのタイトルと直近の投稿一覧を表示することは簡単です。
 単に <code>blog</code> に続けて <code>.</code> と入力すれば、自動補完の候補一覧が確認できるでしょう。
 コードとしては以下のようにします：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -381,9 +334,7 @@ staticメソッド <code>GetSample</code> を使用します：</p>
 </code></pre></td>
 </tr>
 </table>
-
 <h2>関連する記事</h2>
-
 <ul>
 <li><a href="../..reference/fsharp-data-xmlprovider.html">API リファレンス: XmlProvider 型プロバイダー</a></li>
 <li><a href="../../reference/fsharp-data-xelementextensions.html">API リファレンス: XElementExtensions モジュール</a></li>

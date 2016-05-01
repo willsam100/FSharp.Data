@@ -47,7 +47,6 @@
 <div class="xmldoc">
 <p>Typed representation of a CSV file.</p>
 
-
 </div>
   <h3>Static parameters</h3>
   <table class="table table-bordered member-list">
@@ -73,7 +72,6 @@
           <p>Location of a CSV sample file or a string containing a sample CSV document.</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -92,7 +90,6 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Column delimiter(s). Defaults to <code>,</code>.</p>
-
 
 
         </td>
@@ -115,7 +112,6 @@
           <p>Number of rows to use for inference. Defaults to <code>1000</code>. If this is zero, all rows are used.</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -134,8 +130,7 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Optional column types, in a comma separated list. Valid types are <code>int</code>, <code>int64</code>, <code>bool</code>, <code>float</code>, <code>decimal</code>, <code>date</code>, <code>guid</code>, <code>string</code>, <code>int?</code>, <code>int64?</code>, <code>bool?</code>, <code>float?</code>, <code>decimal?</code>, <code>date?</code>, <code>guid?</code>, <code>int option</code>, <code>int64 option</code>, <code>bool option</code>, <code>float option</code>, <code>decimal option</code>, <code>date option</code>, <code>guid option</code> and <code>string option</code>.
-       You can also specify a unit and the name of the column like this: <code>Name (type&lt;unit&gt;)</code>, or you can override only the name. If you don't want to specify all the columns, you can reference the columns by name like this: <code>ColumnName=type</code>.</p>
-
+You can also specify a unit and the name of the column like this: <code>Name (type&lt;unit&gt;)</code>, or you can override only the name. If you don't want to specify all the columns, you can reference the columns by name like this: <code>ColumnName=type</code>.</p>
 
 
         </td>
@@ -158,7 +153,6 @@
           <p>Whether the sample contains the names of the columns as its first line.</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -177,7 +171,6 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Whether to ignore rows that have the wrong number of columns or which can't be parsed using the inferred or specified schema. Otherwise an exception is thrown when these rows are encountered.</p>
-
 
 
         </td>
@@ -200,7 +193,6 @@
           <p>SKips the first n rows of the CSV file.</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -219,7 +211,6 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>When set to true, the type provider will assume all columns can have missing values, even if in the provided sample all values are present. Defaults to false.</p>
-
 
 
         </td>
@@ -242,7 +233,6 @@
           <p>When set to true, inference will prefer to use the option type instead of nullable types, <code>double.NaN</code> or <code>""</code> for missing values. Defaults to false.</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -261,7 +251,6 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>The quotation mark (for surrounding values containing the delimiter). Defaults to <code>"</code>.</p>
-
 
 
         </td>
@@ -284,7 +273,6 @@
           <p>The set of strings recogized as missing values. Defaults to <code>NaN,NA,N/A,#N/A,:,-,TBA,TBD</code>.</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -303,7 +291,6 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Whether the rows should be caches so they can be iterated multiple times. Defaults to true. Disable for large datasets.</p>
-
 
 
         </td>
@@ -326,7 +313,6 @@
           <p>The culture used for parsing numbers and dates. Defaults to the invariant culture.</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -345,7 +331,6 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless <code>charset</code> is specified in the <code>Content-Type</code> response header.</p>
-
 
 
         </td>
@@ -368,7 +353,6 @@
           <p>A directory that is used when resolving relative file references (at design time and in hosted execution).</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -386,9 +370,8 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>When specified, the type provider first attempts to load the sample from the specified resource 
-          (e.g. 'MyCompany.MyAssembly, resource_name.csv'). This is useful when exposing types generated by the type provider.</p>
-
+          <p>When specified, the type provider first attempts to load the sample from the specified resource
+(e.g. 'MyCompany.MyAssembly, resource_name.csv'). This is useful when exposing types generated by the type provider.</p>
 
 
         </td>

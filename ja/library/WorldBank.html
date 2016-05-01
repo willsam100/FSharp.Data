@@ -39,27 +39,22 @@
         <div class="span9" id="main">
           
 <h1>F# Data: WorldBank プロバイダー</h1>
-
 <p><a href="http://www.worldbank.org">世界銀行</a> (World Bank)は世界中の発展途上国に対して、
 経済的かつ技術的な支援を行っている国際組織です。
 また、世界銀行は活動の一環として世界中の各国における発展指標や
 その他のデータを収集しています。
 <a href="http://data.worldbank.org/">data catalog</a> のページではプログラムからも
 アクセスできる8000以上の指標が公開されています。</p>
-
 <p>WorldBank 型プロバイダーを使うと、F#プログラムやスクリプトから型安全かつ
 簡単な方法でWorldBankのデータにアクセスできるようになります。
 このドキュメントはこの型プロバイダーの基本的な部分のみ説明しています。
 WorldBank 型プロバイダーは <a href="http://www.tryfsharp.org">Try F#</a> の
 Webサイトにある"Data Science" のチュートリアルでも使われているため、
 そちらも参考にするとよいでしょう。</p>
-
 <h2>型プロバイダーの基本</h2>
-
 <p>以下の例では(F# Interactive上で) <code>FSharp.Data.dll</code> ライブラリを読み込んだ後、
 <code>GetDataContext</code> メソッドを使ってWorldBankへの接続を初期化し、
 イギリスで大学に進学した人口の割合を受信しています；</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -82,7 +77,6 @@ Webサイトにある"Data Science" のチュートリアルでも使われて�
 </code></pre></td>
 </tr>
 </table>
-
 <p>データコンテキストが生成されると、WorldBank 型プロバイダーは
 世界銀行で把握されているすべての国のリスト、および
 利用可能なすべての指針のリストを受信します。
@@ -90,16 +84,12 @@ Webサイトにある"Data Science" のチュートリアルでも使われて�
 自動コンプリートの候補から様々なデータソースが利用できることが確認できるでしょう。
 多くの指標には長い名前がつけられているため、
 名前を <code>\</code>`` で囲む必要があります。</p>
-
 <p><code>Gross enrolment ratio, tertiary, both sexes (%)</code> プロパティの結果は
 異なる年毎の値のシーケンスです。
 <code>Seq.maxBy fst</code> とすることで直近で利用可能な最新のデータを取得できます。</p>
-
 <h3>世界銀行のデータをチャート表示する</h3>
-
 <p><a href="http://fsharp.github.io/FSharp.Charting/">FSharp.Charting</a> ライブラリを使うと
 大学進学率の変遷を簡単に図表にできます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -108,7 +98,6 @@ Webサイトにある"Data Science" のチュートリアルでも使われて�
 </code></pre></td>
 </tr>
 </table>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -119,15 +108,11 @@ Webサイトにある"Data Science" のチュートリアルでも使われて�
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>Chart.Line</code> 関数はXとYの値ペアのシーケンスを受け取ります。
 そのため、世界銀行から受信したデータセットをそのまま渡せば
 Xが年、Yがその年の値になったチャートが作成できます。</p>
-
-<p><img src="/FSharp.Data/images/chart7.png" alt="Chart" /></p>
-
+<p><img src="/FSharp.Data/images/chart8.png" alt="Chart" /></p>
 <h2>世界銀行のデータを非同期的に使う</h2>
-
 <p>非常に大量のデータをダウンロードする必要がある場合、
 あるいは呼び出し元をブロックせずに処理を実行した場合には、
 F#の非同期ワークフローを使って操作ができればいいなと思うのではないでしょうか。
@@ -136,7 +121,6 @@ F# Dataライブラリには様々なstatic引数を受け取るような
 引数 <code>Asyncronous</code> を <code>true</code> にすると、
 すべての操作を非同期的に実行するような型が
 型プロバイダーによって生成されます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -145,7 +129,6 @@ F# Dataライブラリには様々なstatic引数を受け取るような
 </code></pre></td>
 </tr>
 </table>
-
 <p>上のコードではデータソース(一般的に利用可能な指標のコレクション)の名前として
 "World Development Indicators" を指定して、オプション引数 <code>Asynchronous</code> に
 <code>true</code> を設定しています。
@@ -153,14 +136,11 @@ F# Dataライブラリには様々なstatic引数を受け取るような
 <code>Async&lt;(int * int)[]&gt;</code> になります。
 これはつまり非同期的に処理を始めることができ、最終的にデータを生成するような
 操作であることを示しています。</p>
-
 <h3>データを並列にダウンロードする</h3>
-
 <p>非同期バージョンの型プロバイダーのデモとして、
 多数の国における大学進学率を並列にダウンロートしてみます。
 まずデータコンテキストを作成した後に、
 対象とする国を配列として定義します：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -201,11 +181,9 @@ F# Dataライブラリには様々なstatic引数を受け取るような
 </code></pre></td>
 </tr>
 </table>
-
 <p>データを並列にダウンロードするには、非同期計算のリストを作成した後、
 それらを <code>Async.Parallel</code> で組み合わせ、
 (1つになった)計算を実行してすべてのダウンロード処理を行います：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -222,19 +200,17 @@ F# Dataライブラリには様々なstatic引数を受け取るような
 </code></pre></td>
 </tr>
 </table>
-
 <p>上のコードは単に <code>Async.RunSynchronously</code> を使ってダウンロードするだけではなく、
 それぞれのデータセットから1つの折れ線チャートを出力して、
 各チャートを <code>Chart.Combine</code> で1つの総合チャートにしています。</p>
-
-<p><img src="/FSharp.Data/images/chart8.png" alt="Chart" /></p>
-
+<p><img src="/FSharp.Data/images/chart9.png" alt="Chart" /></p>
 <h2>関連する記事</h2>
-
 <ul>
-<li><a href="http://www.tryfsharp.org/Learn/data-science">Try F#: Data Science</a> -
+<li>
+<a href="http://www.tryfsharp.org/Learn/data-science">Try F#: Data Science</a> -
 Try F# の Data Science チュートリアルにはFreebase 型プロバイダーを使った
-様々な例があります。</li>
+様々な例があります。
+</li>
 <li><a href="../../reference/fsharp-data-worldbankdataprovider.html">API リファレンス: WorldBankDataProvider 型プロバイダー</a></li>
 </ul>
 

@@ -39,14 +39,12 @@
         <div class="span9" id="main">
           
 <h1>F# Data: HTTP ユーティリティ</h1>
-
 <p>.NETライブラリにはHTTP Webリクエストを作成して送信するための
 強力なAPIが用意されています。
 具体的には単純な <code>WebClient</code> 型(<a href="http://msdn.microsoft.com/en-us/library/system.net.webclient.aspx">MSDN</a> を参照)や、
 より柔軟な機能を持った <code>HttpWebRequest</code> (<a href="http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.aspx">MSDN</a> を参照)があります。
 しかしこれらはいずれも、HTTP POSTデータや追加のヘッダなど、
 特定の引数を指定した単純なHTTPリクエストを手軽に実行することには向いていません。</p>
-
 <p>F# Dataライブラリにはオーバーロードを持った4つのメソッドを含む、
 単純な <code>Http</code> 型があります。
 <code>RequestString</code> と <code>AsyncRequestString</code> メソッドは単純なリクエストを作成して、
@@ -54,11 +52,9 @@
 また <code>Request</code> とその非同期バージョン <code>AsyncRequest</code> を使うと
 バイナリファイルを送信したり、ステータスコードや応答URL、
 受信ヘッダやクッキーなど、レスポンスの詳細情報を知ることができます。</p>
-
 <p>この型を使うには、まず(F# Interactiveの場合は) <code>#r</code> あるいはプロジェクトで
 参照の追加を行ってライブラリを参照する必要があります。
 この型は <code>FSharp.Net</code> 名前空間にあります：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -67,13 +63,10 @@
 </code></pre></td>
 </tr>
 </table>
-
 <h2>単純なリクエストの送信</h2>
-
 <p>特定のWebページをダウンロードするような単純なHTTP (GET) リクエストを送信するには、
 <code>Http.RequestString</code> あるいは <code>Http.AsyncRequestString</code> にたった1つの引数を
 指定するだけです：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -92,33 +85,26 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>AsyncRequestString</code> は <code>RequestString</code> と全く同じ方法で使うことができるため、
 以降では <code>RequestString</code> だけを使います。</p>
-
 <h2>クエリ引数とヘッダ</h2>
-
 <p>クエリ引数は引数を含んだURLを用意するか、
 <code>query</code> という省略可能な引数を使って指定できます。
 以下では明示的にGETメソッドであることを指定していますが、
 省略した場合には自動的にGETになります：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 14)" onmouseover="showTip(event, 'fs3', 14)" class="t">Http</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 15)" onmouseover="showTip(event, 'fs4', 15)" class="f">RequestString</span>(<span class="s">&quot;http://httpbin.org/get&quot;</span>, <span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="i">query</span><span class="o">=</span>[<span class="s">&quot;test&quot;</span>, <span class="s">&quot;foo&quot;</span>], <span class="i">httpMethod</span><span class="o">=</span><span class="s">&quot;Get&quot;</span>)
 </code></pre></td>
 </tr>
 </table>
-
 <p>同じように、省略可能な引数 <code>headers</code> を使うと追加のヘッダを指定できます。
 このコレクションには独自のヘッダを追加できますが、
 Acceptヘッダのような標準的なヘッダも含まれています
 ( <code>HttpWebRequest</code> の場合には特定のプロパティに設定する必要があります)。</p>
-
 <p>以下では <a href="http://www.themoviedb.org">The Movie Database</a> APIを使って
 「batman」という単語を検索しています。
 サンプルを実行するためには登録をしてAPIキーを取得する必要があります：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -139,21 +125,18 @@ Acceptヘッダのような標準的なヘッダも含まれています
 </code></pre></td>
 </tr>
 </table>
-
 <p>このライブラリでは(先の例のように)単純かつチェックのない文字列ベースのAPIがサポートされていますが、
 スペルミスを防ぐことができるよう、あらかじめ定義されたヘッダ名を使うこともできます。
 名前付きヘッダは <code>HttpRequestHeaders</code> (および <code>HttpResponseHeaders</code>) モジュールで定義されているため、
 <code>HttpRequestHeaders.Accept</code> のようにフルネームを指定するか、
 以下の例のようにモジュールをオープンしておいてから <code>Accept</code> のような短い名前で指定することになります。
 同様に、 <code>HttpContentTypes</code> 列挙体には既知のコンテンツタイプ名が定義されています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 22)" onmouseover="showTip(event, 'fs1', 22)" class="i">FSharp</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 23)" onmouseover="showTip(event, 'fs2', 23)" class="i">Data</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="i">HttpRequestHeaders</span>
 </code></pre></td>
 </tr>
 </table>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -168,33 +151,25 @@ Acceptヘッダのような標準的なヘッダも含まれています
 </code></pre></td>
 </tr>
 </table>
-
 <h2>特別な情報の取得</h2>
-
 <p>先のコードスニペットでは、正しいAPIキーを指定しなかった場合には(401)認証エラーが返され、
 例外が発生することに注意してください。
 ただし <code>WebRequest</code> を直接使用した場合とは異なり、例外メッセージには返されたコンテンツの情報も含まれるため、
 サーバーが特別な情報を返すような場合であってもF# Interactiveで簡単にデバッグできます。</p>
-
 <p>また <code>silentHttpErrors</code> 引数を設定することによって例外を無効化することもできます:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 32)" onmouseover="showTip(event, 'fs3', 32)" class="t">Http</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 33)" onmouseover="showTip(event, 'fs4', 33)" class="f">RequestString</span>(<span class="s">&quot;http://api.themoviedb.org/3/search/movie&quot;</span>, <span class="i">silentHttpErrors</span> <span class="o">=</span> <span class="k">true</span>)
 </code></pre></td>
 </tr>
 </table>
-
 <p>この結果は以下のようになります：</p>
-
 <table class="pre"><tr><td><pre><code>"{"status_code":7,"status_message":"Invalid API key: You must be granted a valid key."}"</code></pre></td></tr></table>
-
 <p>この場合にはHTTPステータスコードを確認すればよいため、実際にレスポンスとして返されたデータと
 エラーメッセージとを混同することもないでしょう。
 ステータスコードやレスポンスヘッダー、返されたクッキー、レスポンスURL
 (リダイレクトされた場合にはリクエストを投げたURLとは別の値が返されることがあります)など、
 レスポンスの詳細を確認したい場合には <code>RequestString</code> の代わりに <code>Request</code> メソッドを使用します:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -213,40 +188,34 @@ Acceptヘッダのような標準的なヘッダも含まれています
 </code></pre></td>
 </tr>
 </table>
-
 <h2>リクエストデータの送信</h2>
-
 <p>HTTP POSTデータを含んだPOSTリクエストを作成したい場合は、
 オプション引数 <code>body</code> に追加データを指定するだけです。
 この引数は3つのケースを持った判別共用体 <code>HttpRequestBody</code> 型です：</p>
-
 <ul>
 <li><code>TextRequest</code> はリクエストの本体で文字列を送信するために使用します</li>
 <li><code>BinaryUpload</code> はリクエストにバイナリデータを含めて送信する場合に使用します</li>
-<li><code>FormValues</code> は特定のフォームの値を名前と値のペアとして
-送信するために使用します</li>
+<li>
+<code>FormValues</code> は特定のフォームの値を名前と値のペアとして
+送信するために使用します
+</li>
 </ul>
-
 <p>bodyを指定した場合、引数 <code>httpMethod</code> には自動的に <code>Post</code> が設定されるようになるため、
 明示的に指定する必要はありません。</p>
-
 <p>以下ではリクエストの詳細を返すサービス
 <a href="http://httpbin.org">httpbin.org</a>
 を使っています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 45)" onmouseover="showTip(event, 'fs3', 45)" class="t">Http</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 46)" onmouseover="showTip(event, 'fs4', 46)" class="f">RequestString</span>(<span class="s">&quot;http://httpbin.org/post&quot;</span>, <span class="i">body</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 47)" onmouseover="showTip(event, 'fs24', 47)" class="p">FormValues</span> [<span class="s">&quot;test&quot;</span>, <span class="s">&quot;foo&quot;</span>])
 </code></pre></td>
 </tr>
 </table>
-
 <p>デフォルトでは <code>Content-Type</code> ヘッダには <code>HttpRequestBody</code> に指定した値に応じて
 <code>text/plain</code> <code>application/x-www-form-urlencoded</code> <code>application/octet-stream</code>
 のいずれかが設定されます。
 ただしオプション引数 <code>headers</code> を使ってヘッダのリストに <code>content-type</code> を
 追加することでこの動作を変更できます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -259,14 +228,11 @@ Acceptヘッダのような標準的なヘッダも含まれています
 </code></pre></td>
 </tr>
 </table>
-
 <h2>リクエスト間でクッキーを管理する</h2>
-
 <p>リクエスト間でクッキーを管理したい場合には、
 引数 <code>cookieContainer</code> を指定します。
 以下では <code>HttpRequest</code> クラスに関するMSDNドキュメントをリクエストしています。
 そうするとF#ではなくC#のコードスニペットが表示されます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -287,12 +253,10 @@ Acceptヘッダのような標準的なヘッダも含まれています
 </code></pre></td>
 </tr>
 </table>
-
 <p>別のMSDNのページに移動してF#のコード例をクリックしてから
 <code>HttpRequest</code> クラスのドキュメントに戻ってくると、
 同じ <code>cookieContainer</code> を保持し続けている限りはF#のコードが
 表示されるようになります：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -327,13 +291,10 @@ Acceptヘッダのような標準的なヘッダも含まれています
 </code></pre></td>
 </tr>
 </table>
-
 <h2>バイナリデータの送信</h2>
-
 <p><code>RequestString</code> メソッドでは常に <code>string</code> としてレスポンスが返されます。
 しかし <code>Request</code> メソッドの場合にはレスポンスの <code>content-type</code> ヘッダに応じて
 <code>HttpResponseBody.Text</code> または <code>HttpResponseBody.Binary</code> が返されます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -350,22 +311,17 @@ Acceptヘッダのような標準的なヘッダも含まれています
 </code></pre></td>
 </tr>
 </table>
-
 <h2>HTTPリクエストのカスタマイズ</h2>
-
 <p>ライブラリに元々備えられていないような機能を使用したい場合には、
 <code>customizeHttpRequest</code> 引数を設定することになります。
 この引数には <code>HttpWebRequest</code> を変更するための関数を指定します。</p>
-
 <p>たとえばリクエストにクライアント証明書を追加したいとします。
 そのためにはまず <code>System.Security.Cryptography</code> 以下の
 <code>X509Certificates</code> 名前空間をオープンして、
 <code>X509ClientCertificate2</code> の値を用意し、
 この値をリクエストの <code>ClientCertificates</code> リストに追加します。</p>
-
 <p>証明書が <code>myCertificate.pfx</code> に格納されているとすると、
 以下のようなコードになります：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -390,9 +346,7 @@ Acceptヘッダのような標準的なヘッダも含まれています
 </code></pre></td>
 </tr>
 </table>
-
 <h2>関連する記事</h2>
-
 <ul>
 <li><a href="../../reference/fsharp-data-http.html">API リファレンス: HTTP クラス</a></li>
 <li><a href="../../reference/fsharp-data-httpmethod.html">API リファレンス: HttpMethod モジュール</a></li>

@@ -39,20 +39,15 @@
         <div class="span9" id="main">
           
 <h1>F# Data: CSV Type Provider</h1>
-
 <p>This article demonstrates how to use the CSV type provider to read CSV files
 in a statically typed way. This type provider is similar to the one used on the <a href="http://www.tryfsharp.org">Try F#</a>
 web site in the "Financial Computing" tutorial, so you can find additional examples there.</p>
-
 <p>The CSV type provider takes a sample CSV as input and generates a type based on the data
 present on the columns of that sample. The column names are obtained from the first
 (header) row, and the types are inferred from the values present on the subsequent rows.</p>
-
 <h2>Introducing the provider</h2>
-
-<p>The type provider is located in the <code>FSharp.Data.dll</code> assembly. Assuming the assembly 
+<p>The type provider is located in the <code>FSharp.Data.dll</code> assembly. Assuming the assembly
 is located in the <code>../../../bin</code> directory, we can load it in F# Interactive as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -61,12 +56,9 @@ is located in the <code>../../../bin</code> directory, we can load it in F# Inte
 </code></pre></td>
 </tr>
 </table>
-
 <h3>Parsing stock prices</h3>
-
 <p>The Yahoo Finance web site provides daily stock prices in a CSV format that has the
 following structure (you can find a larger example in the <a href="../data/MSFT.csv"><code>data/MSFT.csv</code></a> file):</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -79,24 +71,20 @@ following structure (you can find a larger example in the <a href="../data/MSFT.
 2012-01-25,29.07,29.65,29.07,29.56,59231700,29.56
 2012-01-24,29.47,29.57,29.18,29.34,51703300,29.34
 </code></pre></td></tr></table>
-
-<p>As usual with CSV files, the first row contains the headers (names of individual columns) 
-and the next rows define the data. We can pass reference to the file to <code>CsvProvider</code> to 
+<p>As usual with CSV files, the first row contains the headers (names of individual columns)
+and the next rows define the data. We can pass reference to the file to <code>CsvProvider</code> to
 get a strongly typed view of the file:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="t">Stocks</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">CsvProvider</span><span class="o">&lt;</span><span class="s">&quot;../data/MSFT.csv&quot;</span><span class="o">&gt;</span>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The generated type provides two static methods for loading data. The <code>Parse</code> method can be
 used if we have the data in a <code>string</code> value. The <code>Load</code> method allows reading the data from
 a file or from a web resource (and there's also an asynchronous <code>AsyncLoad</code> version). We could also
 have used a web URL instead of a local file in the sample parameter of the type provider.
 The following sample calls the <code>Load</code> method with an URL that points to a live CSV file on the Yahoo finance web site:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -125,21 +113,16 @@ The following sample calls the <code>Load</code> method with an URL that points 
 </code></pre></td>
 </tr>
 </table>
-
 <p>The generated type has a property <code>Rows</code> that returns the data from the CSV file as a
 collection of rows. We iterate over the rows using a <code>for</code> loop. As you can see the
 (generated) type for rows has properties such as <code>High</code>, <code>Low</code> and <code>Close</code> that correspond
 to the columns in the CSV file.</p>
-
 <p>As you can see, the type provider also infers types of individual rows. The <code>Date</code>
 property is inferred to be a <code>DateTime</code> (because the values in the sample file can all
 be parsed as dates) while HLOC prices are inferred as <code>decimal</code>.</p>
-
 <h3>Charting stock prices</h3>
-
 <p>We can use the <a href="http://fsharp.github.io/FSharp.Charting/">FSharp.Charting</a> library to draw a simple line chart showing how the price
 of MSFT stocks changes since the company was founded:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -152,7 +135,6 @@ of MSFT stocks changes since the company was founded:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -163,12 +145,9 @@ of MSFT stocks changes since the company was founded:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p><img src="/FSharp.Data/images/chart1.png" alt="Chart" /></p>
-
 <p>As one more example, we use the <code>Candlestick</code> chart to get a more detailed look at the
 data over the last month:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -183,7 +162,6 @@ data over the last month:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -192,54 +170,42 @@ data over the last month:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p><img src="/FSharp.Data/images/chart2.png" alt="Chart" /></p>
-
 <h2>Using units of measure</h2>
-
 <p>Another interesting feature of the CSV type provider is that it supports F# units of measure.
 If the header includes the name or symbol of one of the standard SI units, then the generated type
 returns values annotated with the appropriate unit.</p>
-
 <p>In this section, we use a simple file <a href="../data/SmallTest.csv"><code>data/SmallTest.csv</code></a> which
 looks as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="text">Name,  Distance (metre), Time (s)
 First, 50.0,             3.7
 </code></pre></td></tr></table>
-
 <p>As you can see, the second and third columns are annotated with <code>metre</code> and <code>s</code>,
 respectively. To use units of measure in our code, we need to open the namespace with
 standard unit names. Then we pass the <code>SmallTest.csv</code> file to the type provider as
 a static argument. Also note that in this case we're using the same data at runtime,
 so we use the <code>GetSample</code> method instead of calling <code>Load</code> and passing the same parameter again.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 65)" onmouseover="showTip(event, 'fs30', 65)" class="i">small</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 66)" onmouseover="showTip(event, 'fs4', 66)" class="t">CsvProvider</span><span class="o">&lt;</span><span class="s">&quot;../data/SmallTest.csv&quot;</span><span class="o">&gt;</span><span class="o">.</span><span class="f">GetSample</span>()
 </code></pre></td>
 </tr>
 </table>
-
 <p>We can also use the default constructor instead of the <code>GetSample</code> static method:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 67)" onmouseover="showTip(event, 'fs31', 67)" class="i">small2</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs4', 68)" onmouseover="showTip(event, 'fs4', 68)" class="t">CsvProvider</span><span class="o">&lt;</span><span class="s">&quot;../data/SmallTest.csv&quot;</span><span class="o">&gt;</span>()
 </code></pre></td>
 </tr>
 </table>
-
 <p>but the VisualStudio IntelliSense for the type provider parameters doesn't work when we use a default
 constructor for a type provider, so we'll keep using <code>GetSample</code> instead.</p>
-
 <p>As in the previous example, the <code>small</code> value exposes the rows using the <code>Rows</code> property.
 The generated properties <code>Distance</code> and <code>Time</code> are now annotated with units. Look at the
 following simple calculation:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -256,21 +222,17 @@ following simple calculation:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The numerical values of <code>Distance</code> and <code>Time</code> are both inferred as <code>decimal</code> (because they
 are small enough). Thus the type of <code>speed</code> becomes <code>decimal&lt;metre/second&gt;</code>. The compiler
 can then statically check that we're not comparing incompatible values - e.g. number in
 meters per second against a value in kilometres per hour.</p>
-
 <h2>Custom separators and tab-separated files</h2>
-
 <p>By default, the CSV type provider uses comma (<code>,</code>) as a separator. However, CSV
 files sometime use a different separator character than <code>,</code>. In some European
 countries, <code>,</code> is already used as the numeric decimal separator, so a semicolon (<code>;</code>) is used
 instead to separate CSV columns. The <code>CsvProvider</code> has an optional <code>Separator</code> static parameter
 where you can specify what to use as separator. This means that you can consume
 any textual tabular format. Here is an example using <code>;</code> as a separator:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -289,17 +251,14 @@ any textual tabular format. Here is an example using <code>;</code> as a separat
 </code></pre></td>
 </tr>
 </table>
-
 <p>The air quality dataset (<a href="../data/AirQuality.csv"><code>data/AirQuality.csv</code></a>) is used in many
-samples for the Statistical Computing language R. A short description of the dataset can be found 
+samples for the Statistical Computing language R. A short description of the dataset can be found
 <a href="http://stat.ethz.ch/R-manual/R-devel/library/datasets/html/airquality.html">in the R language manual</a>.</p>
-
 <p>If you are parsing a tab-separated file that uses <code>\t</code> as the separator, you can also
-specify the separator explicitly. However, if you're using an url or file that has 
+specify the separator explicitly. However, if you're using an url or file that has
 the <code>.tsv</code> extension, the type provider will use <code>\t</code> by default. In the following example,
 we also set <code>IgnoreErrors</code> static parameter to <code>true</code> so that lines with incorrect number of elements
 are automatically skipped (the sample file (<a href="../data/MortalityNY.tsv"><code>data/MortalityNY.csv</code></a>) contains additional unstructured data at the end):</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -328,25 +287,20 @@ are automatically skipped (the sample file (<a href="../data/MortalityNY.tsv"><c
 </code></pre></td>
 </tr>
 </table>
-
 <p>Finally, note that it is also possible to specify multiple different separators
-for the <code>CsvProvider</code>. This might be useful if a file is irregular and contains 
+for the <code>CsvProvider</code>. This might be useful if a file is irregular and contains
 rows separated by either semicolon or a colon. You can use:
 <code>CsvProvider&lt;"../data/AirQuality.csv", Separator=";,"&gt;</code>.</p>
-
 <h2>Missing values</h2>
-
 <p>It is quite common in statistical datasets for some values to be missing. If
 you open the <a href="../data/AirQuality.csv"><code>data/AirQuality.csv</code></a> file you will see
 that some values for the ozone observations are marked <code>#N/A</code>. Such values are
 parsed as float and will be marked with <code>Double.NaN</code> in F#. The values <code>#N/A</code>, <code>NA</code>,
 and <code>:</code> are recognized as missing values by default, but you can customize it by specifying
 the <code>MissingValues</code> static parameter of <code>CsvProvider</code>.</p>
-
 <p>The following snippet calculates the mean of the ozone observations
 excluding the <code>Double.NaN</code> values. We first obtain the <code>Ozone</code> property for
 each row, then remove missing values and then use the standard <code>Seq.average</code> function:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -361,29 +315,22 @@ each row, then remove missing values and then use the standard <code>Seq.average
 </code></pre></td>
 </tr>
 </table>
-
 <p>If the sample doesn't have missing values on all columns, but at runtime missing values could
-appear anywhere, you can set the static parameter <code>AssumeMissingValues</code> to <code>true</code> in order to force <code>CsvProvider</code> 
+appear anywhere, you can set the static parameter <code>AssumeMissingValues</code> to <code>true</code> in order to force <code>CsvProvider</code>
 to assume missing values can occur in any column.</p>
-
 <h2>Controlling the column types</h2>
-
 <p>By default, the CSV type provider checks the first 1000 rows to infer the types, but you can customize
 it by specifying the <code>InferRows</code> static parameter of <code>CsvProvider</code>. If you specify 0 the entire file will be used.</p>
-
 <p>Columns with only <code>0</code>, <code>1</code>, <code>Yes</code>, <code>No</code>, <code>True</code>, or <code>False</code> will be set to <code>bool</code>. Columns with numerical values
 will be set to either <code>int</code>, <code>int64</code>, <code>decimal</code>, or <code>float</code>, in that order of preference.</p>
-
 <p>If a value is missing in any row, by default the CSV type provider will infer a nullable (for <code>int</code> and <code>int64</code>) or an optional
 (for <code>bool</code>, <code>DateTime</code> and <code>Guid</code>). When a <code>decimal</code> would be inferred but there are missing values, we will infer a
 <code>float</code> instead, and use <code>Double.NaN</code> to represent those missing values. The <code>string</code> type is already inherently nullable,
 so by default we won't generate a <code>string option</code>. If you prefer to use optionals in all cases, you can set the static parameter
 <code>PreferOptionals</code> to <code>true</code>. In that case you'll never get an empty string or a <code>Double.NaN</code> and will always get a <code>None</code> instead.</p>
-
 <p>If you have other preferences, e.g. if you want a column to be a <code>float</code> instead of a <code>decimal</code>,
 you can override the default behaviour by specifying the types in the header column between braces, similar to what can be done to
 specify the units of measure. This will override both <code>AssumeMissingValues</code> and <code>PreferOptionals</code>. The valid types are:</p>
-
 <ul>
 <li><code>int</code></li>
 <li><code>int?</code></li>
@@ -409,32 +356,25 @@ specify the units of measure. This will override both <code>AssumeMissingValues<
 <li><code>string</code></li>
 <li><code>string option</code>.</li>
 </ul>
-
 <p>You can also specify both the type and a unit (e.g <code>float&lt;metre&gt;</code>). Example:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="text">Name,  Distance (decimal?&lt;metre&gt;), Time (float)
 First, 50,                        3
 </code></pre></td></tr></table>
-
 <p>Additionally, you can also specify some or all the types in the <code>Schema</code> static parameter of <code>CsvProvider</code>. Valid formats are:</p>
-
 <ul>
 <li><code>Type</code></li>
 <li><code>Type&lt;Measure&gt;</code></li>
 <li><code>Name (Type)</code></li>
 <li><code>Name (Type&lt;Measure&gt;)</code></li>
 </ul>
-
 <p>What's specified in the <code>Schema</code> static parameter will always take precedence to what's specified in the column headers.</p>
-
 <p>If the first row of the file is not a header row, you can specify the <code>HasHeaders</code> static parameter to <code>false</code> in order to
 consider that row as a data row. In that case, the columns will be named <code>Column1</code>, <code>Column2</code>, etc..., unless the
 names are overridden using the <code>Schema</code> parameter. Note that you can override only the name in the <code>Schema</code> parameter
 and still have the provider infer the type for you. Example:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -445,13 +385,11 @@ and still have the provider infer the type for you. Example:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>You don't need to override all the columns, you can skip the ones to leave as default.
 For example, in the titanic training dataset from Kaggle (<a href="../data/Titanic.csv"><code>data/Titanic.csv</code></a>),
 if you want to rename the 3rd column (the <code>PClass</code> column) to <code>Passenger Class</code> and override the
 6th column (the <code>Fare</code> column) to be a <code>float</code> instead of a <code>decimal</code>, you can define only that, and leave
 the other columns blank in the schema (you also don't need to add all the trailing commas).</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -462,9 +400,7 @@ the other columns blank in the schema (you also don't need to add all the traili
 </code></pre></td>
 </tr>
 </table>
-
 <p>Alternatively, you can rename and override the type of any column by name instead of by position:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -475,16 +411,12 @@ the other columns blank in the schema (you also don't need to add all the traili
 </code></pre></td>
 </tr>
 </table>
-
 <p>You can even mix and match the two syntaxes like this <code>Schema="int64,DidSurvive,PClass-&gt;Passenger Class=string"</code></p>
-
 <h2>Transforming CSV files</h2>
-
 <p>In addition to reading, <code>CsvProvider</code> also has support for transforming the row collection of CSV files. The operations
 available are <code>Filter</code>, <code>Take</code>, <code>TakeWhile</code>, <code>Skip</code>, <code>SkipWhile</code>, and <code>Truncate</code>. All these operations
 preserve the schema, so after transforming you can save the results by using one of the overloads of
 the <code>Save</code> method. You can also use the <code>SaveToString()</code> to get the output directly as a string.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -499,9 +431,7 @@ the <code>Save</code> method. You can also use the <code>SaveToString()</code> t
 </code></pre></td>
 </tr>
 </table>
-
 <p>It's also possible to transform the columns themselves by using <code>Map</code> and the constructor for the <code>Row</code> type.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -520,9 +450,7 @@ the <code>Save</code> method. You can also use the <code>SaveToString()</code> t
 </code></pre></td>
 </tr>
 </table>
-
 <p>You can also append new rows, either by creating them directly as in the previous example, or by parsing them from a string.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -535,9 +463,7 @@ the <code>Save</code> method. You can also use the <code>SaveToString()</code> t
 </code></pre></td>
 </tr>
 </table>
-
 <p>It's even possible to create csv files without parsing at all:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -552,15 +478,12 @@ the <code>Save</code> method. You can also use the <code>SaveToString()</code> t
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Handling big datasets</h2>
-
 <p>By default, the rows are cached so you can iterate over the <code>Rows</code> property multiple times without worrying.
 But if you will only iterate once, you can disable caching by setting the <code>CacheRows</code> static parameter of <code>CsvProvider</code>
 to <code>false</code>. If the number of rows is very big, you have to do this otherwise you may exhaust the memory.
 You can still cache the data at some point by using the <code>Cache</code> method, but only do that if you have already
 transformed the dataset to be smaller:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -569,13 +492,13 @@ transformed the dataset to be smaller:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Related articles</h2>
-
 <ul>
 <li><a href="JsonProvider.html#jsonlib">Using JSON provider in a library</a> also applies to CSV type provider</li>
-<li><a href="CsvFile.html">F# Data: CSV Parser</a> - provides more information about 
-working with CSV documents dynamically.</li>
+<li>
+<a href="CsvFile.html">F# Data: CSV Parser</a> - provides more information about 
+working with CSV documents dynamically.
+</li>
 <li><a href="../reference/fsharp-data-csvprovider.html">API Reference: CsvProvider type provider</a></li>
 </ul>
 

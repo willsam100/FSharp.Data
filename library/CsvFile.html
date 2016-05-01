@@ -39,19 +39,14 @@
         <div class="span9" id="main">
           
 <h1>F# Data: CSV Parser</h1>
-
 <p>The F# <a href="CsvProvider.html">CSV Type Provider</a> is built on top of an efficient CSV parser written
 in F#. There's also a simple API that can be used to access values dynamically.</p>
-
-<p>When working with well-defined CSV documents, it is easier to use the 
+<p>When working with well-defined CSV documents, it is easier to use the
 <a href="CsvProvider.html">type provider</a>, but in a more dynamic scenario or when writing
 quick and simple scripts, the parser might be a simpler option.</p>
-
 <h2>Loading CSV documents</h2>
-
 <p>To load a sample CSV document, we first need to reference the <code>FSharp.Data.dll</code> library
 (when using F# Interactive) or to add reference to a project.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -60,13 +55,11 @@ quick and simple scripts, the parser might be a simpler option.</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The <code>FSharp.Data</code> namespace contains the <code>CsvFile</code> type that provides two static methods
 for loading data. The <code>Parse</code> method can be used if we have the data in a <code>string</code> value.
 The <code>Load</code> method allows reading the data from a file or from a web resource (and there's
 also an asynchronous <code>AsyncLoad</code> version). The following sample calls <code>Load</code> with a URL that
 points to a live CSV file on the Yahoo finance web site:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -83,34 +76,33 @@ points to a live CSV file on the Yahoo finance web site:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>Note that unlike <code>CsvProvider</code>, <code>CsvFile</code> works in streaming mode for performance reasons, which means
-that <code>Rows</code> can only be iterated once. If you need to iterate multiple times, use the <code>Cache</code> method, 
+that <code>Rows</code> can only be iterated once. If you need to iterate multiple times, use the <code>Cache</code> method,
 but please note that this will increase memory usage and should not be used in large datasets.</p>
-
 <h2>Using CSV extensions</h2>
-
-<p>Now we look at a number of extensions that become available after 
+<p>Now we look at a number of extensions that become available after
 opening the <code>FSharp.Data.CsvExtensions</code> namespace. Once opened, we can write:</p>
-
 <ul>
-<li><code>row?column</code> uses the dynamic operator to obtain the column value named <code>column</code>;
-alternatively, you can also use an indexer <code>row.[column]</code>.</li>
+<li>
+<code>row?column</code> uses the dynamic operator to obtain the column value named <code>column</code>;
+alternatively, you can also use an indexer <code>row.[column]</code>.
+</li>
 <li><code>value.AsBoolean()</code> returns the value as boolean if it is either <code>true</code> or <code>false</code></li>
-<li><code>value.AsInteger()</code> returns the value as integer if it is numeric and can be
+<li>
+<code>value.AsInteger()</code> returns the value as integer if it is numeric and can be
 converted to an integer; <code>value.AsInteger64()</code>, <code>value.AsDecimal()</code> and
-<code>value.AsFloat()</code> behave similarly.</li>
-<li><code>value.AsDateTime()</code> returns the value as a <code>DateTime</code> value using either the
+<code>value.AsFloat()</code> behave similarly.
+</li>
+<li>
+<code>value.AsDateTime()</code> returns the value as a <code>DateTime</code> value using either the
 <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format, or using the
-<code>\/Date(...)\/</code> JSON format containing number of milliseconds since 1/1/1970.</li>
+<code>\/Date(...)\/</code> JSON format containing number of milliseconds since 1/1/1970.
+</li>
 <li><code>value.AsGuid()</code> returns the value as a <code>Guid</code> value.</li>
 </ul>
-
 <p>Methods that may need to parse a numeric value or date (such as <code>AsFloat</code> and
 <code>AsDateTime</code>) receive an optional culture parameter.</p>
-
 <p>The following example shows how to process the sample previous CSV sample using these extensions:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -123,14 +115,11 @@ converted to an integer; <code>value.AsInteger64()</code>, <code>value.AsDecimal
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Transforming CSV files</h2>
-
 <p>In addition to reading, <code>CsvFiles</code> also has support for transforming CSV files. The operations
 available are <code>Filter</code>, <code>Take</code>, <code>TakeWhile</code>, <code>Skip</code>, <code>SkipWhile</code>, and <code>Truncate</code>. After transforming
 you can save the results by using one of the overloads of the <code>Save</code> method. You can choose different
 separator and quote characters when saving.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -143,12 +132,12 @@ separator and quote characters when saving.</p>
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Related articles</h2>
-
 <ul>
-<li><a href="CsvProvider.html">F# Data: CSV Type Provider</a> - discusses F# type provider
-that provides type-safe access to CSV data</li>
+<li>
+<a href="CsvProvider.html">F# Data: CSV Type Provider</a> - discusses F# type provider
+that provides type-safe access to CSV data
+</li>
 <li><a href="../reference/fsharp-data-csvfile.html">API Reference: CsvFile class</a></li>
 <li><a href="../reference/fsharp-data-csvrow.html">API Reference: CsvRow class</a></li>
 <li><a href="../reference/fsharp-data-csvextensions.html">API Reference: CsvExtensions module</a></li>

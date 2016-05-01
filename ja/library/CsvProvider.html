@@ -39,24 +39,19 @@
         <div class="span9" id="main">
           
 <h1>F# Data: CSV 型プロバイダー</h1>
-
 <p>この記事ではCSV 型プロバイダーを使って
 静的に型付けされた方法でCSVファイルを扱う方法を紹介します。
 この型プロバイダーは <a href="http://www.tryfsharp.org">Try F#</a> のWebサイトにある
 "Financial Computing" のチュートリアルとよく似ています。
 したがってそちらを参考にするともう少し多くの例が見つけられるでしょう。</p>
-
 <p>CSV 型プロバイダーは入力としてサンプルとなるCSVを受け取り、
 このサンプル内の列データを元にした型を生成します。
 列の名前は1行目(ヘッダ行)が元になり、各列の型は2行目以降にあるデータから
 推測されます。</p>
-
 <h2>プロバイダーの基本</h2>
-
 <p>この型プロバイダーは <code>FSharp.Data.Dll</code> アセンブリに含まれています。
 このアセンブリが <code>../../../../bin</code> にあるとすると、
 F# Interactiveでアセンブリを読み込むには以下のようにします：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -65,14 +60,11 @@ F# Interactiveでアセンブリを読み込むには以下のようにします
 </code></pre></td>
 </tr>
 </table>
-
 <h3>株価をパースする</h3>
-
 <p>Yahoo FinanceのWebサイトでは以下のような構造のCSV形式で
 日単位の株価が公開されています
 (より大きな例としては <a href="../../data/MSFT.csv"><code>data/MSFT.csv</code></a> ファイルを
 参照してください)：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -85,19 +77,16 @@ F# Interactiveでアセンブリを読み込むには以下のようにします
 2012-01-25,29.07,29.65,29.07,29.56,59231700,29.56
 2012-01-24,29.47,29.57,29.18,29.34,51703300,29.34
 </code></pre></td></tr></table>
-
 <p>一般的なCSVファイルと同じく、1行目にはヘッダ(各列の名前)があり、
 2行目以降にデータがあります。
 このファイルを <code>CsvProvider</code> に指定すると、
 静的に型付けされた方法でファイルの内容を参照できるようになります：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="t">Stocks</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">CsvProvider</span><span class="o">&lt;</span><span class="s">&quot;../../data/MSFT.csv&quot;</span><span class="o">&gt;</span>
 </code></pre></td>
 </tr>
 </table>
-
 <p>生成された型にはデータをロードするための2つのstaticメソッドがあります。
 データが文字列の場合には <code>Parse</code> メソッドを使用します。
 データがファイルやWeb上のリソースの場合には <code>Load</code> メソッドを使用します
@@ -106,7 +95,6 @@ F# Interactiveでアセンブリを読み込むには以下のようにします
 ローカルのパスだけではなく、Web上のURLを指定することもできます。
 以下の例ではYahoo FinanceのWebサイトで実際に公開されているCSVファイルの
 URLを使って <code>Load</code> メソッドを呼び出しています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -135,27 +123,21 @@ URLを使って <code>Load</code> メソッドを呼び出しています：</p>
 </code></pre></td>
 </tr>
 </table>
-
 <blockquote>
-  <p>訳注：四本値とは高値、安値、始値、終値の4種の値段のこと</p>
+<p>訳注：四本値とは高値、安値、始値、終値の4種の値段のこと</p>
 </blockquote>
-
 <p>生成された型にはCSVファイルのデータを行コレクションとして返す
 <code>Rows</code> プロパティがあります。
 ここでは <code>for</code> ループを使って各行を走査しています。
 見て分かるように、行のための(生成された)型には <code>High</code> や <code>Low</code> 、
 <code>Close</code> など、CSVファイルの各列に対応するプロパティがあります。</p>
-
 <p>また、型プロバイダーが各列の型を推測していることも確認できます。
 <code>Date</code> プロパティは(サンプルファイル中のデータが日付としてパースできるため)
 <code>DateTime</code> 型として推測されていますが、一方で四本値はそれぞれ
 <code>decimal</code> として推測されています。</p>
-
 <h3>株価のチャート表示</h3>
-
 <p><a href="http://fsharp.github.io/FSharp.Charting/">FSharp.Charting</a> ライブラリを使うと
 上場からのMSFTの株価変化を単純な折れ線チャートとして描画できます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -168,7 +150,6 @@ URLを使って <code>Load</code> メソッドを呼び出しています：</p>
 </code></pre></td>
 </tr>
 </table>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -179,12 +160,9 @@ URLを使って <code>Load</code> メソッドを呼び出しています：</p>
 </code></pre></td>
 </tr>
 </table>
-
 <table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
-
 <p>もう1つ例として、先月のデータの詳細を確認できるように
 <code>ローソク</code> (Candlestick)チャートにしてみます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -199,7 +177,6 @@ URLを使って <code>Load</code> メソッドを呼び出しています：</p>
 </code></pre></td>
 </tr>
 </table>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -208,25 +185,19 @@ URLを使って <code>Load</code> メソッドを呼び出しています：</p>
 </code></pre></td>
 </tr>
 </table>
-
-<p><img src="/FSharp.Data/images/chart6.png" alt="Chart" /></p>
-
+<p><img src="/FSharp.Data/images/chart7.png" alt="Chart" /></p>
 <h2>測定単位を使用する</h2>
-
 <p>もう1つ興味深い機能として、CSV 型プロバイダーは測定単位をサポートしています。
 標準SI単位の名前あるいは記号がヘッダに含まれている場合、
 生成された型では特定の単位が付加された値が返されるようになります。</p>
-
 <p>このセクションでは以下のような単純なデータが含まれた
 <a href="../../data/SmallTest.csv"><code>data/SmallTest.csv</code></a> を使います：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="text">Name,  Distance (metre), Time (s)
 First, 50.0,             3.7
 </code></pre></td></tr></table>
-
 <p>見ての通り、2列目と3列目にはそれぞれ <code>metre</code> と <code>s</code> という単位があります。
 コード側で測定単位を使う場合、
 標準単位名を含んだ名前空間をオープンする必要があります。
@@ -234,18 +205,15 @@ First, 50.0,             3.7
 なお今回は同じデータを実行時にも使用するため、
 同じ引数を再度指定して <code>Load</code> を呼び出すのではなく、
 <code>GetSample</code> メソッドを使っていることに注意してください。</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 65)" onmouseover="showTip(event, 'fs30', 65)" class="i">small</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 66)" onmouseover="showTip(event, 'fs4', 66)" class="t">CsvProvider</span><span class="o">&lt;</span><span class="s">&quot;../../data/SmallTest.csv&quot;</span><span class="o">&gt;</span><span class="o">.</span><span class="f">GetSample</span>()
 </code></pre></td>
 </tr>
 </table>
-
 <p>先ほどの例と同じく、行データは値 <code>small</code> の <code>Rows</code> プロパティで取得できます。
 今回は生成されたプロパティ <code>Distance</code> と <code>Time</code> に単位が付加されています。
 以下の単純な計算をみてください：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -262,16 +230,13 @@ First, 50.0,             3.7
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>Distance</code> と <code>Time</code> の数値的な値はいずれも(かなり小さな値なので)
 <code>decimal</code> として推測されています。
 したがって <code>speed</code> の型は <code>decimal&lt;meter/second&gt;</code> になります。
 そうするとコンパイラは互換性のない値を比較していないかどうか、
 つまりたとえばメートル毎秒とキロメートル毎時を比較していたりはしないか
 チェックするようになります。</p>
-
 <h2>独自の区切り文字とタブ区切りファイル</h2>
-
 <p>CSV 型プロバイダーはデフォルトではカンマ( <code>,</code> )を区切り文字とします。
 しかし場合によっては <code>,</code> ではない区切り文字が
 CSVファイルで使われていることがあります。
@@ -281,7 +246,6 @@ CSVの列区切り文字には代わりにセミコロン( <code>;</code> )が�
 代わりとなる区切り文字を指定できます。
 つまりこれを使えばタブ区切り形式のテキストも処理できるわけです。
 以下では区切り文字として <code>;</code> を使っています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -296,13 +260,11 @@ CSVの列区切り文字には代わりにセミコロン( <code>;</code> )が�
 </code></pre></td>
 </tr>
 </table>
-
 <p>空気質のデータセット(<a href="../../data/AirQuality.csv"><code>data/AirQuality.csv</code></a>)は
 統計解析向け言語 R の多くのサンプルで使われているものです。
 このデータセットの簡単な説明については
 <a href="http://stat.ethz.ch/R-manual/R-devel/library/datasets/html/airquality.html">R の言語マニュアル</a>
 を参照してください。</p>
-
 <p><code>\t</code> を区切り文字とするようなタブ区切りファイルを処理する場合には
 やはり区切り文字を明示的に指定してもよいでしょう。
 ですが、URLまたはファイルの末尾にある拡張子が <code>.tsv</code> になっていると
@@ -311,7 +273,6 @@ CSVの列区切り文字には代わりにセミコロン( <code>;</code> )が�
 要素数が異なる行を自動的に無視するようにもしています
 (サンプルファイル <a href="../../data/MortalityNY.tsv"><code>data/MortalityNY.csv</code></a> には
 末尾に構造化されていないデータが追加されています)：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -340,16 +301,13 @@ CSVの列区切り文字には代わりにセミコロン( <code>;</code> )が�
 </code></pre></td>
 </tr>
 </table>
-
 <p>最後に、 <code>CsvProvider</code> には複数種類の区切り文字を指定することもできます。
 これはたとえばファイルが不正で、セミコロンかコロンのどちらかで
 行が区切られているような場合に有効です。
 具体的には
 <code>CsvProvider&lt;"../../data/AirQuality.csv", Separator=";,"&gt;</code>
 というようにします。</p>
-
 <h2>値無し</h2>
-
 <p>統計的データセットでは一部の値が無しになっているということがよくあります。
 <a href="../../data/AirQuality.csv"><code>data/AirQuality.csv</code></a> ファイルを開くと、
 一部のオゾンの観測値が <code>#N/A</code> と記録されていることが確認できます。
@@ -357,12 +315,10 @@ CSVの列区切り文字には代わりにセミコロン( <code>;</code> )が�
 デフォルトでは <code>#N/A</code> <code>NA</code> <code>:</code> が値無しを表す値と認識されますが、
 <code>CsvProvider</code> のstatic引数 <code>MissingValues</code> を指定して
 カスタマイズすることもできます。</p>
-
 <p>以下のコードでは <code>Double.NaN</code> になっている値を除いて、
 オゾンの観測値の平均を計算しています。
 まず各行の <code>Ozone</code> プロパティを取得して値無しを除去した後、
 標準の <code>Seq.average</code> 関数を使って平均を計算しています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -377,23 +333,18 @@ CSVの列区切り文字には代わりにセミコロン( <code>;</code> )が�
 </code></pre></td>
 </tr>
 </table>
-
 <p>サンプルとして指定するデータにはどの列にも値無しのデータが含まれていないものの、
 実行時にはどこかで値無しが現れる可能性があるという場合には
 <code>AssumeMissingValues</code> を <code>true</code> に設定すれば、
 <code>CsvProvider</code> がどこかの列には値無しが現れるだろうと想定するようになります。</p>
-
 <h2>列の型を制御する</h2>
-
 <p>デフォルトではCSV 型プロバイダーは最初の1000行を使って型を推測します。
 しかし <code>CsvProvider</code> のstatic引数 <code>InferRows</code> を使うと
 この動作をカスタマイズできます。
 0を指定するとファイル全体が使われるようになります。</p>
-
 <p><code>0</code> <code>1</code> <code>Yes</code> <code>No</code> <code>True</code> <code>False</code> しか含まない列は <code>bool</code> になります。
 数値を含む列はそれぞれ精度に応じて <code>int</code> <code>int64</code> <code>decimal</code> <code>float</code> の
 いずれかになります。</p>
-
 <p>いずれかの行で値無しになっている場合、CSV 型プロバイダーは
 その行を(<code>int</code> および <code>int64</code> に対しては)null許容型、
 あるいは(<code>bool</code> <code>DateTime</code> <code>Guid</code> に対しては)オプション型とみなします。
@@ -405,14 +356,12 @@ CSVの列区切り文字には代わりにセミコロン( <code>;</code> )が�
 static引数 <code>PreferOptionals</code> を <code>true</code> にします。
 この設定を行うと、空の文字列や <code>Double.NaN</code> ではなく、
 代わりに <code>None</code> が返されるようになります。</p>
-
 <p>他にもたとえば <code>decimal</code> ではなく <code>float</code> として行を扱いたいというような、
 別の設定を使いたい場合には、ヘッダ行で列の型を丸括弧で囲んで記述することで
 デフォルトの動作を上書きできます。
 これは測定単位を指定する方法と同じです。
 ヘッダ行による指定方法は <code>AssumeMissingValues</code> や <code>PreferOptionals</code> の動作を上書きします。
 指定可能な型は以下の通りです：</p>
-
 <ul>
 <li><code>int</code></li>
 <li><code>int?</code></li>
@@ -438,30 +387,24 @@ static引数 <code>PreferOptionals</code> を <code>true</code> にします。
 <li><code>string</code></li>
 <li><code>string option</code>.</li>
 </ul>
-
 <p>型と測定単位の両方を( <code>float&lt;metre&gt;</code> のようにして)指定することもできます。
 たとえば以下の通りです：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="text">Name,  Distance (decimal?&lt;metre&gt;), Time (float)
 First, 50,                        3
 </code></pre></td></tr></table>
-
 <p>さらに、 <code>CsvProvider</code> のstatic引数 <code>Schema</code> で一部またはすべての型を
 指定することもできます。
 指定可能な形式は以下の通りです：</p>
-
 <ul>
 <li><code>型</code></li>
 <li><code>型&lt;測定単位&gt;</code></li>
 <li><code>名前 (型)</code></li>
 <li><code>名前 (型&lt;測定単位&gt;)</code></li>
 </ul>
-
 <p><code>Schema</code> 引数で指定された値はヘッダ行で指定されたものよりも常に優先されます。</p>
-
 <p>ファイルの1行目がヘッダ行ではない場合、static引数 <code>HasHeaders</code> を <code>false</code> に
 すると1行目もデータ行とみなされるようになります。
 この場合、それぞれの行は <code>Schema</code> 引数で指定されていなければ
@@ -469,7 +412,6 @@ First, 50,                        3
 なお <code>Schema</code> 引数で名前だけを上書きしつつ、
 型プロバイダーに列の型を推測させることもできます。
 たとえば以下のようにします：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -480,7 +422,6 @@ First, 50,                        3
 </code></pre></td>
 </tr>
 </table>
-
 <p>必ずしもすべての列を上書きしなければいけないわけではなく、
 一部をデフォルトのままにしておくこともできます。
 たとえばKaggleから取得したタイタニックの乗船者データ
@@ -489,7 +430,6 @@ First, 50,                        3
 6列目( <code>Fare</code> 列)を <code>decimal</code> ではなく <code>float</code> にしたい場合、
 これらだけを定義しておいて、その他の行が空になっているようなスキーマを
 指定します(末尾で連続するカンマは省略できます)。</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -500,9 +440,7 @@ First, 50,                        3
 </code></pre></td>
 </tr>
 </table>
-
 <p>あるいは位置で指定する代わりに列の名前を使って上書きすることもできます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -513,13 +451,10 @@ First, 50,                        3
 </code></pre></td>
 </tr>
 </table>
-
 <p>これら2つのシンタックスを組み合わせて
 <code>Schema="int64,DidSurvive,PClass-&gt;Passenger Class=string"</code>
 とすることもできます。</p>
-
 <h2>CSVファイルの変形</h2>
-
 <p><code>CsvProvider</code> はファイルの読み取りだけでなく、データの変形もサポートしています。
 <code>Filter</code> <code>Take</code> <code>TakeWhile</code> <code>Skip</code> <code>SkipWhile</code> <code>Truncate</code> という操作が可能です。
 これらはいずれもスキーマを維持するようになっているため、
@@ -527,7 +462,6 @@ First, 50,                        3
 結果をCSV形式で保存したくない場合、あるいはデータの形式を変更したい場合には、
 <code>Rows</code> プロパティで取得できる行のシーケンスに対して直接
 <code>Seq</code> モジュールの機能を使うこともできます。</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -542,9 +476,7 @@ First, 50,                        3
 </code></pre></td>
 </tr>
 </table>
-
 <h2>ビッグデータの処理</h2>
-
 <p>デフォルトでは行がキャッシュされるため、 <code>Rows</code> プロパティを複数回走査しても
 特に問題はありません。
 しかし1回しか走査しないのであれば、 <code>CsvProvider</code> のstatic引数
@@ -553,7 +485,6 @@ First, 50,                        3
 メモリを消費し尽くしてしまうことになるでしょう。
 <code>Cache</code> メソッドを使えば任意のタイミングでデータをキャッシュできますが、
 データセットを小さなサイズに変形した後に限定すべきです：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -562,12 +493,12 @@ First, 50,                        3
 </code></pre></td>
 </tr>
 </table>
-
 <h2>関連する記事</h2>
-
 <ul>
-<li><a href="CsvFile.html">F# Data: CSV パーサーおよびリーダー</a> -
-CSVドキュメントを動的に処理するための詳しい説明があります。</li>
+<li>
+<a href="CsvFile.html">F# Data: CSV パーサーおよびリーダー</a> -
+CSVドキュメントを動的に処理するための詳しい説明があります。
+</li>
 <li><a href="../../reference/fsharp-data-csvprovider.html">API リファレンス: CsvProvider 型プロバイダー</a></li>
 </ul>
 

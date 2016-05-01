@@ -46,21 +46,22 @@
 </p>
 <div class="xmldoc">
 <p>Represents inferred structural type. A type may be either primitive type
-(one of those listed by <code>primitiveTypes</code>) or it can be collection, 
+(one of those listed by <code>primitiveTypes</code>) or it can be collection,
 (named) record and heterogeneous type. We also have <code>Null</code> type (which is
 a subtype of all non-primitive types) and universal <code>Top</code> type.</p>
-
 <ul>
-<li><p>For collection, we infer the types of different things that appear in 
-the collection and how many times they do.</p></li>
-<li><p>A heterogeneous type (sum type) is simply a choice containing one
-of multiple different possibilities</p></li>
+<li>
+<p>For collection, we infer the types of different things that appear in
+the collection and how many times they do.</p>
+</li>
+<li>
+<p>A heterogeneous type (sum type) is simply a choice containing one
+of multiple different possibilities</p>
+</li>
 </ul>
-
 <p>Why is collection not simply a list of Heterogeneous types? If we used that
 we would lose information about multiplicity and so we would not be able
 to generate nicer types!</p>
-
 
 </div>
   <h3>Union Cases</h3>
@@ -241,7 +242,6 @@ we make the type optional and use None instead.
 It's currently only true in CsvProvider when PreferOptionals is set to false</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -260,6 +260,7 @@ It's currently only true in CsvProvider when PreferOptionals is set to false</p>
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           
+              <p>CompiledName: <code>get_IsOptional</code></p>
         </td>
       </tr>
     </tbody>

@@ -39,18 +39,13 @@
         <div class="span9" id="main">
           
 <h1>F# Data: HTML Type Provider</h1>
-
 <p>This article demonstrates how to use the HTML type provider to read HTML tables files
 in a statically typed way.</p>
-
 <p>The HTML Type Provider takes a sample HTML document as input and generates a type based on the data
 present in the columns of that sample. The column names are obtained from the first (header) row.</p>
-
 <h2>Introducing the provider</h2>
-
-<p>The type provider is located in the <code>FSharp.Data.dll</code> assembly. Assuming the assembly 
+<p>The type provider is located in the <code>FSharp.Data.dll</code> assembly. Assuming the assembly
 is located in the <code>../../../bin</code> directory, we can load it in F# Interactive as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -59,12 +54,9 @@ is located in the <code>../../../bin</code> directory, we can load it in F# Inte
 </code></pre></td>
 </tr>
 </table>
-
 <h3>Parsing Power Market Data</h3>
-
 <p>The Elexon - BM Reports website provides market data about the U.K's current power system. For simplicity, an example of this data below is shown in CSV format,
- (you can see an example of the raw HTML document this data was extracted from in <a href="../data/MarketDepth.htm"><code>data/MarketDepth.htm</code></a>):</p>
-
+(you can see an example of the raw HTML document this data was extracted from in <a href="../data/MarketDepth.htm"><code>data/MarketDepth.htm</code></a>):</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -77,23 +69,19 @@ is located in the <code>../../../bin</code> directory, we can load it in F# Inte
 2014-01-14,3,-190.000,52575.000,-53283.500,186.183,-2.426,0.000,0.000,162.767,-1.917 
 2014-01-14,4,-61.000,52576.000,-53454.500,18.000,-24.158,0.000,0.000,18.000,-24.158 
 </code></pre></td></tr></table>
-
 <p>Usually with HTML files headers are demarked by using the <th> tag, however in this file this is not the case, so the provider assumes that the
 first row is headers. (This behaviour is likely to get smarter in later releases). But it highlights a general problem about HTML's strictness.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="t">MarketDepth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;../data/MarketDepth.htm&quot;</span><span class="o">&gt;</span>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The generated type provides a type space of tables that it has managed to parse out of the given HTML Document.
-Each type's name is derived from either the id, title, name, summary or caption attributes/tags provided. If none of these 
+Each type's name is derived from either the id, title, name, summary or caption attributes/tags provided. If none of these
 entities exist then the table will simply be named <code>Tablexx</code> where xx is the position in the HTML document if all of the tables were flatterned out into a list.
 The <code>Load</code> method allows reading the data from a file or web resource. We could also have used a web URL instead of a local file in the sample parameter of the type provider.
 The following sample calls the <code>Load</code> method with an URL that points to a live market depth servlet on the BM Reports website.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -124,21 +112,16 @@ The following sample calls the <code>Load</code> method with an URL that points 
 </code></pre></td>
 </tr>
 </table>
-
 <p>The generated type has a property <code>Rows</code> that returns the data from the HTML file as a
 collection of rows. We iterate over the rows using a <code>for</code> loop. As you can see the
 (generated) type for rows has properties such as <code>Settlement Day</code>, <code>Bid Volume</code> and <code>Offer Volume</code> that correspond
 to the columns in the selected HTML table file.</p>
-
 <p>As you can see, the type provider also infers types of individual rows. The <code>Date</code>
 property is inferred to be a <code>DateTime</code> (because the values in the sample file can all
 be parsed as dates) while other columns are inferred as <code>decimal</code> or <code>float</code>.</p>
-
 <h3>Parsing Nuget package stats</h3>
-
 <p>This small sample shows how the HTML Type Provider can be used to scrape data from a website. In this example we analyze the download counts of the FSharp.Data package on NuGet.
 Note that we're using the live URL as the sample, so we can just use the default constructor as the runtime data will be the same as the compile time data.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -185,11 +168,8 @@ Note that we're using the live URL as the sample, so we can just use the default
 </code></pre></td>
 </tr>
 </table>
-
 <p><img src="/FSharp.Data/images/chart3.png" alt="Chart" /></p>
-
 <h3>Getting statistics on Doctor Who</h3>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -204,11 +184,11 @@ Note that we're using the live URL as the sample, so we can just use the default
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 63)" onmouseover="showTip(event, 'fs39', 63)" class="i">doctorWho</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs4', 64)" onmouseover="showTip(event, 'fs4', 64)" class="t">HtmlProvider</span><span class="o">&lt;</span><span class="s">&quot;http://en.wikipedia.org/wiki/List_of_Doctor_Who_serials&quot;</span><span class="o">&gt;</span>()
 
-<span class="c">// Get the average number of viewers for each doctor</span>
+<span class="c">// Get the average number of viewers for each doctor finale</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs40', 65)" onmouseover="showTip(event, 'fs40', 65)" class="i">viewersByDoctor</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs39', 66)" onmouseover="showTip(event, 'fs39', 66)" class="i">doctorWho</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 67)" onmouseover="showTip(event, 'fs41', 67)" class="i">Tables</span><span class="o">.</span><span class="i">Overview</span><span class="o">.</span><span class="i">Rows</span> 
+    <span onmouseout="hideTip(event, 'fs39', 66)" onmouseover="showTip(event, 'fs39', 66)" class="i">doctorWho</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 67)" onmouseover="showTip(event, 'fs41', 67)" class="i">Tables</span><span class="o">.</span><span class="i">``Series overview``</span><span class="o">.</span><span class="i">Rows</span> 
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 68)" onmouseover="showTip(event, 'fs9', 68)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 69)" onmouseover="showTip(event, 'fs27', 69)" class="f">groupBy</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs42', 70)" onmouseover="showTip(event, 'fs42', 70)" class="i">season</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs42', 71)" onmouseover="showTip(event, 'fs42', 71)" class="i">season</span><span class="o">.</span><span class="i">``Doctor(s)``</span>)
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 72)" onmouseover="showTip(event, 'fs9', 72)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 73)" onmouseover="showTip(event, 'fs30', 73)" class="f">map</span> (<span class="k">fun</span> (<span onmouseout="hideTip(event, 'fs43', 74)" onmouseover="showTip(event, 'fs43', 74)" class="i">doctor</span>, <span onmouseout="hideTip(event, 'fs44', 75)" onmouseover="showTip(event, 'fs44', 75)" class="i">seasons</span>) <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs43', 76)" onmouseover="showTip(event, 'fs43', 76)" class="i">doctor</span>, <span onmouseout="hideTip(event, 'fs44', 77)" onmouseover="showTip(event, 'fs44', 77)" class="i">seasons</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 78)" onmouseover="showTip(event, 'fs9', 78)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 79)" onmouseover="showTip(event, 'fs45', 79)" class="f">averageBy</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs42', 80)" onmouseover="showTip(event, 'fs42', 80)" class="i">season</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs42', 81)" onmouseover="showTip(event, 'fs42', 81)" class="i">season</span><span class="o">.</span><span class="i">``Viewers (millions) - Average``</span>))
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 72)" onmouseover="showTip(event, 'fs9', 72)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs30', 73)" onmouseover="showTip(event, 'fs30', 73)" class="f">map</span> (<span class="k">fun</span> (<span onmouseout="hideTip(event, 'fs43', 74)" onmouseover="showTip(event, 'fs43', 74)" class="i">doctor</span>, <span onmouseout="hideTip(event, 'fs44', 75)" onmouseover="showTip(event, 'fs44', 75)" class="i">seasons</span>) <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs43', 76)" onmouseover="showTip(event, 'fs43', 76)" class="i">doctor</span>, <span onmouseout="hideTip(event, 'fs44', 77)" onmouseover="showTip(event, 'fs44', 77)" class="i">seasons</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 78)" onmouseover="showTip(event, 'fs9', 78)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 79)" onmouseover="showTip(event, 'fs45', 79)" class="f">averageBy</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs42', 80)" onmouseover="showTip(event, 'fs42', 80)" class="i">season</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs42', 81)" onmouseover="showTip(event, 'fs42', 81)" class="i">season</span><span class="o">.</span><span class="i">``Viewers (millions) - Finale``</span>))
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 82)" onmouseover="showTip(event, 'fs9', 82)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 83)" onmouseover="showTip(event, 'fs46', 83)" class="f">toArray</span>
 
 <span class="c">// Visualize it</span>
@@ -216,14 +196,13 @@ Note that we're using the live URL as the sample, so we can just use the default
 </code></pre></td>
 </tr>
 </table>
-
-<table class="pre"><tr><td><pre><code>No value has been returned</code></pre></td></tr></table>
-
+<p><img src="/FSharp.Data/images/chart4.png" alt="Chart" /></p>
 <h2>Related articles</h2>
-
 <ul>
-<li><a href="HtmlParser.html">F# Data: HTML Parser</a> - provides more information about 
-working with HTML documents dynamically.</li>
+<li>
+<a href="HtmlParser.html">F# Data: HTML Parser</a> - provides more information about 
+working with HTML documents dynamically.
+</li>
 </ul>
 
 <div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
@@ -265,11 +244,11 @@ working with HTML documents dynamically.</li>
 <div class="tip" id="fs37">type Chart =<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:Color * ?XTitle:string * ?YTitle:string -&gt; GenericChart<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:Color * ?XTitle:string * ?YTitle:string -&gt; GenericChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:Color * ?XTitle:string * ?YTitle:string -&gt; GenericChart<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:Color * ?XTitle:string * ?YTitle:string -&gt; GenericChart<br />&#160;&#160;static member BoxPlotFromData : data:seq&lt;#key * #seq&lt;&#39;a2&gt;&gt; * ?Name:string * ?Title:string * ?Color:Color * ?XTitle:string * ?YTitle:string * ?Percentile:int * ?ShowAverage:bool * ?ShowMedian:bool * ?ShowUnusualValues:bool * ?WhiskerPercentile:int -&gt; GenericChart (requires &#39;a2 :&gt; value)<br />&#160;&#160;static member BoxPlotFromStatistics : data:seq&lt;#key * #value * #value * #value * #value * #value * #value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:Color * ?XTitle:string * ?YTitle:string * ?Percentile:int * ?ShowAverage:bool * ?ShowMedian:bool * ?ShowUnusualValues:bool * ?WhiskerPercentile:int -&gt; GenericChart<br />&#160;&#160;static member Bubble : data:seq&lt;#value * #value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:Color * ?XTitle:string * ?YTitle:string * ?BubbleMaxSize:int * ?BubbleMinSize:int * ?BubbleScaleMax:float * ?BubbleScaleMin:float * ?UseSizeForLabel:bool -&gt; GenericChart<br />&#160;&#160;static member Bubble : data:seq&lt;#key * #value * #value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:Color * ?XTitle:string * ?YTitle:string * ?BubbleMaxSize:int * ?BubbleMinSize:int * ?BubbleScaleMax:float * ?BubbleScaleMin:float * ?UseSizeForLabel:bool -&gt; GenericChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#value * #value * #value * #value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:Color * ?XTitle:string * ?YTitle:string -&gt; CandlestickChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:Color * ?XTitle:string * ?YTitle:string -&gt; CandlestickChart<br />&#160;&#160;...<br /><br />Full name: FSharp.Charting.Chart</div>
 <div class="tip" id="fs38">static member Chart.Bar : data:seq&lt;#value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:System.Drawing.Color * ?XTitle:string * ?YTitle:string -&gt; ChartTypes.GenericChart<br />static member Chart.Bar : data:seq&lt;#key * #value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:System.Drawing.Color * ?XTitle:string * ?YTitle:string -&gt; ChartTypes.GenericChart</div>
 <div class="tip" id="fs39">val doctorWho : HtmlProvider&lt;...&gt;<br /><br />Full name: HtmlProvider.doctorWho</div>
-<div class="tip" id="fs40">val viewersByDoctor : (key * value) []<br /><br />Full name: HtmlProvider.viewersByDoctor</div>
+<div class="tip" id="fs40">val viewersByDoctor : (string * decimal) []<br /><br />Full name: HtmlProvider.viewersByDoctor</div>
 <div class="tip" id="fs41">property HtmlProvider&lt;...&gt;.Tables: HtmlProvider&lt;...&gt;.TablesContainer</div>
-<div class="tip" id="fs42">val season : obj</div>
-<div class="tip" id="fs43">val doctor : key</div>
-<div class="tip" id="fs44">val seasons : seq&lt;obj&gt;</div>
+<div class="tip" id="fs42">val season : HtmlProvider&lt;...&gt;.SeriesOverview.Row</div>
+<div class="tip" id="fs43">val doctor : string</div>
+<div class="tip" id="fs44">val seasons : seq&lt;HtmlProvider&lt;...&gt;.SeriesOverview.Row&gt;</div>
 <div class="tip" id="fs45">val averageBy : projection:(&#39;T -&gt; &#39;U) -&gt; source:seq&lt;&#39;T&gt; -&gt; &#39;U (requires member ( + ) and member DivideByInt and member get_Zero)<br /><br />Full name: Microsoft.FSharp.Collections.Seq.averageBy</div>
 <div class="tip" id="fs46">val toArray : source:seq&lt;&#39;T&gt; -&gt; &#39;T []<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toArray</div>
 <div class="tip" id="fs47">static member Chart.Column : data:seq&lt;#value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:System.Drawing.Color * ?XTitle:string * ?YTitle:string * ?ColumnWidth:float -&gt; ChartTypes.GenericChart<br />static member Chart.Column : data:seq&lt;#key * #value&gt; * ?Name:string * ?Title:string * ?Labels:#seq&lt;string&gt; * ?Color:System.Drawing.Color * ?XTitle:string * ?YTitle:string * ?ColumnWidth:float -&gt; ChartTypes.GenericChart</div>

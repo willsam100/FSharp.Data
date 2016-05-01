@@ -39,23 +39,18 @@
         <div class="span9" id="main">
           
 <h1>F# Data: CSV パーサーおよびリーダー</h1>
-
 <p>F#の <a href="CsvProvider.html">CSV 型プロバイダー</a> はF#で作成された
 効率の良いCSVパーサーを元にしています。
 また、動的に値にアクセスできるような単純なAPIも備えられています。</p>
-
 <p>厳密に定義されたCSV形式のドキュメントを扱う場合には、
 <a href="CsvProvider.html">型プロバイダー</a> を使用したほうが簡単です。
 しかし動的アクセスが必要になるシナリオや、
 単純なスクリプトを手軽に作成したい場合には
 パーサーを直接使ったほうがおそらくは簡単でしょう。</p>
-
 <h2>CSVドキュメントの読み取り</h2>
-
 <p>サンプルとなるCSVドキュメントを読み込むには、まず
 (F# Interactiveを使用している場合は) <code>FSharp.Data.dll</code> への参照を追加するか、
 プロジェクトで参照を追加する必要があります。</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -64,7 +59,6 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>FSharp.Data</code> 名前空間には <code>CsvFile</code> 型が含まれていて、
 この型ではデータの読み取り用に2つのstaticメソッドが公開されています。
 <code>Parse</code> メソッドはデータを <code>string</code> 型の値として指定できます。
@@ -72,7 +66,6 @@
 (また、非同期バージョンの <code>LoadAsync</code> もあります)。
 以下の例ではYahoo financeのウェブサイトにある実際のCSVファイルのURLを指定して
 <code>Load</code> メソッドを呼び出しています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -89,41 +82,42 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>CsvProvider</code> とは異なり、 <code>CsvFile</code> はパフォーマンスを上げるために
 ストリーミングモードで動作します。
 つまり <code>Rows</code> は1度だけしか走査できません。
 複数回走査する必要がある場合には <code>Cache</code> メソッドを使用することになります。
 ただしこのメソッドはメモリを多く使用するため、
 巨大なデータセットを処理する場合には使用すべきではありません。</p>
-
 <h2>CSV の拡張機能を使用する</h2>
-
 <p>ここでは <code>FSharp.Data.CsvExtensions</code> 名前空間をオープンすることで
 使用できるようになる拡張機能について説明します。
 この名前空間をオープンすると以下のような記述ができるようになります：</p>
-
 <ul>
-<li><code>row?column</code> という動的演算子を使うと <code>column</code> 列の値を取得できます。
-あるいは <code>row.[column]</code> というインデクサ形式でも取得できます。</li>
-<li><code>value.AsBoolean()</code> は値が <code>true</code> または <code>false</code> であれば
-それをブール値として返します。</li>
-<li><code>value.AsInteger()</code> は値が数値型であり、整数として変換可能であれば
+<li>
+<code>row?column</code> という動的演算子を使うと <code>column</code> 列の値を取得できます。
+あるいは <code>row.[column]</code> というインデクサ形式でも取得できます。
+</li>
+<li>
+<code>value.AsBoolean()</code> は値が <code>true</code> または <code>false</code> であれば
+それをブール値として返します。
+</li>
+<li>
+<code>value.AsInteger()</code> は値が数値型であり、整数として変換可能であれば
 それを整数値として返します。
 同じように <code>value.AsInteger64()</code> 、 <code>value.AsDecimal()</code> 、
-<code>value.AsFloat()</code> といったメソッドもあります。</li>
-<li><code>value.AsDateTime()</code> は <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
+<code>value.AsFloat()</code> といったメソッドもあります。
+</li>
+<li>
+<code>value.AsDateTime()</code> は <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
 形式か、あるいは1970/1/1からのミリ秒を含んだ <code>\/Date(...)\/</code> JSON 形式の値を
-<code>DateTime</code> として返します。</li>
+<code>DateTime</code> として返します。
+</li>
 <li><code>value.AsGuid()</code> は値を <code>Guid</code> として返します。</li>
 </ul>
-
 <p>数値あるいは日付の値をパースする必要があるメソッドには
 省略可能なパラメータとしてカルチャを指定できます。</p>
-
 <p>以下の例では先ほどのCSVをサンプルにして
 これらの拡張メソッドを呼び出しています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -136,14 +130,11 @@
 </code></pre></td>
 </tr>
 </table>
-
 <h2>CSVファイルを変形する</h2>
-
 <p><code>CsvFiles</code> は読み取りだけではなく、CSVファイルの変形もサポートしています。
 <code>Filter</code> <code>Take</code> <code>TakeWhile</code> <code>Skip</code> <code>SkipWhile</code> <code>Truncate</code> といった操作が可能です。
 変形後は <code>Save</code> メソッドのオーバーロードのいずれかを使って結果を保存できます。
 保存時には別の区切り文字やクォート文字を指定できます。</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -156,13 +147,13 @@
 </code></pre></td>
 </tr>
 </table>
-
 <h2>関連する記事</h2>
-
 <ul>
-<li><a href="CsvProvider.html">F# Data: CSV 型プロバイダー</a> - 
+<li>
+<a href="CsvProvider.html">F# Data: CSV 型プロバイダー</a> - 
 型セーフな方法でCSVデータにアクセスできるような
-F# 型プロバイダーについて説明しています。</li>
+F# 型プロバイダーについて説明しています。
+</li>
 <li><a href="../../reference/fsharp-data-csvfile.html">API リファレンス: CsvFile クラス</a></li>
 <li><a href="../../reference/fsharp-data-csvrow.html">API リファレンス: CsvRow クラス</a></li>
 <li><a href="../../reference/fsharp-data-csvextensions.html">API リファレンス: CsvExtensions モジュール</a></li>

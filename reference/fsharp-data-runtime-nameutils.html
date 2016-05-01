@@ -47,7 +47,6 @@
 <div class="xmldoc">
 <p>Tools for generating nice member names that follow F# &amp; .NET naming conventions</p>
 
-
 </div>
 
 <!-- Render nested types and modules, if there are any -->
@@ -94,7 +93,6 @@
           <p>Turns a given non-empty string into a nice 'camelCase' identifier</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -113,7 +111,6 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Turns a given non-empty string into a nice 'PascalCase' identifier</p>
-
 
 
         </td>
@@ -136,7 +133,6 @@
           <p>Return the plural of an English word</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -157,7 +153,6 @@
           <p>Return the singular of an English word</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -176,9 +171,8 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Trim HTML tags from a given string and replace all of them with spaces
-Multiple tags are replaced with just a single space. (This is a recursive 
+Multiple tags are replaced with just a single space. (This is a recursive
 implementation that is somewhat faster than regular expression.)</p>
-
 
 
         </td>
@@ -201,9 +195,7 @@ implementation that is somewhat faster than regular expression.)</p>
           <p>Given a function to format names (such as <code>niceCamelName</code> or <code>nicePascalName</code>)
 returns a name generator that never returns duplicate name (by appending an
 index to already used names)</p>
-
 <p>This function is curried and should be used with partial function application:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -214,7 +206,6 @@ index to already used names)</p>
 </code></pre></td>
 </tr>
 </table>
-
 <div class="tip" id="fs1">val makeUnique : (string -&gt; obj)<br /><br />Full name: docs.makeUnique</div>
 <div class="tip" id="fs2">val n1 : obj<br /><br />Full name: docs.n1</div>
 <div class="tip" id="fs3">val n2 : obj<br /><br />Full name: docs.n2</div>

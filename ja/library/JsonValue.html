@@ -39,25 +39,20 @@
         <div class="span9" id="main">
           
 <h1>F# Data: JSON パーサーおよびリーダー</h1>
-
 <p>F#の <a href="JsonProvider.html">JSON 型プロバイダー</a> はF#で作成された
 効率の良いJSONパーサーを元にしています。
 このパーサーは <a href="http://fsharp3sample.codeplex.com">F# 3.0 Sample Pack</a>
 内にあるJSONパーサーを元にしていますが、
 F# Dataでは値を動的にアクセスできるようにするための単純なAPIが追加されています。</p>
-
 <p>厳密に定義されたJSONドキュメントを処理する場合、
 <a href="JsonProvider.html">型プロバイダー</a> を使うと簡単なのですが、
 動的に処理するようなシナリオであったり、
 単純なスクリプトを手軽に用意したいような場合には
 パーサーを使ったほうが簡単でしょう。</p>
-
 <h2>JSONドキュメントの読み取り</h2>
-
 <p>サンプルとなるJSONドキュメントを読み取るには
 (F# Interactiveの場合)<code>FSharp.Data.dll</code> ライブラリへの参照を追加するか、
 プロジェクトで参照を追加します。</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -66,10 +61,8 @@ F# Dataでは値を動的にアクセスできるようにするための単純�
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>FSharp.Data</code> 名前空間にある <code>JsonValue</code> 型を使うと、
 以下のようにしてJSON形式の文字列をパースできます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -82,47 +75,52 @@ F# Dataでは値を動的にアクセスできるようにするための単純�
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>JsonValue</code> 型は <code>Record</code> や <code>Collection</code> などのケースを持った判別共用体なので
 パターンマッチを使ってパース後の値の構造を調査することができます。</p>
-
 <h2>JSON用拡張機能を使用する</h2>
-
 <p>ここではすべての機能を紹介しません。
 その代わり、 <code>FSharp.Data.JsonExtensions</code> 名前空間をオープンすることで
 利用できるようになるいくつかの拡張機能について説明します。
 この名前空間をオープンすると、以下のような記述ができるようになります：</p>
-
 <ul>
 <li><code>value.AsBoolean()</code> は値が <code>true</code> または <code>false</code> の場合にブール値を返します。</li>
-<li><code>value.AsInteger()</code> は値が数値型で、整数として変換可能であれば整数値を返します。
+<li>
+<code>value.AsInteger()</code> は値が数値型で、整数として変換可能であれば整数値を返します。
 同様に <code>value.AsInteger64()</code> <code>value.AsDecimal()</code> <code>value.AsFloat()</code>
-といったものもあります。</li>
+といったものもあります。
+</li>
 <li><code>value.AsString()</code> は値を文字列として返します。</li>
-<li><code>value.AsDateTime()</code> は値を <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> か、
+<li>
+<code>value.AsDateTime()</code> は値を <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> か、
 1970/1/1からのミリ秒を含んだJSON形式の <code>\/Date(...)\/</code> でパースして
-<code>DateTime</code> を返します。</li>
+<code>DateTime</code> を返します。
+</li>
 <li><code>value.AsGuid()</code> は値を <code>Guid</code> としてパースします。</li>
-<li><code>value?child</code> は <code>child</code> という名前のレコードメンバーを
+<li>
+<code>value?child</code> は <code>child</code> という名前のレコードメンバーを
 取得するための動的演算子です。
 あるいは <code>value.GetProperty(child)</code> やインデクサ <code>value.[child]</code>
-を使うこともできます。</li>
-<li><code>value.TryGetProperty(child)</code> はレコードメンバーを安全に取得できます
+を使うこともできます。
+</li>
+<li>
+<code>value.TryGetProperty(child)</code> はレコードメンバーを安全に取得できます
 (もしメンバーが値無しあるいはレコードではなかった場合、 <code>TryGetProperty</code> は
-<code>None</code> を返します)。</li>
-<li><code>[ for v in value -&gt; v ]</code> とすると <code>value</code> をコレクションとして扱い、
+<code>None</code> を返します)。
+</li>
+<li>
+<code>[ for v in value -&gt; v ]</code> とすると <code>value</code> をコレクションとして扱い、
 含まれている要素を走査します。
-また、 <code>value.AsArray()</code> とすると、すべての要素を配列として取得できます。</li>
+また、 <code>value.AsArray()</code> とすると、すべての要素を配列として取得できます。
+</li>
 <li><code>value.Properties()</code> はレコードノードの全プロパティのリストを返します。</li>
-<li><code>value.InnerText()</code> はすべてのテキストあるいは配列内のテキスト
-(たとえば複数行文字列を表すデータ)を連結します</li>
+<li>
+<code>value.InnerText()</code> はすべてのテキストあるいは配列内のテキスト
+(たとえば複数行文字列を表すデータ)を連結します
+</li>
 </ul>
-
 <p>数値または日付データとしてパースする( <code>AsFloat</code> や <code>AsDateTime</code> などの)メソッドには
 省略可能な引数としてカルチャを指定出来ます。</p>
-
 <p>以下のコードはサンプルで指定したJSONの値を処理する方法の一例です：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -145,21 +143,17 @@ F# Dataでは値を動的にアクセスできるようにするための単純�
 </code></pre></td>
 </tr>
 </table>
-
 <p><code>JsonValue</code> 型は実際には <code>IEnumerable&lt;'T&gt;</code> インターフェイスを
 実装しているわけではありません(つまり <code>Seq.xyz</code> 関数に渡す事はできません)。
 <code>GetEnumerator</code> だけが定義されているため、シーケンス式内や
 <code>for</code> ループで使うことができるというわけです。</p>
-
 <h2>WorldBankからのレスポンスをパースする</h2>
-
 <p>もう少し複雑な例として、WorldBankへのリクエストに対する
 レスポンスデータ <a href="../../data/WorldBank.json"><code>data/WorldBank.json</code></a> を
 サンプルドキュメントにしてみます。
 (より便利な方法としては <a href="WorldBank.html">型プロバイダー</a> を使って
 WorldBankにアクセスすることもできます)。
 このドキュメントは以下のようになっています：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -168,7 +162,7 @@ WorldBankにアクセスすることもできます)。
 <span class="l">6: </span>
 <span class="l">7: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="js">[ { <span class="s">"page"</span>: 1, <span class="s">"pages"</span>: 1, <span class="s">"total"</span>: 53 },
+<td class="snippet"><pre class="fssnip highlighted"><code lang="js">[ { <span class="s">"page"</span>: <span class="n">1</span>, <span class="s">"pages"</span>: <span class="n">1</span>, <span class="s">"total"</span>: <span class="n">53</span> },
   [ { <span class="s">"indicator"</span>: {<span class="s">"value"</span>: <span class="s">"Central government debt, total (% of GDP)"</span>},
       <span class="s">"country"</span>: {<span class="s">"id"</span>:<span class="s">"CZ"</span>,<span class="s">"value"</span>:<span class="s">"Czech Republic"</span>},
       <span class="s">"value"</span>:<span class="k">null</span>,<span class="s">"decimal"</span>:<span class="s">"1"</span>,<span class="s">"date"</span>:<span class="s">"2000"</span>},
@@ -176,34 +170,28 @@ WorldBankにアクセスすることもできます)。
       <span class="s">"country"</span>: {<span class="s">"id"</span>:<span class="s">"CZ"</span>,<span class="s">"value"</span>:<span class="s">"Czech Republic"</span>},
       <span class="s">"value"</span>:<span class="s">"16.6567773464055"</span>,<span class="s">"decimal"</span>:<span class="s">"1"</span>,<span class="s">"date"</span>:<span class="s">"2010"</span>} ] ]
 </code></pre></td></tr></table>
-
 <p>このように、全体としては配列になっていて、
 1番目の要素にはレコード、2番目の要素にはデータ点のコレクションが
 含まれた形式になっています。
 このドキュメントは以下のようにして読み取りおよびパースできます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="i">value</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 20)" onmouseover="showTip(event, 'fs4', 20)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="f">Load</span>(<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;../../../data/WorldBank.json&quot;</span>)
 </code></pre></td>
 </tr>
 </table>
-
 <p>なおWeb上から直接データを読み取ることもできます。
 また、読み取りを非同期的に実行するバージョンもあります：
 *</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="i">valueAsync</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 23)" onmouseover="showTip(event, 'fs4', 23)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="f">AsyncLoad</span>(<span class="s">&quot;http://api.worldbank.org/country/cz/indicator/GC.DOD.TOTL.GD.ZS?format=json&quot;</span>)
 </code></pre></td>
 </tr>
 </table>
-
 <p>最上位の配列を1番目の(概要を含んだ)レコードとデータ点のコレクションに分けるためには
 <code>value</code> に対してパターンマッチを使って
 <code>Jsonvalue.Array</code> のコンストラクタとマッチするかどうか調べます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -236,29 +224,29 @@ WorldBankにアクセスすることもできます)。
 </code></pre></td>
 </tr>
 </table>
-
 <p>データ点の <code>value</code> プロパティは常に使用できるわけではありません。
 直前で説明してある通り、この値は <code>null</code> になることがあります。
 その場合にはデータ点をスキップします。
 プロパティが <code>null</code> かどうか調べる場合は単に <code>JsonValue.Null</code> と
 比較するだけです。</p>
-
 <p>また <code>date</code> と <code>value</code> のプロパティは元のファイルでは( <code>1990</code> のような)数値ではなく、
 ( <code>"1990"</code> のような)文字列形式になっている点に注意してください。
 この値を int または float として取得しようとすると、
 <code>JsonValue</code> は自動的に文字列を特定の形式になるようにパースします。
 一般的にはこのAPIがファイルをパースする場合、
 できるだけ寛容に値を受け入れるようになっています。</p>
-
 <h2>関連する記事</h2>
-
 <ul>
-<li><a href="JsonProvider.html">F# Data: JSON 型プロバイダー</a> -
+<li>
+<a href="JsonProvider.html">F# Data: JSON 型プロバイダー</a> -
 型安全な方法でJSONデータにアクセスする機能を持った
-F# 型プロバイダーについて説明しています。</li>
-<li><a href="WorldBank.html">F# Data: WorldBank プロバイダー</a> -
+F# 型プロバイダーについて説明しています。
+</li>
+<li>
+<a href="WorldBank.html">F# Data: WorldBank プロバイダー</a> -
 WorldBank 型プロバイダーを使うとWorldBankから受け取ったデータを
-簡単に処理出来るようになります。</li>
+簡単に処理出来るようになります。
+</li>
 <li><a href="../../reference/fsharp-data-jsonvalue.html">API リファレンス: JsonValue 判別共用体</a></li>
 <li><a href="../../reference/fsharp-data-jsonextensions.html">API リファレンス: JsonExtensions モジュール</a></li>
 </ul>

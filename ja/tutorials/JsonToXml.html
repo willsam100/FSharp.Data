@@ -39,7 +39,6 @@
         <div class="span9" id="main">
           
 <h1>F# Data: JSON と XML の相互変換</h1>
-
 <p>このチュートリアルではJSONドキュメント( <a href="JsonValue.html">JSON パーサーの記事</a>
 で説明している <code>JsonValue</code> 型で表されるドキュメント)と
 XMLドキュメント( <code>XElement</code> で表されるドキュメント)を
@@ -47,17 +46,13 @@ XMLドキュメント( <code>XElement</code> で表されるドキュメント)�
 この機能はF# Dataライブラリから直接使用できるものではありませんが、
 JSON(あるいはXML)ドキュメントを再帰的に処理するだけで
 非常に簡単に実装できます。</p>
-
 <p>JSONとXML間の変換を自身のコードで使いたい場合には
 <a href="https://github.com/fsharp/FSharp.Data/blob/master/docs/content/ja/tutorials/JsonToXml.fsx">GitHubにあるソース</a> をコピーしてプロジェクトに追加するだけです。
 この機能を頻繁に利用することがあり、F# Dataライブラリの機能としてほしい場合には
 是非 <a href="https://github.com/fsharp/FSharp.Data/issues">機能リクエスト</a> を投稿してください。</p>
-
 <h2>初期化</h2>
-
 <p>ここでは( <code>System.Xml.Linq.dll</code> 内にある)LINQ to XMLのAPIと、
 <code>FSharp.Data</code> 名前空間にある <code>JsonValue</code> を使います：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -70,14 +65,11 @@ JSON(あるいはXML)ドキュメントを再帰的に処理するだけで
 </code></pre></td>
 </tr>
 </table>
-
 <p>このスクリプト内では簡単に処理できる値を返すような変換機能を実装しますが、
 リバーシブルな変換ではないことに注意してください
 (つまりJSONからXMLに変換した後、JSONに戻したとしても
 元と同じ値になるとは限らないということです)。</p>
-
 <h2>XMLからJSONへの変換</h2>
-
 <p>XMLとJSONはかなり似た形式ではありますが、
 細かい部分ではそれなりに違いがあります。
 たとえばXMLでは <strong>属性</strong> と <strong>子要素</strong> が区別されます。
@@ -85,7 +77,6 @@ JSON(あるいはXML)ドキュメントを再帰的に処理するだけで
 JSONの配列やレコードは無名です(ただしレコードには
 名前のつけられたフィールドがあります)。
 たとえば以下のようなXMLがあるとします：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -98,12 +89,10 @@ JSONの配列やレコードは無名です(ただしレコードには
   <span class="k">&lt;</span><span class="i">item</span> <span class="o">value</span><span class="k">="Second"</span> <span class="k">/&gt;</span>
 <span class="k">&lt;/</span><span class="i">channel</span><span class="k">&gt;</span>
 </code></pre></td></tr></table>
-
 <p>これに対して生成するJSONではトップレベルの要素名( <code>channel</code> )が無視されます。
 生成されるJSONデータはレコード型で、
 各属性および子要素に対してユニークなフィールドが含まれます。
 ある要素が繰り返し現れる場合には配列へと変換されます：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -114,17 +103,14 @@ JSONの配列やレコードは無名です(ただしレコードには
   <span class="s">"items"</span>: [ { <span class="s">"value"</span>: <span class="s">"First"</span> }, 
              { <span class="s">"value"</span>: <span class="s">"Second"</span> } ]  }
 </code></pre></td></tr></table>
-
 <p>このように、 <code>item</code> 要素は自動的に <code>items</code> という複数形に変換されて、
 <code>value</code> 属性の値に関連づけられた2つのレコード値が
 配列の要素として含まれるようになります。</p>
-
 <p>変換関数は <code>XElement</code> を引数にとり、 <code>JsonValue</code> を返すような再帰関数です。
 この関数は( <code>JsonValue.Record</code> と <code>JsonValue.Array</code> を使って)JSONのレコードと
 配列を組み立てます。
 すべての属性は <code>JsonValue.String</code> に変換されます。
 ただし今回の例では数値型を適切なJSON型に変換するような機能は実装しません：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -185,28 +171,23 @@ JSONの配列やレコードは無名です(ただしレコードには
 </code></pre></td>
 </tr>
 </table>
-
 <h2>JSONからXMLへの変換</h2>
-
 <p>JSONからXMLへ変換する場合、同じようなミスマッチが起こります。
 たとえば以下のようなJSONデータがあるとします：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="js">{ <span class="s">"title"</span> : <span class="s">"Sample input"</span>,
-  <span class="s">"paging"</span> : { <span class="s">"current"</span>: 1 },
+  <span class="s">"paging"</span> : { <span class="s">"current"</span>: <span class="n">1</span> },
   <span class="s">"items"</span> : [ <span class="s">"First"</span>, <span class="s">"Second"</span> ] }
 </code></pre></td></tr></table>
-
 <p>トップレベルのレコードには名前がないため、
 今回の変換機能では(ルート名を指定することになる)ユーザー側で
 <code>XElement</code> としてラップできるような
 <code>XObject</code> のリストを生成することにします。
 レコード内にあるプリミティブな値のフィールドは属性になり、
 (配列やレコードのような)複雑な値はオブジェクトになります：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -223,12 +204,10 @@ JSONの配列やレコードは無名です(ただしレコードには
   <span class="k">&lt;</span><span class="i">paging</span> <span class="o">current</span><span class="k">="1"</span> <span class="k">/&gt;</span>
 <span class="k">&lt;/</span><span class="i">root</span><span class="k">&gt;</span>
 </code></pre></td></tr></table>
-
 <p>変換関数はやはり再帰関数になります。
 今回はパターンマッチを使って <code>JsonValue</code> のそれぞれ取り得るケースを区別します。
 プリミティブ値を表すケースでは単に値を <code>obj</code> として返し、
 配列やレコードに対してはネストされた(複数の)要素や属性を返します：</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -311,18 +290,22 @@ JSONの配列やレコードは無名です(ただしレコードには
 </code></pre></td>
 </tr>
 </table>
-
 <h2>関連する記事</h2>
-
 <ul>
-<li><a href="../library/JsonValue.html">F# Data: JSON パーサーおよびリーダー</a> -
-JSONの値を動的に処理する方法についての説明があります。</li>
-<li><a href="../library/JsonProvider.html">F# Data: JSON 型プロバイダー</a> -
+<li>
+<a href="../library/JsonValue.html">F# Data: JSON パーサーおよびリーダー</a> -
+JSONの値を動的に処理する方法についての説明があります。
+</li>
+<li>
+<a href="../library/JsonProvider.html">F# Data: JSON 型プロバイダー</a> -
 型安全な方法でJSONデータにアクセスする機能を持った
-F# 型プロバイダーについて説明しています。</li>
-<li><a href="../library/XmlProvider.html">F# Data: XML 型プロバイダー</a> -
+F# 型プロバイダーについて説明しています。
+</li>
+<li>
+<a href="../library/XmlProvider.html">F# Data: XML 型プロバイダー</a> -
 型安全な方法でXMLデータにアクセスする機能を持った
-F# 型プロバイダーについて説明しています。</li>
+F# 型プロバイダーについて説明しています。
+</li>
 </ul>
 
 <div class="tip" id="fs1">namespace System</div>

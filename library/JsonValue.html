@@ -39,20 +39,15 @@
         <div class="span9" id="main">
           
 <h1>F# Data: JSON Parser</h1>
-
 <p>The F# <a href="JsonProvider.html">JSON Type Provider</a> is built on top of an efficient JSON parser written
-in F#. This parser is based on a JSON parser available in <a href="http://fsharp3sample.codeplex.com">F# 3.0 Sample Pack</a>, 
+in F#. This parser is based on a JSON parser available in <a href="http://fsharp3sample.codeplex.com">F# 3.0 Sample Pack</a>,
 but F# Data adds a simple API that can be used to access values dynamically.</p>
-
-<p>When working with well-defined JSON documents, it is easier to use the 
+<p>When working with well-defined JSON documents, it is easier to use the
 <a href="JsonProvider.html">type provider</a>, but in a more dynamic scenario or when writing
 quick and simple scripts, the parser might be a simpler option.</p>
-
 <h2>Loading JSON documents</h2>
-
 <p>To load a sample JSON document, we first need to reference the <code>FSharp.Data.dll</code> library
 (when using F# Interactive) or to add reference to a project.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -61,10 +56,8 @@ quick and simple scripts, the parser might be a simpler option.</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The <code>FSharp.Data</code> namespace contains the <code>JsonValue</code> type that can be used
 to parse strings formatted using JSON as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -77,46 +70,51 @@ to parse strings formatted using JSON as follows:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The parsed value can be processed using pattern matching - the <code>JsonValue</code> type
 is a discriminated union with cases such as <code>Record</code>, <code>Collection</code> and others that
 can be used to examine the structure.</p>
-
 <h2>Using JSON extensions</h2>
-
 <p>We do not cover this technique in this introduction. Instead, we look at a number
-of extensions that become available after opening the <code>FSharp.Data.JsonExtensions</code> 
+of extensions that become available after opening the <code>FSharp.Data.JsonExtensions</code>
 namespace. Once opened, we can write:</p>
-
 <ul>
 <li><code>value.AsBoolean()</code> returns the value as boolean if it is either <code>true</code> or <code>false</code>.</li>
-<li><code>value.AsInteger()</code> returns the value as integer if it is numeric and can be
+<li>
+<code>value.AsInteger()</code> returns the value as integer if it is numeric and can be
 converted to an integer; <code>value.AsInteger64()</code>, <code>value.AsDecimal()</code> and
-<code>value.AsFloat()</code> behave similarly.</li>
+<code>value.AsFloat()</code> behave similarly.
+</li>
 <li><code>value.AsString()</code> returns the value as a string.</li>
-<li><code>value.AsDateTime()</code> parses the string as a <code>DateTime</code> value using either the
+<li>
+<code>value.AsDateTime()</code> parses the string as a <code>DateTime</code> value using either the
 <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format, or using the
-<code>\/Date(...)\/</code> JSON format containing number of milliseconds since 1/1/1970.</li>
+<code>\/Date(...)\/</code> JSON format containing number of milliseconds since 1/1/1970.
+</li>
 <li><code>value.AsGuid()</code> parses the string as a <code>Guid</code> value.</li>
-<li><code>value?child</code> uses the dynamic operator to obtain a record member named <code>child</code>;
+<li>
+<code>value?child</code> uses the dynamic operator to obtain a record member named <code>child</code>;
 alternatively, you can also use <code>value.GetProperty(child)</code> or an indexer
-<code>value.[child]</code>.</li>
-<li><code>value.TryGetProperty(child)</code> can be used to safely obtain a record member 
+<code>value.[child]</code>.
+</li>
+<li>
+<code>value.TryGetProperty(child)</code> can be used to safely obtain a record member 
 (if the member is missing or the value is not a record then, <code>TryGetProperty</code>
-returns <code>None</code>).</li>
-<li><code>[ for v in value -&gt; v ]</code> treats <code>value</code> as a collection and iterates over it;
+returns <code>None</code>).
+</li>
+<li>
+<code>[ for v in value -&gt; v ]</code> treats <code>value</code> as a collection and iterates over it;
 alternatively, it is possible to obtain all elements as an array using
-<code>value.AsArray()</code>.</li>
+<code>value.AsArray()</code>.
+</li>
 <li><code>value.Properties()</code> returns a list of all properties of a record node.</li>
-<li><code>value.InnerText()</code> concatenates all text or text in an array 
-(representing e.g. multi-line string).</li>
+<li>
+<code>value.InnerText()</code> concatenates all text or text in an array 
+(representing e.g. multi-line string).
+</li>
 </ul>
-
 <p>Methods that may need to parse a numeric value or date (such as <code>AsFloat</code> and
 <code>AsDateTime</code>) receive an optional culture parameter.</p>
-
 <p>The following example shows how to process the sample JSON value:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -139,19 +137,15 @@ alternatively, it is possible to obtain all elements as an array using
 </code></pre></td>
 </tr>
 </table>
-
-<p>Note that the <code>JsonValue</code> type does not actually implement the <code>IEnumerable&lt;'T&gt;</code> 
+<p>Note that the <code>JsonValue</code> type does not actually implement the <code>IEnumerable&lt;'T&gt;</code>
 interface (meaning that it cannot be passed to <code>Seq.xyz</code> functions). It only has
 the <code>GetEnumerator</code> method, which makes it possible to use it in sequence expressions
 and with the <code>for</code> loop.</p>
-
 <h2>Parsing WorldBank response</h2>
-
-<p>To look at a more complex example, consider a sample document 
-<a href="../data/WorldBank.json"><code>data/WorldBank.json</code></a> which was obtained as a response to 
+<p>To look at a more complex example, consider a sample document
+<a href="../data/WorldBank.json"><code>data/WorldBank.json</code></a> which was obtained as a response to
 a WorldBank request (you can access the WorldBank data more conveniently using
 <a href="WorldBank.html">a type provider</a>). The document looks as follows:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -160,7 +154,7 @@ a WorldBank request (you can access the WorldBank data more conveniently using
 <span class="l">6: </span>
 <span class="l">7: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="js">[ { <span class="s">"page"</span>: 1, <span class="s">"pages"</span>: 1, <span class="s">"total"</span>: 53 },
+<td class="snippet"><pre class="fssnip highlighted"><code lang="js">[ { <span class="s">"page"</span>: <span class="n">1</span>, <span class="s">"pages"</span>: <span class="n">1</span>, <span class="s">"total"</span>: <span class="n">53</span> },
   [ { <span class="s">"indicator"</span>: {<span class="s">"value"</span>: <span class="s">"Central government debt, total (% of GDP)"</span>},
       <span class="s">"country"</span>: {<span class="s">"id"</span>:<span class="s">"CZ"</span>,<span class="s">"value"</span>:<span class="s">"Czech Republic"</span>},
       <span class="s">"value"</span>:<span class="k">null</span>,<span class="s">"decimal"</span>:<span class="s">"1"</span>,<span class="s">"date"</span>:<span class="s">"2000"</span>},
@@ -168,32 +162,26 @@ a WorldBank request (you can access the WorldBank data more conveniently using
       <span class="s">"country"</span>: {<span class="s">"id"</span>:<span class="s">"CZ"</span>,<span class="s">"value"</span>:<span class="s">"Czech Republic"</span>},
       <span class="s">"value"</span>:<span class="s">"16.6567773464055"</span>,<span class="s">"decimal"</span>:<span class="s">"1"</span>,<span class="s">"date"</span>:<span class="s">"2010"</span>} ] ]
 </code></pre></td></tr></table>
-
 <p>The document is formed by an array that contains a record as the first element
 and a collection of data points as the second element. The following code
 reads the document and parses it:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="i">value</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 20)" onmouseover="showTip(event, 'fs4', 20)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="f">Load</span>(<span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;../../data/WorldBank.json&quot;</span>)
 </code></pre></td>
 </tr>
 </table>
-
 <p>Note that we can also load the data directly from the web, and there's an
 asynchronous version available too:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="i">valueAsync</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 23)" onmouseover="showTip(event, 'fs4', 23)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="f">AsyncLoad</span>(<span class="s">&quot;http://api.worldbank.org/country/cz/indicator/GC.DOD.TOTL.GD.ZS?format=json&quot;</span>)
 </code></pre></td>
 </tr>
 </table>
-
-<p>To split the top-level array into the first record (with overall information) 
+<p>To split the top-level array into the first record (with overall information)
 and the collection of data points, we use pattern matching and match the <code>value</code>
 against the <code>JsonValue.Array</code> constructor:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -226,24 +214,24 @@ against the <code>JsonValue.Array</code> constructor:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>The <code>value</code> property of a data point is not always available - as demonstrated
 above, the value may be <code>null</code>. In that case, we want to skip the data point.
 To check whether the property is <code>null</code> we simply compare it with <code>JsonValue.Null</code>.</p>
-
-<p>Also note that the <code>date</code> and <code>value</code> properties are formatted as strings 
+<p>Also note that the <code>date</code> and <code>value</code> properties are formatted as strings
 in the source file (e.g. <code>"1990"</code>) instead of numbers (e.g. <code>1990</code>). When you try
 accessing the value as an integer or float, the <code>JsonValue</code> automatically parses
 the string into the desired format. In general, the API attempts to be as tolerant
 as possible when parsing the file.</p>
-
 <h2>Related articles</h2>
-
 <ul>
-<li><a href="JsonProvider.html">F# Data: JSON Type Provider</a> - discusses a F# type provider
-that provides type-safe access to JSON data</li>
-<li><a href="WorldBank.html">F# Data: WorldBank Provider</a> - the WorldBank type provider
-can be used to easily access data from the WorldBank</li>
+<li>
+<a href="JsonProvider.html">F# Data: JSON Type Provider</a> - discusses a F# type provider
+that provides type-safe access to JSON data
+</li>
+<li>
+<a href="WorldBank.html">F# Data: WorldBank Provider</a> - the WorldBank type provider
+can be used to easily access data from the WorldBank
+</li>
 <li><a href="../reference/fsharp-data-jsonvalue.html">API Reference: JsonValue discriminated union</a></li>
 <li><a href="../reference/fsharp-data-jsonextensions.html">API Reference: JsonExtensions module</a></li>
 </ul>
