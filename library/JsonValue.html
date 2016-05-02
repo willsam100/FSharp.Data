@@ -174,8 +174,18 @@ reads the document and parses it:</p>
 <p>Note that we can also load the data directly from the web, and there's an
 asynchronous version available too:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="i">valueAsync</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 23)" onmouseover="showTip(event, 'fs4', 23)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="f">AsyncLoad</span>(<span class="s">&quot;http://api.worldbank.org/country/cz/indicator/GC.DOD.TOTL.GD.ZS?format=json&quot;</span>)
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="i">wbReq</span> <span class="o">=</span> 
+  <span class="s">&quot;http://api.worldbank.org/country/cz/indicator/&quot;</span> <span class="o">+</span> 
+  <span class="s">&quot;GC.DOD.TOTL.GD.ZS?format=json&quot;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="i">valueAsync</span> <span class="o">=</span> 
+  <span onmouseout="hideTip(event, 'fs4', 24)" onmouseover="showTip(event, 'fs4', 24)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="f">AsyncLoad</span>(<span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="i">wbReq</span>)
 </code></pre></td>
 </tr>
 </table>
@@ -197,20 +207,20 @@ against the <code>JsonValue.Array</code> constructor:</p>
 <span class="l">13: </span>
 <span class="l">14: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">match</span> <span onmouseout="hideTip(event, 'fs11', 25)" onmouseover="showTip(event, 'fs11', 25)" class="i">value</span> <span class="k">with</span>
-| <span onmouseout="hideTip(event, 'fs4', 26)" onmouseover="showTip(event, 'fs4', 26)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="p">Array</span> [| <span onmouseout="hideTip(event, 'fs16', 28)" onmouseover="showTip(event, 'fs16', 28)" class="i">info</span>; <span onmouseout="hideTip(event, 'fs17', 29)" onmouseover="showTip(event, 'fs17', 29)" class="i">data</span> |] <span class="k">-&gt;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">match</span> <span onmouseout="hideTip(event, 'fs11', 27)" onmouseover="showTip(event, 'fs11', 27)" class="i">value</span> <span class="k">with</span>
+| <span onmouseout="hideTip(event, 'fs4', 28)" onmouseover="showTip(event, 'fs4', 28)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 29)" onmouseover="showTip(event, 'fs16', 29)" class="p">Array</span> [| <span onmouseout="hideTip(event, 'fs17', 30)" onmouseover="showTip(event, 'fs17', 30)" class="i">info</span>; <span onmouseout="hideTip(event, 'fs18', 31)" onmouseover="showTip(event, 'fs18', 31)" class="i">data</span> |] <span class="k">-&gt;</span>
     <span class="c">// Print overall information</span>
-    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="i">page</span>, <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="i">pages</span>, <span onmouseout="hideTip(event, 'fs20', 32)" onmouseover="showTip(event, 'fs20', 32)" class="i">total</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 33)" onmouseover="showTip(event, 'fs16', 33)" class="i">info</span><span class="o">?</span><span class="i">page</span>, <span onmouseout="hideTip(event, 'fs16', 34)" onmouseover="showTip(event, 'fs16', 34)" class="i">info</span><span class="o">?</span><span class="i">pages</span>, <span onmouseout="hideTip(event, 'fs16', 35)" onmouseover="showTip(event, 'fs16', 35)" class="i">info</span><span class="o">?</span><span onmouseout="hideTip(event, 'fs20', 36)" onmouseover="showTip(event, 'fs20', 36)" class="i">total</span>
-    <span onmouseout="hideTip(event, 'fs8', 37)" onmouseover="showTip(event, 'fs8', 37)" class="f">printfn</span> 
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 32)" onmouseover="showTip(event, 'fs19', 32)" class="i">page</span>, <span onmouseout="hideTip(event, 'fs20', 33)" onmouseover="showTip(event, 'fs20', 33)" class="i">pages</span>, <span onmouseout="hideTip(event, 'fs21', 34)" onmouseover="showTip(event, 'fs21', 34)" class="i">total</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 35)" onmouseover="showTip(event, 'fs17', 35)" class="i">info</span><span class="o">?</span><span class="i">page</span>, <span onmouseout="hideTip(event, 'fs17', 36)" onmouseover="showTip(event, 'fs17', 36)" class="i">info</span><span class="o">?</span><span class="i">pages</span>, <span onmouseout="hideTip(event, 'fs17', 37)" onmouseover="showTip(event, 'fs17', 37)" class="i">info</span><span class="o">?</span><span onmouseout="hideTip(event, 'fs21', 38)" onmouseover="showTip(event, 'fs21', 38)" class="i">total</span>
+    <span onmouseout="hideTip(event, 'fs8', 39)" onmouseover="showTip(event, 'fs8', 39)" class="f">printfn</span> 
       <span class="s">&quot;Showing page </span><span class="pf">%d</span><span class="s"> of </span><span class="pf">%d</span><span class="s">. Total records </span><span class="pf">%d</span><span class="s">&quot;</span> 
-      (<span onmouseout="hideTip(event, 'fs18', 38)" onmouseover="showTip(event, 'fs18', 38)" class="i">page</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 39)" onmouseover="showTip(event, 'fs21', 39)" class="f">AsInteger</span>()) (<span onmouseout="hideTip(event, 'fs19', 40)" onmouseover="showTip(event, 'fs19', 40)" class="i">pages</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 41)" onmouseover="showTip(event, 'fs21', 41)" class="f">AsInteger</span>()) (<span onmouseout="hideTip(event, 'fs20', 42)" onmouseover="showTip(event, 'fs20', 42)" class="i">total</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 43)" onmouseover="showTip(event, 'fs21', 43)" class="f">AsInteger</span>())
+      (<span onmouseout="hideTip(event, 'fs19', 40)" onmouseover="showTip(event, 'fs19', 40)" class="i">page</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 41)" onmouseover="showTip(event, 'fs22', 41)" class="f">AsInteger</span>()) (<span onmouseout="hideTip(event, 'fs20', 42)" onmouseover="showTip(event, 'fs20', 42)" class="i">pages</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 43)" onmouseover="showTip(event, 'fs22', 43)" class="f">AsInteger</span>()) (<span onmouseout="hideTip(event, 'fs21', 44)" onmouseover="showTip(event, 'fs21', 44)" class="i">total</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 45)" onmouseover="showTip(event, 'fs22', 45)" class="f">AsInteger</span>())
     
     <span class="c">// Print every non-null data point</span>
-    <span class="k">for</span> <span onmouseout="hideTip(event, 'fs22', 44)" onmouseover="showTip(event, 'fs22', 44)" class="i">record</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs17', 45)" onmouseover="showTip(event, 'fs17', 45)" class="i">data</span> <span class="k">do</span>
-      <span class="k">if</span> <span onmouseout="hideTip(event, 'fs22', 46)" onmouseover="showTip(event, 'fs22', 46)" class="i">record</span><span class="o">?</span><span onmouseout="hideTip(event, 'fs11', 47)" onmouseover="showTip(event, 'fs11', 47)" class="i">value</span> <span class="o">&lt;&gt;</span> <span onmouseout="hideTip(event, 'fs4', 48)" onmouseover="showTip(event, 'fs4', 48)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs23', 49)" onmouseover="showTip(event, 'fs23', 49)" class="p">Null</span> <span class="k">then</span>
-        <span onmouseout="hideTip(event, 'fs8', 50)" onmouseover="showTip(event, 'fs8', 50)" class="f">printfn</span> <span class="s">&quot;</span><span class="pf">%d</span><span class="s">: </span><span class="pf">%f</span><span class="s">&quot;</span> (<span onmouseout="hideTip(event, 'fs22', 51)" onmouseover="showTip(event, 'fs22', 51)" class="i">record</span><span class="o">?</span><span class="i">date</span><span class="o">.</span><span class="f">AsInteger</span>()) 
-                         (<span onmouseout="hideTip(event, 'fs22', 52)" onmouseover="showTip(event, 'fs22', 52)" class="i">record</span><span class="o">?</span><span onmouseout="hideTip(event, 'fs11', 53)" onmouseover="showTip(event, 'fs11', 53)" class="i">value</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 54)" onmouseover="showTip(event, 'fs24', 54)" class="f">AsFloat</span>())
-| _ <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs8', 55)" onmouseover="showTip(event, 'fs8', 55)" class="f">printfn</span> <span class="s">&quot;failed&quot;</span>
+    <span class="k">for</span> <span onmouseout="hideTip(event, 'fs23', 46)" onmouseover="showTip(event, 'fs23', 46)" class="i">record</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs18', 47)" onmouseover="showTip(event, 'fs18', 47)" class="i">data</span> <span class="k">do</span>
+      <span class="k">if</span> <span onmouseout="hideTip(event, 'fs23', 48)" onmouseover="showTip(event, 'fs23', 48)" class="i">record</span><span class="o">?</span><span onmouseout="hideTip(event, 'fs11', 49)" onmouseover="showTip(event, 'fs11', 49)" class="i">value</span> <span class="o">&lt;&gt;</span> <span onmouseout="hideTip(event, 'fs4', 50)" onmouseover="showTip(event, 'fs4', 50)" class="t">JsonValue</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 51)" onmouseover="showTip(event, 'fs24', 51)" class="p">Null</span> <span class="k">then</span>
+        <span onmouseout="hideTip(event, 'fs8', 52)" onmouseover="showTip(event, 'fs8', 52)" class="f">printfn</span> <span class="s">&quot;</span><span class="pf">%d</span><span class="s">: </span><span class="pf">%f</span><span class="s">&quot;</span> (<span onmouseout="hideTip(event, 'fs23', 53)" onmouseover="showTip(event, 'fs23', 53)" class="i">record</span><span class="o">?</span><span class="i">date</span><span class="o">.</span><span class="f">AsInteger</span>()) 
+                         (<span onmouseout="hideTip(event, 'fs23', 54)" onmouseover="showTip(event, 'fs23', 54)" class="i">record</span><span class="o">?</span><span onmouseout="hideTip(event, 'fs11', 55)" onmouseover="showTip(event, 'fs11', 55)" class="i">value</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs25', 56)" onmouseover="showTip(event, 'fs25', 56)" class="f">AsFloat</span>())
+| _ <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs8', 57)" onmouseover="showTip(event, 'fs8', 57)" class="f">printfn</span> <span class="s">&quot;failed&quot;</span>
 </code></pre></td>
 </tr>
 </table>
@@ -248,18 +258,19 @@ can be used to easily access data from the WorldBank
 <div class="tip" id="fs10">static member JsonExtensions.AsString : x:JsonValue * ?cultureInfo:System.Globalization.CultureInfo -&gt; string</div>
 <div class="tip" id="fs11">val value : JsonValue<br /><br />Full name: JsonValue.value</div>
 <div class="tip" id="fs12">static member JsonValue.Load : uri:string * ?cultureInfo:System.Globalization.CultureInfo -&gt; JsonValue<br />static member JsonValue.Load : reader:System.IO.TextReader * ?cultureInfo:System.Globalization.CultureInfo -&gt; JsonValue<br />static member JsonValue.Load : stream:System.IO.Stream * ?cultureInfo:System.Globalization.CultureInfo -&gt; JsonValue</div>
-<div class="tip" id="fs13">val valueAsync : Async&lt;JsonValue&gt;<br /><br />Full name: JsonValue.valueAsync</div>
-<div class="tip" id="fs14">static member JsonValue.AsyncLoad : uri:string * ?cultureInfo:System.Globalization.CultureInfo -&gt; Async&lt;JsonValue&gt;</div>
-<div class="tip" id="fs15">union case JsonValue.Array: elements: JsonValue [] -&gt; JsonValue</div>
-<div class="tip" id="fs16">val info : JsonValue</div>
-<div class="tip" id="fs17">val data : JsonValue</div>
-<div class="tip" id="fs18">val page : JsonValue</div>
-<div class="tip" id="fs19">val pages : JsonValue</div>
-<div class="tip" id="fs20">val total : JsonValue</div>
-<div class="tip" id="fs21">static member JsonExtensions.AsInteger : x:JsonValue * ?cultureInfo:System.Globalization.CultureInfo -&gt; int</div>
-<div class="tip" id="fs22">val record : JsonValue</div>
-<div class="tip" id="fs23">union case JsonValue.Null: JsonValue</div>
-<div class="tip" id="fs24">static member JsonExtensions.AsFloat : x:JsonValue * ?cultureInfo:System.Globalization.CultureInfo * ?missingValues:string [] -&gt; float</div>
+<div class="tip" id="fs13">val wbReq : string<br /><br />Full name: JsonValue.wbReq</div>
+<div class="tip" id="fs14">val valueAsync : Async&lt;JsonValue&gt;<br /><br />Full name: JsonValue.valueAsync</div>
+<div class="tip" id="fs15">static member JsonValue.AsyncLoad : uri:string * ?cultureInfo:System.Globalization.CultureInfo -&gt; Async&lt;JsonValue&gt;</div>
+<div class="tip" id="fs16">union case JsonValue.Array: elements: JsonValue [] -&gt; JsonValue</div>
+<div class="tip" id="fs17">val info : JsonValue</div>
+<div class="tip" id="fs18">val data : JsonValue</div>
+<div class="tip" id="fs19">val page : JsonValue</div>
+<div class="tip" id="fs20">val pages : JsonValue</div>
+<div class="tip" id="fs21">val total : JsonValue</div>
+<div class="tip" id="fs22">static member JsonExtensions.AsInteger : x:JsonValue * ?cultureInfo:System.Globalization.CultureInfo -&gt; int</div>
+<div class="tip" id="fs23">val record : JsonValue</div>
+<div class="tip" id="fs24">union case JsonValue.Null: JsonValue</div>
+<div class="tip" id="fs25">static member JsonExtensions.AsFloat : x:JsonValue * ?cultureInfo:System.Globalization.CultureInfo * ?missingValues:string [] -&gt; float</div>
 
         </div>
         <div class="span3">
@@ -300,6 +311,7 @@ can be used to easily access data from the WorldBank
             <li><a href="/FSharp.Data/library/Http.html">HTTP Utilities</a></li>
             <li><a href="/FSharp.Data/library/CsvFile.html">CSV Parser</a></li>
             <li><a href="/FSharp.Data/library/HtmlParser.html">HTML Parser</a></li>
+            <li><a href="/FSharp.Data/library/HtmlCssSelectors.html">HTML CSS Selectors</a></li>
             <li><a href="/FSharp.Data/library/JsonValue.html">JSON Parser</a></li>
 
             <li class="nav-header">Tutorials</li>

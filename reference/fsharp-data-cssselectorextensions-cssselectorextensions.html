@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>XmlProvider - F# Data</title>
+    <title>CssSelectorExtensions - F# Data</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Tomas Petricek; Gustavo Guerra">
@@ -40,36 +40,35 @@
 
 
 
-<h1>XmlProvider</h1>
+<h1>CssSelectorExtensions</h1>
 <p>
   <span>Namespace: FSharp.Data</span><br />
+  <span>Parent Module: <a href="fsharp-data-cssselectorextensions.html">CssSelectorExtensions</a></span>
 </p>
 <div class="xmldoc">
-<p>Typed representation of a XML file.</p>
-
 </div>
-  <h3>Static parameters</h3>
+  <h3>Static members</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Static parameters</td><td>Description</td></tr>
+      <tr><td>Static member</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '403', 403)" onmouseover="showTip(event, '403', 403)">
-            Sample
+          <code onmouseout="hideTip(event, '182', 182)" onmouseover="showTip(event, '182', 182)">
+            CssSelect(node, selector)
           </code>
-          <div class="tip" id="403">
-            <strong>Signature:</strong> string<br />
+          <div class="tip" id="182">
+            <strong>Signature:</strong> (node:HtmlNode * selector:string) -&gt; HtmlNode list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/docs/tools/startup#L1-1" class="github-link">
+            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Html/HtmlCssSelectors.fs#L387-387" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>Location of a XML sample file or a string containing a sample XML document.</p>
+          <p>Gets descendants matched by Css selector</p>
 
 
         </td>
@@ -77,19 +76,19 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '404', 404)" onmouseover="showTip(event, '404', 404)">
-            SampleIsList
+          <code onmouseout="hideTip(event, '183', 183)" onmouseover="showTip(event, '183', 183)">
+            CssSelect(nodes, selector)
           </code>
-          <div class="tip" id="404">
-            <strong>Signature:</strong> bool (optional, default = false)<br />
+          <div class="tip" id="183">
+            <strong>Signature:</strong> (nodes:seq&lt;HtmlNode&gt; * selector:string) -&gt; HtmlNode list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/docs/tools/startup#L1-1" class="github-link">
+            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Html/HtmlCssSelectors.fs#L382-382" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>If true, the children of the root in the sample document represent individual samples for the inference.</p>
+          <p>Gets descendants matched by Css selector</p>
 
 
         </td>
@@ -97,121 +96,19 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '405', 405)" onmouseover="showTip(event, '405', 405)">
-            Global
+          <code onmouseout="hideTip(event, '184', 184)" onmouseover="showTip(event, '184', 184)">
+            CssSelect(doc, selector)
           </code>
-          <div class="tip" id="405">
-            <strong>Signature:</strong> bool (optional, default = false)<br />
+          <div class="tip" id="184">
+            <strong>Signature:</strong> (doc:HtmlDocument * selector:string) -&gt; HtmlNode list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/docs/tools/startup#L1-1" class="github-link">
+            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Html/HtmlCssSelectors.fs#L377-377" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>If true, the inference unifies all XML elements with the same name.</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '406', 406)" onmouseover="showTip(event, '406', 406)">
-            Culture
-          </code>
-          <div class="tip" id="406">
-            <strong>Signature:</strong> string (optional, default = &quot;&quot;)<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/docs/tools/startup#L1-1" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>The culture used for parsing numbers and dates. Defaults to the invariant culture.</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '407', 407)" onmouseover="showTip(event, '407', 407)">
-            Encoding
-          </code>
-          <div class="tip" id="407">
-            <strong>Signature:</strong> string (optional, default = &quot;&quot;)<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/docs/tools/startup#L1-1" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless <code>charset</code> is specified in the <code>Content-Type</code> response header.</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '408', 408)" onmouseover="showTip(event, '408', 408)">
-            ResolutionFolder
-          </code>
-          <div class="tip" id="408">
-            <strong>Signature:</strong> string (optional, default = &quot;&quot;)<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/docs/tools/startup#L1-1" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>A directory that is used when resolving relative file references (at design time and in hosted execution).</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '409', 409)" onmouseover="showTip(event, '409', 409)">
-            EmbeddedResource
-          </code>
-          <div class="tip" id="409">
-            <strong>Signature:</strong> string (optional, default = &quot;&quot;)<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/docs/tools/startup#L1-1" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>When specified, the type provider first attempts to load the sample from the specified resource
-(e.g. 'MyCompany.MyAssembly, resource_name.xml'). This is useful when exposing types generated by the type provider.</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '410', 410)" onmouseover="showTip(event, '410', 410)">
-            InferTypesFromValues
-          </code>
-          <div class="tip" id="410">
-            <strong>Signature:</strong> bool (optional, default = true)<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/docs/tools/startup#L1-1" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>If true, turns on additional type inference from values.
-(e.g. type inference infers string values such as "123" as ints and values constrained to 0 and 1 as booleans. The XmlProvider also infers string values as JSON.)</p>
+          <p>Gets descendants matched by Css selector</p>
 
 
         </td>

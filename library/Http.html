@@ -88,8 +88,12 @@ an URL that includes the parameters (e.g. <code>http://...?test=foo&amp;more=bar
 can pass them using the optional parameter <code>query</code>. The following example also explicitly
 specifies the GET method, but it will be set automatically for you if you omit it:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 14)" onmouseover="showTip(event, 'fs3', 14)" class="t">Http</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 15)" onmouseover="showTip(event, 'fs4', 15)" class="f">RequestString</span>(<span class="s">&quot;http://httpbin.org/get&quot;</span>, <span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="i">query</span><span class="o">=</span>[<span class="s">&quot;test&quot;</span>, <span class="s">&quot;foo&quot;</span>], <span class="i">httpMethod</span><span class="o">=</span><span class="s">&quot;GET&quot;</span>)
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 14)" onmouseover="showTip(event, 'fs3', 14)" class="t">Http</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 15)" onmouseover="showTip(event, 'fs4', 15)" class="f">RequestString</span>
+  ( <span class="s">&quot;http://httpbin.org/get&quot;</span>, 
+    <span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="i">query</span><span class="o">=</span>[<span class="s">&quot;test&quot;</span>, <span class="s">&quot;foo&quot;</span>], <span class="i">httpMethod</span><span class="o">=</span><span class="s">&quot;GET&quot;</span> )
 </code></pre></td>
 </tr>
 </table>
@@ -311,6 +315,7 @@ create a <code>X509ClientCertificate2</code> value, and add it to the <code>Clie
 <span class="l"> 8: </span>
 <span class="l"> 9: </span>
 <span class="l">10: </span>
+<span class="l">11: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs33', 96)" onmouseover="showTip(event, 'fs33', 96)" class="i">System</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 97)" onmouseover="showTip(event, 'fs47', 97)" class="i">Security</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs48', 98)" onmouseover="showTip(event, 'fs48', 98)" class="i">Cryptography</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs49', 99)" onmouseover="showTip(event, 'fs49', 99)" class="i">X509Certificates</span>
 
@@ -321,7 +326,8 @@ create a <code>X509ClientCertificate2</code> value, and add it to the <code>Clie
 <span class="c">// Send the request with certificate</span>
 <span onmouseout="hideTip(event, 'fs3', 102)" onmouseover="showTip(event, 'fs3', 102)" class="t">Http</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs41', 103)" onmouseover="showTip(event, 'fs41', 103)" class="f">Request</span>
   ( <span class="s">&quot;http://yourprotectedresouce.com/data&quot;</span>,
-    <span class="i">customizeHttpRequest</span> <span class="o">=</span> <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs52', 104)" onmouseover="showTip(event, 'fs52', 104)" class="i">req</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs52', 105)" onmouseover="showTip(event, 'fs52', 105)" class="i">req</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs53', 106)" onmouseover="showTip(event, 'fs53', 106)" class="i">ClientCertificates</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs54', 107)" onmouseover="showTip(event, 'fs54', 107)" class="f">Add</span>(<span onmouseout="hideTip(event, 'fs50', 108)" onmouseover="showTip(event, 'fs50', 108)" class="i">clientCert</span>) <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 109)" onmouseover="showTip(event, 'fs38', 109)" class="f">ignore</span>; <span onmouseout="hideTip(event, 'fs52', 110)" onmouseover="showTip(event, 'fs52', 110)" class="i">req</span>)
+    <span class="i">customizeHttpRequest</span> <span class="o">=</span> <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs52', 104)" onmouseover="showTip(event, 'fs52', 104)" class="i">req</span> <span class="k">-&gt;</span> 
+        <span onmouseout="hideTip(event, 'fs52', 105)" onmouseover="showTip(event, 'fs52', 105)" class="i">req</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs53', 106)" onmouseover="showTip(event, 'fs53', 106)" class="i">ClientCertificates</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs54', 107)" onmouseover="showTip(event, 'fs54', 107)" class="f">Add</span>(<span onmouseout="hideTip(event, 'fs50', 108)" onmouseover="showTip(event, 'fs50', 108)" class="i">clientCert</span>) <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 109)" onmouseover="showTip(event, 'fs38', 109)" class="f">ignore</span>; <span onmouseout="hideTip(event, 'fs52', 110)" onmouseover="showTip(event, 'fs52', 110)" class="i">req</span>)
 </code></pre></td>
 </tr>
 </table>
@@ -432,6 +438,7 @@ create a <code>X509ClientCertificate2</code> value, and add it to the <code>Clie
             <li><a href="/FSharp.Data/library/Http.html">HTTP Utilities</a></li>
             <li><a href="/FSharp.Data/library/CsvFile.html">CSV Parser</a></li>
             <li><a href="/FSharp.Data/library/HtmlParser.html">HTML Parser</a></li>
+            <li><a href="/FSharp.Data/library/HtmlCssSelectors.html">HTML CSS Selectors</a></li>
             <li><a href="/FSharp.Data/library/JsonValue.html">JSON Parser</a></li>
 
             <li class="nav-header">Tutorials</li>

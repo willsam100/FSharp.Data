@@ -387,6 +387,7 @@ Consider the problem of flattening a data set. Let's say you have xml data that 
 <span class="l">10: </span>
 <span class="l">11: </span>
 <span class="l">12: </span>
+<span class="l">13: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs55', 120)" onmouseover="showTip(event, 'fs55', 120)" class="t">InputXml</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 121)" onmouseover="showTip(event, 'fs4', 121)" class="t">XmlProvider</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs53', 122)" onmouseover="showTip(event, 'fs53', 122)" class="i">customersXmlSample</span><span class="o">&gt;</span>
 <span class="k">type</span> <span onmouseout="hideTip(event, 'fs56', 123)" onmouseover="showTip(event, 'fs56', 123)" class="t">OutputXml</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 124)" onmouseover="showTip(event, 'fs4', 124)" class="t">XmlProvider</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs54', 125)" onmouseover="showTip(event, 'fs54', 125)" class="i">orderLinesXmlSample</span><span class="o">&gt;</span>
@@ -396,10 +397,11 @@ Consider the problem of flattening a data set. Let's say you have xml data that 
     <span class="k">for</span> <span onmouseout="hideTip(event, 'fs59', 129)" onmouseover="showTip(event, 'fs59', 129)" class="i">customer</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs55', 130)" onmouseover="showTip(event, 'fs55', 130)" class="t">InputXml</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs60', 131)" onmouseover="showTip(event, 'fs60', 131)" class="f">GetSample</span>()<span class="o">.</span><span class="i">Customers</span> <span class="k">do</span>
       <span class="k">for</span> <span onmouseout="hideTip(event, 'fs61', 132)" onmouseover="showTip(event, 'fs61', 132)" class="i">order</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs59', 133)" onmouseover="showTip(event, 'fs59', 133)" class="i">customer</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs62', 134)" onmouseover="showTip(event, 'fs62', 134)" class="i">Orders</span> <span class="k">do</span>
         <span class="k">for</span> <span onmouseout="hideTip(event, 'fs63', 135)" onmouseover="showTip(event, 'fs63', 135)" class="i">line</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs61', 136)" onmouseover="showTip(event, 'fs61', 136)" class="i">order</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs64', 137)" onmouseover="showTip(event, 'fs64', 137)" class="i">OrderLines</span> <span class="k">do</span>
-          <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs56', 138)" onmouseover="showTip(event, 'fs56', 138)" class="t">OutputXml</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs65', 139)" onmouseover="showTip(event, 'fs65', 139)" class="t">OrderLine</span>(<span onmouseout="hideTip(event, 'fs59', 140)" onmouseover="showTip(event, 'fs59', 140)" class="i">customer</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs66', 141)" onmouseover="showTip(event, 'fs66', 141)" class="i">Name</span>,
-                                    <span onmouseout="hideTip(event, 'fs61', 142)" onmouseover="showTip(event, 'fs61', 142)" class="i">order</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs67', 143)" onmouseover="showTip(event, 'fs67', 143)" class="i">Number</span>,
-                                    <span onmouseout="hideTip(event, 'fs63', 144)" onmouseover="showTip(event, 'fs63', 144)" class="i">line</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs68', 145)" onmouseover="showTip(event, 'fs68', 145)" class="i">Item</span>,
-                                    <span onmouseout="hideTip(event, 'fs63', 146)" onmouseover="showTip(event, 'fs63', 146)" class="i">line</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs69', 147)" onmouseover="showTip(event, 'fs69', 147)" class="i">Quantity</span>) |]
+          <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs56', 138)" onmouseover="showTip(event, 'fs56', 138)" class="t">OutputXml</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs65', 139)" onmouseover="showTip(event, 'fs65', 139)" class="t">OrderLine</span>
+                  ( <span onmouseout="hideTip(event, 'fs59', 140)" onmouseover="showTip(event, 'fs59', 140)" class="i">customer</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs66', 141)" onmouseover="showTip(event, 'fs66', 141)" class="i">Name</span>,
+                    <span onmouseout="hideTip(event, 'fs61', 142)" onmouseover="showTip(event, 'fs61', 142)" class="i">order</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs67', 143)" onmouseover="showTip(event, 'fs67', 143)" class="i">Number</span>,
+                    <span onmouseout="hideTip(event, 'fs63', 144)" onmouseover="showTip(event, 'fs63', 144)" class="i">line</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs68', 145)" onmouseover="showTip(event, 'fs68', 145)" class="i">Item</span>,
+                    <span onmouseout="hideTip(event, 'fs63', 146)" onmouseover="showTip(event, 'fs63', 146)" class="i">line</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs69', 147)" onmouseover="showTip(event, 'fs69', 147)" class="i">Quantity</span> ) |]
 </code></pre></td>
 </tr>
 </table>
@@ -519,6 +521,7 @@ Consider the problem of flattening a data set. Let's say you have xml data that 
             <li><a href="/FSharp.Data/library/Http.html">HTTP Utilities</a></li>
             <li><a href="/FSharp.Data/library/CsvFile.html">CSV Parser</a></li>
             <li><a href="/FSharp.Data/library/HtmlParser.html">HTML Parser</a></li>
+            <li><a href="/FSharp.Data/library/HtmlCssSelectors.html">HTML CSS Selectors</a></li>
             <li><a href="/FSharp.Data/library/JsonValue.html">JSON Parser</a></li>
 
             <li class="nav-header">Tutorials</li>
