@@ -409,6 +409,11 @@
  Gets all of the nodes immediately under this node
 </summary>
 </member>
+<member name="M:FSharp.Data.HtmlNodeExtensions.DirectInnerText(FSharp.Data.HtmlNode)">
+<summary>
+ Returns the direct inner text of the current node
+</summary>
+</member>
 <member name="M:FSharp.Data.HtmlNodeExtensions.DescendantsWithPath(FSharp.Data.HtmlNode,System.String)">
 <summary>
  Gets all of the descendants of the current node, which match the given name
@@ -983,6 +988,21 @@
  Conversions from string to string/int/int64/decimal/float/boolean/datetime/guid options
 </summary>
 </member>
+<member name="M:FSharp.Data.CssSelectorExtensions.CssSelectorExtensions.CssSelect(FSharp.Data.HtmlNode,System.String)">
+<summary>
+ Gets descendants matched by Css selector
+</summary>
+</member>
+<member name="M:FSharp.Data.CssSelectorExtensions.CssSelectorExtensions.CssSelect(System.Collections.Generic.IEnumerable{FSharp.Data.HtmlNode},System.String)">
+<summary>
+ Gets descendants matched by Css selector
+</summary>
+</member>
+<member name="M:FSharp.Data.CssSelectorExtensions.CssSelectorExtensions.CssSelect(FSharp.Data.HtmlDocument,System.String)">
+<summary>
+ Gets descendants matched by Css selector
+</summary>
+</member>
 <member name="M:FSharp.Data.CsvExtensionsModule.op_Dynamic(FSharp.Data.CsvRow,System.String)">
 <summary>
  Get the value of a column by name from a CSV row
@@ -1090,6 +1110,13 @@
 <member name="T:FSharp.Data.HtmlExtensionsModule">
 <summary>
  Provides the dynamic operator for getting attribute values from HTML elements
+</summary>
+</member>
+<member name="M:FSharp.Data.HtmlNodeModule.directInnerText(FSharp.Data.HtmlNode)">
+<summary>
+ Returns the direct inner text of the current node
+ Parameters:
+ * n - The given node
 </summary>
 </member>
 <member name="M:FSharp.Data.HtmlNodeModule.innerText(FSharp.Data.HtmlNode)">
