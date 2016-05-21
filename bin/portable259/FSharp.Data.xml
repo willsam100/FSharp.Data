@@ -1395,6 +1395,13 @@
  Constants for common HTTP encodings
 </summary>
 </member>
+<member name="T:FSharp.Data.HttpHelpers.WebResponse">
+<summary>
+ Decorator for System.Net.WebResponse class
+ used to make response stream seekable 
+ in order to preserve it in the new response
+</summary>
+</member>
 <member name="M:FSharp.Data.HttpHelpers.asyncRead(System.IO.Stream)">
 <summary>
  consumes a stream asynchronously until the end
