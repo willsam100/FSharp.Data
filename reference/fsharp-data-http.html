@@ -62,11 +62,11 @@ resources with specified headers, query parameters and HTTP body</p>
             AsyncRequest(...)
           </code>
           <div class="tip" id="317">
-            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * responseEncodingOverride:string option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option) -&gt; Async&lt;HttpResponse&gt;<br />
+            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * responseEncodingOverride:string option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option * timeout:int option) -&gt; Async&lt;HttpResponse&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L922-922" class="github-link">
+            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L969-969" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -86,11 +86,11 @@ that will be encoded, and the method will automatically be set if not specified<
             AsyncRequestStream(...)
           </code>
           <div class="tip" id="318">
-            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option) -&gt; Async&lt;HttpResponseWithStream&gt;<br />
+            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option * timeout:int option) -&gt; Async&lt;HttpResponseWithStream&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L945-945" class="github-link">
+            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L1019-1019" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -110,11 +110,11 @@ that will be encoded, and the method will automatically be set if not specified<
             AsyncRequestString(...)
           </code>
           <div class="tip" id="319">
-            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * responseEncodingOverride:string option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option) -&gt; Async&lt;string&gt;<br />
+            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * responseEncodingOverride:string option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option * timeout:int option) -&gt; Async&lt;string&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L931-931" class="github-link">
+            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L991-991" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -134,11 +134,11 @@ that will be encoded, and the method will automatically be set if not specified<
             Request(...)
           </code>
           <div class="tip" id="320">
-            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * responseEncodingOverride:string option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option) -&gt; HttpResponse<br />
+            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * responseEncodingOverride:string option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option * timeout:int option) -&gt; HttpResponse<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L973-973" class="github-link">
+            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L1059-1059" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -158,11 +158,11 @@ that will be encoded, and the method will automatically be set if not specified<
             RequestStream(...)
           </code>
           <div class="tip" id="321">
-            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option) -&gt; HttpResponseWithStream<br />
+            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option * timeout:int option) -&gt; HttpResponseWithStream<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L993-993" class="github-link">
+            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L1105-1105" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -182,11 +182,11 @@ that will be encoded, and the method will automatically be set if not specified<
             RequestString(...)
           </code>
           <div class="tip" id="322">
-            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * responseEncodingOverride:string option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option) -&gt; string<br />
+            <strong>Signature:</strong> (url:string * query:(string * string) list option * headers:seq&lt;string * string&gt; option * httpMethod:string option * body:HttpRequestBody option * cookies:seq&lt;string * string&gt; option * cookieContainer:CookieContainer option * silentHttpErrors:bool option * responseEncodingOverride:string option * customizeHttpRequest:(HttpWebRequest -&gt; HttpWebRequest) option * timeout:int option) -&gt; string<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L983-983" class="github-link">
+            <a href="https://github.com/fsharp/FSharp.Data/tree/master/src/Net/Http.fs#L1082-1082" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
