@@ -344,6 +344,12 @@
  </summary>
  <param name="content">The actual content</param>
 </member>
+<member name="M:FSharp.Data.HtmlNode.NewCData(System.String)">
+ <summary>
+ Creates a CData element
+ </summary>
+ <param name="content">The actual content</param>
+</member>
 <member name="T:FSharp.Data.HtmlNode">
 <summary>
  Represents an HTML node. The names of elements are always normalized to lowercase
