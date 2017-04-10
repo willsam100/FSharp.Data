@@ -161,7 +161,7 @@ the response content, so it's easier to debug in F# interactive when the server 
 </tr>
 </table>
 <p>This returns the following:</p>
-<table class="pre"><tr><td><pre><code>"{"status_message":"Invalid API key: You must be granted a valid key.","status_code":7}"</code></pre></td></tr></table>
+<table class="pre"><tr><td><pre><code>"{"status_message":"Invalid API key: You must be granted a valid key.","success":false,"status_code":7}"</code></pre></td></tr></table>
 <p>In this case, you might want to look at the HTTP status code so you don't confuse an error message for an actual response.
 If you want to see more information about the response, including the status code, the response
 headers, the returned cookies, and the response url (which might be different to
